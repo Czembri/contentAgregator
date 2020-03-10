@@ -2,19 +2,19 @@
 {% block app %}
 <div class="row justify-content-center">
   <div class='col'>
-    <h2>Google News</h2>
+    <h2>BBC News</h2>
     <div class="newses">
-      {% for items in gc %}
-        <p>{{ items[0] }}</p>
+      {% for i in bbc %}
+        <p>{{ i[0] }}</p>
       {% endfor %}
     </div>
   </div>
 </div>
 <div class="row justify-content-center move-down">
   <div class="col">
-    <a href="https://news.google.com/?hl=en-US&gl=US&ceid=US:en">
+    <a href="https://www.bbc.com/news">
       <div class="cont">
-        <img class="main-img" src="static/img/news-report.png"/>
+        <img class="main-img" src="static/img/bbc.png"/>
         <div class="overlay">
           <div class="text">Click Me</div>
           <h5>To get more info...</h5>
