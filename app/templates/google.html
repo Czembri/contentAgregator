@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block app %}
+<div class="row justify-content-center">
+  <div class='col'>
+    <h2>Google News</h2>
+    {% for items in gc %}
+      <p>{{ items[0] }}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,133 @@
+body, html {
+  margin: 0;
+  background-image: linear-gradient(to bottom, #7C296A, #44887B);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  color: white;
+  font-family: 'Tomorrow', sans-serif;
+  overflow-y: scroll;
+  position:absolute;
+}
+
+.container {
+  width: 100%;
+  min-width: 800px;
+}
+
+h1 {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+h2 {
+  text-align: center;
+  padding-top: 50px;
+}
+
+ul {
+  border-style: ridge;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+span {
+  padding-right: 10px;
+}
+
+.row {
+  padding-top: 10px;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.items {
+    padding-top: 10%;
+}
+
+
+p {
+    font-size: 20px;
+    text-align: center;
+}
+
+.mark {
+    color: black;
+    text-decoration: none;
+    padding-left: 10px;
+}
+
+.mark-as {
+    float: right;
+    font-size: 12px;
+}
+
+.to-do {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.product {
+  float: left;
+}
+
+.delete {
+  padding-left: 100px;
+}
+
+li {
+  padding-right: 100px;
+}
+
+.field {
+  padding-bottom: 10px;
+}
+
+.move-right {
+  padding-left: 10px;
+}
+
+.move-bot {
+  padding-top: 20px;
+}
+
+.space {
+  padding-right: 10px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row-my {
+  width: 100%;
+  margin: 0;
+}
