@@ -4,9 +4,11 @@
   <div class='col'>
     <h2>Google News</h2>
     <div class="newses">
-      {% for items in gc %}
-        <p>{{ items[0] }}</p>
-      {% endfor %}
+      <a class="news-link" href="https://news.google.com{{ link }}"><p>{{ gc[0][0] }}</p></a>
+      <a class="news-link" href="https://news.google.com{{ link_2 }}"><p>{{ gc[1][0] }}</p></a>
+      <a class="news-link" href="https://news.google.com{{ link_3 }}"><p>{{ gc[2][0] }}</p></a>
+      <a class="news-link" href="https://news.google.com{{ link_4 }}"><p>{{ gc[3][0] }}</p></a>
+      <a class="news-link" href="https://news.google.com{{ link_5 }}"><p>{{ gc[4][0] }}</p></a>
     </div>
   </div>
 </div>
