@@ -1,3 +1,32 @@
 {% extends "base.html" %}
 {% block app %}
+<div class="container">
+  <div style="text-align:center">
+    <h2>Contact Me</h2>
+    <p>Swing by for a cup of coffee, or leave me a message:</p>
+  </div>
+  <div class="row">
+    <div class="column">
+      <img class="me" src="static/img/me.jpg">
+    </div>
+    <div class="column">
+      <form action="{{ url_for('msg') }}" method="post">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+        <label for="country">Country</label>
+        <select id="country" name="country">
+          <option value="poland">Poland</option>
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+        <label for="content">Content</label>
+        <textarea id="content" name="content" placeholder="Write something.." style="height:170px"></textarea>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

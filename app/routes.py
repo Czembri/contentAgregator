@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, request
 from app import app, db
 import requests
 from bs4 import BeautifulSoup
+from app.models import Messages
 
 routes = Blueprint("routes", __name__, static_folder="static", template_folder="templates")
 
@@ -25,15 +26,15 @@ def google():
     a2 = article_2.find('a')
     link_2 = a2['href']
 
-    article_3 = soup_goo.find_all('article')[1]
+    article_3 = soup_goo.find_all('article')[2]
     a3 = article_3.find('a')
     link_3 = a3['href']
 
-    article_4 = soup_goo.find_all('article')[1]
+    article_4 = soup_goo.find_all('article')[3]
     a4 = article_4.find('a')
     link_4 = a4['href']
 
-    article_5 = soup_goo.find_all('article')[1]
+    article_5 = soup_goo.find_all('article')[4]
     a5 = article_5.find('a')
     link_5 = a5['href']
     return render_template('google.html', gc=gc, link=link, link_2=link_2, link_3=link_3, link_4=link_4, link_5=link_5)
@@ -99,9 +100,25 @@ def test():
     flash('Site under construction!', 'danger')
     return render_template('test.html')
 
+@app.route('/ty')
+def thankyou():
+    flash('Your message has been sent!', 'success')
+    return render_template('thankyou.html')
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@app.route('/msg', methods=['POST'])
+def msg():
+    fname = request.form['firstname']
+    lname = request.form['lastname']
+    country = request.form['country']
+    content = request.form['content']
+    data = Messages(lname, fname, country, content)
+    db.session.add(data)
+    db.session.commit()
+    return redirect(url_for('thankyou'))
 
 @app.route('/about')
 def about():
