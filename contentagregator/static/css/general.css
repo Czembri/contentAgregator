@@ -1,0 +1,321 @@
+body, html {
+  margin: 0;
+  background-color: rgb(32, 24, 24);
+  height: 100%;
+  width: 100%;
+  font-family: 'Tomorrow', sans-serif;
+  color: white;
+}
+
+.container {
+  width: 100%;
+  min-width: 800px;
+}
+
+h1 {
+  text-align: center;
+  padding-bottom: 50px;
+  width: auto;
+}
+
+h2 {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+ul {
+  border-style: ridge;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+span {
+  padding-right: 10px;
+}
+
+.row {
+  padding-top: 10px;
+}
+
+a:hover {
+    color: #9775AA;
+    text-decoration: none;
+}
+
+.items {
+    padding-top: 10%;
+}
+
+
+p {
+    font-size: 20px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mark {
+    color: black;
+    text-decoration: none;
+}
+
+.mark-as {
+    float: right;
+    font-size: 12px;
+}
+
+.to-do {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    background-color: black;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.product {
+  float: left;
+}
+
+.delete {
+  padding-left: 100px;
+}
+
+li {
+  padding-right: 100px;
+}
+
+.field {
+  padding-bottom: 10px;
+}
+
+.move-right {
+  padding-left: 10px;
+}
+
+.move-bot {
+  padding-top: 20px;
+}
+
+.space {
+  padding-right: 10px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.zoom {
+  transition: transform .2s;
+}
+
+.zoom:hover {
+  transform: scale(1.5);
+}
+
+.row-my {
+  width: 100%;
+  margin: 0;
+  padding-top: 100px;
+}
+
+.newses {
+  background-color: white;
+  font-size: 16px;
+  border-style: groove;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #9078AD;
+  min-width: 1000px;
+}
+
+.cont {
+  position: relative;
+}
+
+.main-img {
+  width: 50%;
+  height: 40%;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #6D4E90;
+}
+
+.cont:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.move-down {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.rd-img {
+  width: 60%;
+  height: 80%;
+}
+
+.test {
+  width: 80%;
+}
+
+.test-p {
+  padding-bottom: 20px;
+}
+
+.news-link:hover {
+  color: #EADAEE;
+}
+
+.preload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: white;
+    transition: opacity 500ms ease-in-out, visibility 0s 500ms;
+}
+
+.show-preloader {
+    visibility: visible;
+    opacity: 1;
+}
+
+.circle {
+    background-color: black;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce-circles 0.7s infinite ease-in-out;
+}
+
+.preload .circle:nth-child(1) {
+     animation-delay: -0.6s;
+}
+
+.preload .circle:nth-child(2) {
+     animation-delay: -0.5s;
+}
+
+.preload .circle:nth-child(3) {
+     animation-delay: -0.4s;
+}
+
+.preload .circle:nth-child(4) {
+    animation-delay: -0.3s;
+}
+
+@keyframes bounce-circles {
+    0%, 40%, 100% {
+ 		transform: translateY(-10px);
+    } 20% {
+ 		transform: translateY(-20px);
+    }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style inputs */
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.me {
+  width: 80%;
+  height: 90%;
+}
