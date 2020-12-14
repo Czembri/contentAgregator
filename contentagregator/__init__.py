@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_assets import Environment
-
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
@@ -9,6 +9,7 @@ app.config.from_object('contentagregator.config.DevelopmentConfig')
 
 db = SQLAlchemy(app)
 assets = Environment(app)
+migrate = Migrate(app, db)
 
 #register blueprints
 from contentagregator.modules.api.controllers import api_module
