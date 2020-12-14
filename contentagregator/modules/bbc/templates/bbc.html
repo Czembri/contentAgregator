@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block app %}
+<div class="row justify-content-center">
+  <div class='col'>
+    <h2>BBC News</h2>
+    <div class="newses"></div>
+  </div>
+</div>
+<div class="row justify-content-center move-down">
+  <div class="col">
+    <a href="https://www.bbc.com/news">
+      <div class="cont">
+        <img class="main-img" src="{{ url_for('bbc.static', filename='img/bbc.png') }}"/>
+        <div class="overlay">
+          <div class="text">Click Me</div>
+          <h5>To get more info...</h5>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %} 
+<script src="{{ url_for('bbc.static', filename='scripts/bbc.js') }}" type="text/javascript"></script>
+{% endblock %}

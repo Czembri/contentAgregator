@@ -1,7 +1,5 @@
-from app import app
-from app.routes import routes
+from contentagregator import app
 
-app.register_blueprint(routes, url_prefix="")
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
