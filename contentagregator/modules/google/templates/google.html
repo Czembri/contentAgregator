@@ -3,20 +3,14 @@
 <div class="row justify-content-center">
   <div class='col'>
     <h2>Google News</h2>
-    <div class="newses">
-      <a class="news-link" href="https://news.google.com{{ link }}"><p>{{ gc[0][0] }}</p></a>
-      <a class="news-link" href="https://news.google.com{{ link_2 }}"><p>{{ gc[1][0] }}</p></a>
-      <a class="news-link" href="https://news.google.com{{ link_3 }}"><p>{{ gc[2][0] }}</p></a>
-      <a class="news-link" href="https://news.google.com{{ link_4 }}"><p>{{ gc[3][0] }}</p></a>
-      <a class="news-link" href="https://news.google.com{{ link_5 }}"><p>{{ gc[4][0] }}</p></a>
-    </div>
+    <div class="newses"></div>
   </div>
 </div>
 <div class="row justify-content-center move-down">
   <div class="col">
     <a href="https://news.google.com/?hl=en-US&gl=US&ceid=US:en">
       <div class="cont">
-        <img class="main-img" src="static/img/news-report.png"/>
+        <img class="main-img" src="{{ url_for('google.static', filename='img/google.png') }}"/>
         <div class="overlay">
           <div class="text">Click Me</div>
           <h5>To get more info...</h5>
@@ -25,4 +19,7 @@
     </a>
   </div>
 </div>
+{% endblock %}
+{% block scripts %} 
+<script src="{{ url_for('google.static', filename='scripts/google.js') }}" type="text/javascript"></script>
 {% endblock %}

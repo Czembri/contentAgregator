@@ -32,17 +32,16 @@ SCRAP_URLS = {
 
 class Config:
     SQLALCHEMY_DATABASE_URI = DB_URL
-    SQLALCHEMY_TRACK_MODIFICATIONS = False  # silence warning
-    SECRET_KEY = 'SECRET_KEY'  # has to be changed on production
-    OIDC_CLIENT_SECRETS = 'client_secrets.json'  # keycloak config file
-    OIDC_ID_TOKEN_COOKIE_SECURE = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = '1234' 
     MAKO_TRANSLATE_EXCEPTIONS = False
     ASSETS_AUTO_BUILD = True
     JSON_SORT_KEYS = False
     ASSETS_DEBUG = False
     CORS_HEADERS = 'Content-Type'
-
-
+    JWT_SECRET_KEY = 'jwt-secret-string'
+    JWT_BLACKLIST_ENABLED = True
+    JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
 
 
 class ProductionConfig(Config):
