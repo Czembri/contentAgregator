@@ -24,7 +24,8 @@ allowedEndpoints = (
     None, 
     'register',
     'contact_form_view',
-    'contact_form_post'
+    'contact_form_post',
+    'user_login_api'
     )
 
 #register blueprints
@@ -47,13 +48,13 @@ app.register_blueprint(contact_module)
 
 # API section
 from contentagregator.modules.api import resources
-api.add_resource(resources.UserRegistration, '/auth/register')
-api.add_resource(resources.UserLogin, '/auth/login')
-api.add_resource(resources.UserLogoutAccess, '/auth/logout/access')
-api.add_resource(resources.UserLogoutRefresh, '/auth/logout/refresh')
-api.add_resource(resources.TokenRefresh, '/token/refresh')
-api.add_resource(resources.AllUsers, '/users')
-api.add_resource(resources.SecretResource, '/secret')
+api.add_resource(resources.UserRegistration, '/api/auth/register')
+api.add_resource(resources.UserLogin, '/api/auth/login')
+api.add_resource(resources.UserLogoutAccess, '/api/auth/logout/access')
+api.add_resource(resources.UserLogoutRefresh, '/api/auth/logout/refresh')
+api.add_resource(resources.TokenRefresh, '/api/token/refresh')
+api.add_resource(resources.AllUsers, '/api/users')
+api.add_resource(resources.SecretResource, '/api/secret')
 
 # custom errors
 @app.errorhandler(404)
@@ -70,7 +71,7 @@ def check_if_token_in_blacklist(decrypted_token):
 @app.before_request
 def before_request():
     if (
-            session['logged_in'] == False and # not logged in
+            not session.get('user_id') and # not logged in
             (request.endpoint not in allowedEndpoints) and # not in allowed endpoits
             (request.endpoint.split('.')[-1] != 'static')  # not static file
     ):
