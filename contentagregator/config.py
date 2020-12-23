@@ -2,16 +2,33 @@ import os
 import configparser
 
 
+#config
+AVATAR_VALID_EXTENTIONS = ['jpg', 'png', 'jpeg']
+ATTACHMENT_VALID_EXTENTIONS = AVATAR_VALID_EXTENTIONS + ['pdf', 'doc', 'docx']
+
 #DATABASE CONFIGURATION SCOPE
 config =configparser.ConfigParser()
-with open('contentagregator/db_config.ini', 'r', encoding='utf-8') as f:
+with open('contentagregator/app_config.ini', 'r', encoding='utf-8') as f:
     config.read_file(f)
     db_config = {
-        'login':config['USER']['login'],
-        'password':config['USER']['password'],
+        'login':config['DATABASE']['login'],
+        'password':config['DATABASE']['password'],
         'url':config['DATABASE']['url'],
         'database':config['DATABASE']['db']
-}
+    }
+
+    mail_config = {
+        'usrnm':config['MAIL']['username'],
+        'psswd':config['MAIL']['password'],
+        'mail_default_sender':config['MAIL']['mail_default_sender'],
+        'mail_sender':config['MAIL']['mail_sender'],
+        'mail_receiver':config['MAIL']['mail_receiver']
+    }
+    secrets = {
+        'secret_key':config['SECRETS']['secret_key'],
+        'jwt_secret_key':config['SECRETS']['jwt_secret_key']
+    }
+
 
 DB_URL = 'mysql://{user}:{password}@{url}/{db}'.format(
     user=db_config['login'], password=db_config['password'], url=db_config['url'], db=db_config['database'])
@@ -29,17 +46,19 @@ SCRAP_URLS = {
 }
 
 
+MAIL_SENDER = mail_config['mail_sender']
+MAIL_RECEIVER = mail_config['mail_receiver']
 
 class Config:
     SQLALCHEMY_DATABASE_URI = DB_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = '1234' 
+    SECRET_KEY = secrets['secret_key'] 
     MAKO_TRANSLATE_EXCEPTIONS = False
     ASSETS_AUTO_BUILD = True
     JSON_SORT_KEYS = False
     ASSETS_DEBUG = False
     CORS_HEADERS = 'Content-Type'
-    JWT_SECRET_KEY = 'jwt-secret-string'
+    JWT_SECRET_KEY = secrets['jwt_secret_key']
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
 
@@ -61,13 +80,13 @@ class DevelopmentConfig(Config):
     # using a test gmail account for now, to be changed for prod
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
-    MAIL_USERNAME = ''
-    MAIL_PASSWORD = ''
+    MAIL_USERNAME = mail_config['usrnm']
+    MAIL_PASSWORD = mail_config['psswd']
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
     MAIL_DEBUG = True
     MAIL_SUPPRESS_SEND = False
-    MAIL_DEFAULT_SENDER = 'gildartsft16@gmail.com'
+    MAIL_DEFAULT_SENDER = mail_config['mail_default_sender']
 
 
 class TestConfig(Config):

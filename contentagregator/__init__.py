@@ -4,6 +4,7 @@ from flask_assets import Environment
 from flask_migrate import Migrate
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
+from flask_mail import Mail
 
 app = Flask(__name__)
 
@@ -14,9 +15,17 @@ assets = Environment(app)
 migrate = Migrate(app, db)
 api = Api(app)
 jwt = JWTManager(app)
+mail = Mail(app)
 
 # endpoints that don't require logging in
-allowedEndpoints = ('login', 'logout', None, 'register')
+allowedEndpoints = (
+    'login',
+    'logout', 
+    None, 
+    'register',
+    'contact_form_view',
+    'contact_form_post'
+    )
 
 #register blueprints
 from contentagregator.modules.api.controllers import api_module
@@ -25,6 +34,7 @@ from contentagregator.modules.auth.controllers import auth_module
 from contentagregator.modules.about.controllers import about_module
 from contentagregator.modules.google.controllers import google_module
 from contentagregator.modules.communicates.controllers import communicates_module
+from contentagregator.modules.contact.controllers import contact_module
 
 app.register_blueprint(api_module)
 app.register_blueprint(bbc_module)
@@ -32,6 +42,7 @@ app.register_blueprint(auth_module)
 app.register_blueprint(communicates_module)
 app.register_blueprint(about_module)
 app.register_blueprint(google_module)
+app.register_blueprint(contact_module)
 
 
 # API section
