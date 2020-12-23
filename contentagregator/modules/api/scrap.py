@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup, NavigableString, Tag
 import requests
 from datetime import date
-
+from contentagregator import db
+from contentagregator.modules.bbc.models import Bbc
 from contentagregator.config import SCRAP_URLS
 
 
@@ -118,6 +119,14 @@ def bbc():
     url = SCRAP_URLS['bbc']
     soup = get_source(url)
     scrap = Scrap('h3', 'gs-c-promo-heading', 'BBC').scrap_data_en(data, soup)
+    for d in data:
+        bbc_db = Bbc(
+            source=d['Source'],
+            description=d['Description'],
+            scraped=d['Scraped']
+        )
+    db.session.add(bbc_db)
+    db.session.commit()
     return data
  
 
@@ -125,23 +134,23 @@ def google():
     data = []
     url = SCRAP_URLS['google']
     soup = get_source(url)
-    scrap = Scrap('h3', 'gs-c-promo-heading', 'BBC').scrap_data_en(data, soup)
+    # scrap = Scrap('h3', 'gs-c-promo-heading', 'BBC').scrap_data_en(data, soup)
 
-    i = 1
-    article_1 = soup.find('article').a
+    # i = 1
+    # article_1 = soup.find('article').a
 
-    data += [
-                    {
-                        'Description':article_1,
-                        'Source':'Google',
-                        'Scraped':date.today(),
-                        'Link':article_1['href']
-                    }
-                ] 
+    # data += [
+    #                 {
+    #                     'Description':article_1,
+    #                     'Source':'Google',
+    #                     'Scraped':date.today(),
+    #                     'Link':article_1['href']
+    #                 }
+    #             ] 
 
     for content_goo in soup.find_all('a', class_='DY5T1d')[0:5]:
         google_content = content_goo.getText().split(',')
-        next_ = soup_goo.find_all('article')[i]
+        next_ = soup.find_all('article')[0]
         a_ = next_.find('a')
         data += [
                     {
@@ -151,7 +160,6 @@ def google():
                         'Link':a_['href']
                     }
                 ]
-        i += 1
     return data
 
 

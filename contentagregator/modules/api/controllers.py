@@ -13,16 +13,13 @@ from contentagregator.modules.api.scrap import (
     google,
     cnn
 )
+from flask_restful import Resource
 
 api_module = Blueprint('api', __name__, url_prefix='/api/v1')
 
 
-def get_source(url):
-    response = requests.get(url).text
-    soup = BeautifulSoup(response, 'html.parser')
-    return soup
-
 # english news 
+
 @app.route('/api/v1/en/google')
 def google_get():
     google_data = google()
