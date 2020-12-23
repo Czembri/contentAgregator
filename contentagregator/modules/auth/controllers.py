@@ -21,10 +21,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 auth_module = Blueprint('auth', __name__, url_prefix='/news',  template_folder='templates', static_folder='static')
 
 
-@app.route('/news')
+@app.route('/')
 def index():
     return render_template('index.html')
 
+
+@app.route('/news')
+def news():
+    return render_template('choose_news.html')
 
 @app.route('/auth/login', methods=['GET', 'POST'])
 def login():

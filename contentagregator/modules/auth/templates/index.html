@@ -1,26 +1,12 @@
 {% extends "base.html" %}
 {% block app %}
 <div class="container">
-  <div class="row row-my">
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('google_get_view') }}"><img src="{{ url_for('google.static', filename='img/google.png') }}"/><p>Google News</p></a>
+  <div class="row justify-content-center">
+    <div class="col d-flex justify-content-center">
+      <a href="{{ url_for('news') }}"><h2>I want to <strong>see</strong> the news</h2></a>
     </div>
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('bbc_get_view') }}"><img src="{{ url_for('bbc.static', filename='img/bbc.png') }}"/><p>BBC News</p></a>
-    </div>
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('cnn_get') }}"><img src="static/img/cnn.png"/><p>CNN News</p></a>
-    </div>
-  </div>
-  <div class="row row-my">
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('test') }}"><img src="static/img/test.png"/><h2>Test News</h2></a>
-    </div>
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('test') }}"><img src="static/img/test.png"/><h2>Test News</h2></a>
-    </div>
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('test') }}"><img src="static/img/test.png"/><h2>Test News</h2></a>
+    <div class="col d-flex justify-content-center">
+      <a href="#"><h2>I want to <strong>write</strong> the news</h2></a>
     </div>
   </div>
 </div>

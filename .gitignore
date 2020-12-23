@@ -4,4 +4,4 @@ env/
 __pycache__
 venv/
 .webassets-cache
-db_config.ini
+app_config.ini
