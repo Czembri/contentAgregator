@@ -1,5 +1,8 @@
-from flask_restful import Resource, reqparse
 from contentagregator.modules.auth.models import User, RevokedToken
+from contentagregator import app
+
+from flask import session
+from flask_restful import Resource, reqparse
 from flask_jwt_extended import (
     create_access_token, 
     create_refresh_token, 
@@ -9,9 +12,11 @@ from flask_jwt_extended import (
     get_raw_jwt
     )
 
+
 parser = reqparse.RequestParser()
 parser.add_argument('username', help = 'This field cannot be blank', required = True)
 parser.add_argument('password', help = 'This field cannot be blank', required = True)
+
 
 class UserRegistration(Resource):
     def post(self):
@@ -50,6 +55,7 @@ class UserLogin(Resource):
         if User.verify_hash(data['password'], current_user.password):
             access_token = create_access_token(identity = data['username'])
             refresh_token = create_refresh_token(identity = data['username'])
+            session['user_id']=current_user.id
             return {
                 'message': 'Logged in as {}'.format(current_user.username),
                 'access_token': access_token,
@@ -57,7 +63,7 @@ class UserLogin(Resource):
                 }
         else:
             return {'message': 'Wrong credentials'}
-      
+
       
 class UserLogoutAccess(Resource):
     @jwt_required
@@ -104,3 +110,7 @@ class SecretResource(Resource):
         return {
             'answer': 42
         }
+
+# url rules
+app.add_url_rule('/api/auth/login', view_func=UserLogin.as_view('user_login_api'))
+app.add_url_rule('/api/auth/register', view_func=UserRegistration.as_view('user_register_api'))
