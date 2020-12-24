@@ -8,3 +8,8 @@ redactor_zone_module = Blueprint('redactor_zone', __name__, url_prefix='/redacto
 def redactor_zone_get_view():
     session['redactor'] = True
     return render_template('redactor_zone.html')
+
+
+@app.route('/redactor-zone/how-to-start')
+def how_to_start():
+    return render_template('how_to_start.html')

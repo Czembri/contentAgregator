@@ -1,0 +1,43 @@
+div#wave {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+div#wave .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 3px;
+  background: #ffffff;
+  animation: wave 1.3s linear infinite;
+}
+div#wave .dot:nth-child(2) {
+  animation-delay: -1.1s;
+}
+div#wave .dot:nth-child(3) {
+  animation-delay: -0.9s;
+}
+
+@keyframes wave {
+  0%, 60%, 100% {
+    transform: initial;
+  }
+  30% {
+    transform: translateY(-15px);
+  }
+}
+
+.container-zone {
+    margin: 0;
+    background-image: linear-gradient(to bottom, #403075, #07060C);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: visible;
+    color: white;
+    font-family: 'Tomorrow', sans-serif;
+    border: 1px solid white;
+    border-radius: 25px;
+}

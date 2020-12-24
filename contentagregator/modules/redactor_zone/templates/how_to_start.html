@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('redactor_zone.static', filename='css/redactor_zone.css') }}" type="text/css"/>
+{% endblock %}
+{% block app %}
+<div class="container container-zone">
+    <div class="row justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="col">
+                <h1>Choose Your category</h1>
+            </div>
+        </div>
+    </div>
+  <div class="row justify-content-center">
+    <div class="d-flex justify-content-center">
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/001-game console.png') }}"/>
+        </div>
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/045-sing.png') }}"/>
+        </div>
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/047-travel.png') }}"/>
+        </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="d-flex justify-content-center">
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/042-running.png') }}"/>
+        </div>
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/039-reading.png') }}"/>
+        </div>
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/036-photography.png') }}"/>
+        </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="d-flex justify-content-center">
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/011-computer.png') }}"/>
+        </div>
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/030-nail polish.png') }}"/>
+        </div>
+        <div class="col">
+            <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/029-movie.png') }}"/>
+        </div>
+    </div>
+  </div>
+  <div style="margin-top: 50px;"></div>
+
+  <div class="row justify-content-start">
+    <div class="d-flex justify-content-center">
+        <div class="col">
+            
+                <div id="wave">
+                    <h2>Start typing
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    </h2>
+                </div>
+            
+        </div>
+    </div>
+  </div>
+  <div style="margin-top: 50px;"></div>
+
+  <div class="row justify-content-end">
+    <div class="d-flex justify-content-center">
+        <div class="col">
+            <div>
+                <span><img  src="{{ url_for('redactor_zone.static', filename='img/newspaper.png') }}"/>
+                    <h2>Add photos and documents </h2>
+                </span>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div style="margin-top: 50px;"></div>
+  
+  <div class="row justify-content-start">
+    <div class="d-flex justify-content-center">
+        <div class="col">
+            <div>
+                <span><img  src="{{ url_for('redactor_zone.static', filename='img/categories/png/014-crossword.png') }}"/>
+                    <h2>Apply changes </h2>
+                </span>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
