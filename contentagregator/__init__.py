@@ -38,6 +38,7 @@ from contentagregator.modules.google.controllers import google_module
 from contentagregator.modules.communicates.controllers import communicates_module
 from contentagregator.modules.contact.controllers import contact_module
 from contentagregator.modules.rmf.controllers import rmf_module
+from contentagregator.modules.redactor_zone.controllers import redactor_zone_module
 
 app.register_blueprint(api_module)
 app.register_blueprint(bbc_module)
@@ -47,6 +48,7 @@ app.register_blueprint(about_module)
 app.register_blueprint(google_module)
 app.register_blueprint(contact_module)
 app.register_blueprint(rmf_module)
+app.register_blueprint(redactor_zone_module)
 
 # API section
 from contentagregator.modules.api import resources

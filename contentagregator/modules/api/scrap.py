@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 import requests
 from datetime import date
 from contentagregator import db
-from contentagregator.modules.bbc.models import Bbc
 from contentagregator.config import SCRAP_URLS
 
 
@@ -121,14 +120,6 @@ def bbc():
     url = SCRAP_URLS['bbc']
     soup = get_source(url)
     scrap = Scrap('h3', 'gs-c-promo-heading', 'BBC').scrap_data_en(data, soup)
-    for d in data:
-        bbc_db = Bbc(
-            source=d['Source'],
-            description=d['Description'],
-            scraped=d['Scraped']
-        )
-    db.session.add(bbc_db)
-    db.session.commit()
     return data
  
 

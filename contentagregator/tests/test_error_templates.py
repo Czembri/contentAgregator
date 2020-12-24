@@ -1,14 +1,60 @@
 from contentagregator.tests.base import BaseTestCase
-from contentagregator.modules.auth.models import User
 
-
-class TestErrorTemplates(BaseTestCase):
-    # Ensure id is correct for the current/logged in user
-    def test_404(self):
+class TestGetApi(BaseTestCase):
+    # polish news api get endpoints
+    def test_rmf(self):
         with self.client:
-            self.client.get('/undefined', follow_redirects=True)
-            self.assert404
+            try:
+                self.client.get('/api/v1/pl/rmf', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
 
+
+    def test_interia(self):
+        with self.client:
+            try:
+                self.client.get('/api/v1/pl/interia', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
+
+
+    def test_gazeta(self):
+        with self.client:
+            try:
+                self.client.get('/api/v1/pl/gazeta', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
+
+
+    # english news api get endpoints
+    def test_google(self):
+        with self.client:
+            try:
+                self.client.get('/api/v1/en/google', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
+
+    
+    def test_bbc(self):
+        with self.client:
+            try:
+                self.client.get('/api/v1/en/bbc', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
+
+
+    def test_cnn(self):
+        with self.client:
+            try:
+                self.client.get('/api/v1/en/cnn', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
 
 
 if __name__ == '__main__':

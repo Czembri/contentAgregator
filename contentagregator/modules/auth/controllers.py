@@ -23,6 +23,7 @@ auth_module = Blueprint('auth', __name__, url_prefix='/news',  template_folder='
 
 @app.route('/')
 def index():
+    session['redactor'] = False
     return render_template('index.html')
 
 
@@ -46,6 +47,16 @@ def login():
             else:
                 flash('Username or Password Incorrect', "error")
                 return redirect(url_for('login'))
+        else: # just for development
+            hashed_password = User.generate_hash(form.password.data)
+            new_user = User(
+                username=form.username.data,
+                password=hashed_password
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+            
     return render_template('login.html', form=form)
 
 
@@ -70,4 +81,5 @@ def register():
 @app.route('/logout')
 def logout():
     session['logged_in'] = False
+    session['redactor'] = False
     return redirect(url_for('login'))
