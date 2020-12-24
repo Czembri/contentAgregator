@@ -26,17 +26,6 @@
           <a class="nav-link" href="https://github.com/Czembri">Github</a>
         </li>
         {% endif %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authentication</a>
-          <div class="dropdown-menu">
-            {% if session.logged_in %}
-            <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
-            {% else %}
-            <a class="dropdown-item" href="{{ url_for('login') }}">Login</a>
-            <a class="dropdown-item" href="{{ url_for('register') }}">Register</a>
-            {% endif %}
-          </div>
-        </li>
         {% if session['redactor'] %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('how_to_start') }}">How to start?</a>
@@ -52,6 +41,22 @@
             <a class="dropdown-item" href="#">Invite to Your zone</a>
             <a class="dropdown-item" href="#">Achievements</a>
           </div>
+        </li>
+        {% endif %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authentication</a>
+          <div class="dropdown-menu">
+            {% if session.logged_in %}
+            <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+            <a class="dropdown-item" href="{{ url_for('login') }}">Login</a>
+            <a class="dropdown-item" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+          </div>
+        </li>
+        {% if session['logged_in'] %}
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ session['username'] }}</a>
         </li>
         {% endif %}
       </ul>
@@ -71,7 +76,7 @@
                     {% block content %}{% endblock %}
                   </div>
                 </main>
-              <h1><a href="/">Content Agregator v1</a></h1>
+              <h1 style="text-align: center;"><a href="/" >Content Agregator v1</a></h1>
             </div>
           </div>
         </header>
