@@ -1,11 +1,3 @@
-
-function addLoader() {
-    $('.newses').append(`
-    <div class="loader"></div>
-`);
-}
-
-addLoader();
 $.get("/api/v1/en/google", function(data) {
     setTimeout(fetchNewses, 2000);
     function fetchNewses() {
