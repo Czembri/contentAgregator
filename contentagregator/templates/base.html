@@ -15,6 +15,7 @@
 <body>
     <div class="container">
       <ul class="nav justify-content-center">
+        {% if not session['redactor'] %}
         <li class="nav-item">
           <a class="nav-link active" href="/about">About APP</a>
         </li>
@@ -24,6 +25,7 @@
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/Czembri">Github</a>
         </li>
+        {% endif %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authentication</a>
           <div class="dropdown-menu">
@@ -35,6 +37,14 @@
             {% endif %}
           </div>
         </li>
+        {% if session['redactor'] %}
+        <li class="nav-item">
+          <a class="nav-link" href="#">Create an article</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Forum</a>
+        </li>
+        {% endif %}
       </ul>
       
         <header>
