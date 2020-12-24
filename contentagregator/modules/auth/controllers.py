@@ -44,7 +44,7 @@ def login():
                 session['user_id'] = user.id
                 return redirect(url_for('index'))
             else:
-                flash('Username or Password Incorrect', "Danger")
+                flash('Username or Password Incorrect', "error")
                 return redirect(url_for('login'))
     return render_template('login.html', form=form)
 

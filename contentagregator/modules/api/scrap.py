@@ -103,9 +103,11 @@ def rmf():
             if isinstance(a, NavigableString):
                 continue
             if isinstance(a, Tag):
+                link = [str(link) for link in a if 'href' in str(link)]
                 data += [
                     {
-                        'Description':a.get_text(),
+                        'Description':a.get_text().rstrip(),
+                        'Link': link,
                         'Source':'RMF24',
                         'Scraped':date.today()
                     }
@@ -134,19 +136,6 @@ def google():
     data = []
     url = SCRAP_URLS['google']
     soup = get_source(url)
-    # scrap = Scrap('h3', 'gs-c-promo-heading', 'BBC').scrap_data_en(data, soup)
-
-    # i = 1
-    # article_1 = soup.find('article').a
-
-    # data += [
-    #                 {
-    #                     'Description':article_1,
-    #                     'Source':'Google',
-    #                     'Scraped':date.today(),
-    #                     'Link':article_1['href']
-    #                 }
-    #             ] 
 
     for content_goo in soup.find_all('a', class_='DY5T1d')[0:5]:
         google_content = content_goo.getText().split(',')
@@ -166,7 +155,6 @@ def google():
 def cnn():
     data = []
     url = SCRAP_URLS['cnn']
-    # url = 'https://edition.cnn.com/world'
     soup = get_source(url)
     
     article_1 = soup.find('h3', class_="cd__headline").a

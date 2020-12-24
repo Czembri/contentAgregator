@@ -8,6 +8,7 @@ from flask_mail import Mail
 
 app = Flask(__name__)
 
+app.debug=True
 app.config.from_object('contentagregator.config.DevelopmentConfig')
 
 db = SQLAlchemy(app)
@@ -36,6 +37,7 @@ from contentagregator.modules.about.controllers import about_module
 from contentagregator.modules.google.controllers import google_module
 from contentagregator.modules.communicates.controllers import communicates_module
 from contentagregator.modules.contact.controllers import contact_module
+from contentagregator.modules.rmf.controllers import rmf_module
 
 app.register_blueprint(api_module)
 app.register_blueprint(bbc_module)
@@ -44,7 +46,7 @@ app.register_blueprint(communicates_module)
 app.register_blueprint(about_module)
 app.register_blueprint(google_module)
 app.register_blueprint(contact_module)
-
+app.register_blueprint(rmf_module)
 
 # API section
 from contentagregator.modules.api import resources
