@@ -13,3 +13,8 @@ def redactor_zone_get_view():
 @app.route('/redactor-zone/how-to-start')
 def how_to_start():
     return render_template('how_to_start.html')
+
+
+@app.route('/redactor-zone/create-an-article')
+def create_an_article():
+    return render_template('create_an_article.html')
