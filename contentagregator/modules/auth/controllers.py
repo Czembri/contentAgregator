@@ -13,7 +13,8 @@ from flask import (
     jsonify, 
     flash, 
     request, 
-    session
+    session,
+    make_response
     )
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -43,7 +44,8 @@ def login():
                 session['logged_in'] = True
                 session['username'] = user.username
                 session['user_id'] = user.id
-                return redirect(url_for('index'))
+                response = make_response(redirect(url_for('index')))
+                return response
             else:
                 flash('Username or Password Incorrect', "error")
                 return redirect(url_for('login'))
@@ -55,7 +57,13 @@ def login():
             )
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('index'))
+
+            session['logged_in'] = True
+            session['username'] = new_user.username
+            session['user_id'] = new_user.id
+            response = make_response(redirect(url_for('index')))
+            flash('User created', 'success')
+            return response
             
     return render_template('login.html', form=form)
 

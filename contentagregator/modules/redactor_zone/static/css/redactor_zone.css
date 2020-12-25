@@ -41,3 +41,38 @@ div#wave .dot:nth-child(3) {
     border: 1px solid white;
     border-radius: 25px;
 }
+
+.image-checkbox
+{
+    cursor: pointer;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 4px solid transparent;
+    outline: 0;
+}
+
+    .image-checkbox input[type="checkbox"]
+    {
+        display: none;
+    }
+
+.image-checkbox-checked
+{
+  filter: blur(2px);
+}
+
+.card {
+  margin: 0 20px;
+  min-width: 20vw;
+}
+
+.title-container {
+  min-width: 1000px !important;
+  margin: 50px auto;
+}
+
+#title {
+  max-width: 500px;
+}
+

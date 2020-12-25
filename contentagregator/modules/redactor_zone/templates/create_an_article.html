@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block links %} 
+<link rel="stylesheet" href="{{ url_for('redactor_zone.static', filename='css/redactor_zone.css') }}">
+{% endblock %}
+{% block app %}
+<form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="col">
+                    <h1>Choose Your's article category</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/001-game console.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="games" id="check-category" name="check-category">
+                    </label>
+                </div>
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/045-sing.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="music" id="check-category" name="check-category">
+                    </label>
+                </div>
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/047-travel.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="travel" id="check-category" name="check-category">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/042-running.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="sport" id="check-category" name="check-category">
+                    </label>
+                </div>
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/039-reading.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="documentary" id="check-category" name="check-category">
+                    </label>
+                </div>
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/036-photography.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="captured" id="check-category" name="check-category">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/011-computer.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="technology" id="check-category" name="check-category">
+                    </label>
+                </div>
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/030-nail polish.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="fashion" id="check-category" name="check-category">
+                    </label>
+                </div>
+                <div class="card image-checkbox">
+                    <label for="check-category">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/029-movie.png') }}"/>
+                        <input class="form-check-input" type="checkbox" value="movies" id="check-category" name="check-category">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="title-container">
+        <div class="row justify-content-center">
+            <div class="col d-flex justify-content-center">
+                <div class="form-group col-md-6">
+                    <b><label for="title">Type Your's article title!</label></b>
+                    <input type="text" class="form-control" placeholder="Enter a title" id="title" name="title" required>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="{{ url_for('redactor_zone.static', filename='scripts/redactor_zone.js') }}"></script>
+{% endblock %}
