@@ -18,3 +18,4 @@ def how_to_start():
 @app.route('/redactor-zone/create-an-article')
 def create_an_article():
     return render_template('create_an_article.html')
+
