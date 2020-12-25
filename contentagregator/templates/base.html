@@ -13,54 +13,76 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 </head>
 <body>
-    <div class="container">
-      <ul class="nav justify-content-center">
-        {% if not session['redactor'] %}
-        <li class="nav-item">
-          <a class="nav-link active" href="/about">About APP</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('contact_form_view') }}">Contact Me</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/Czembri">Github</a>
-        </li>
-        {% endif %}
-        {% if session['redactor'] %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('how_to_start') }}">How to start?</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Forum</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Your zone</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Your articles</a>
-            <a class="dropdown-item" href="#">Create an article</a>
-            <a class="dropdown-item" href="#">Invite to Your zone</a>
-            <a class="dropdown-item" href="#">Achievements</a>
-          </div>
-        </li>
-        {% endif %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authentication</a>
-          <div class="dropdown-menu">
-            {% if session.logged_in %}
-            <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
-            {% else %}
-            <a class="dropdown-item" href="{{ url_for('login') }}">Login</a>
-            <a class="dropdown-item" href="{{ url_for('register') }}">Register</a>
+      <nav class="navbar navbar-expand-lg">
+        
+        <b><a class="navbar-brand" href="/"> Content Agregator v1 </a></b>
+        <div class="collapse navbar-collapse justify-content-center" id="main-navbar">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            {% if not session['redactor'] %}
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About APP</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contact_form_view') }}">Contact Me</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/Czembri">Github</a>
+            </li>
             {% endif %}
-          </div>
-        </li>
-        {% if session['logged_in'] %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">{{ session['username'] }}</a>
-        </li>
-        {% endif %}
-      </ul>
-      
+            {% if session['redactor'] %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('how_to_start') }}">How to start?</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Forum</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Your zone</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Your articles</a>
+                <a class="dropdown-item" href="#">Create an article</a>
+                <a class="dropdown-item" href="#">Invite to Your zone</a>
+                <a class="dropdown-item" href="#">Achievements</a>
+              </div>
+            </li>
+            {% endif %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
+              <div class="dropdown-menu">
+                {% if session.logged_in %}
+                <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                <a class="dropdown-item" href="{{ url_for('login') }}">Login</a>
+                <a class="dropdown-item" href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+              </div>
+            </li>
+            {% if session['logged_in'] %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">{{ session['username'] }}</a>
+            </li>
+            {% endif %}     
+            </ul>
+        </div>
+        <form class="d-flex justify-content-end" style="margin: 0 25px;">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Type query"
+            aria-label="Search"
+            style="margin-right: 10px;"
+          />
+          <button
+            class="btn btn-outline-light"
+            type="button"
+            data-mdb-ripple-color="dark"
+          >
+            Search
+          </button>
+        </form>
+      </nav>
+     
+      <div class="container-fluid">
         <header>
           <div class="row justify-content-center">
             <div class="col">
@@ -76,7 +98,6 @@
                     {% block content %}{% endblock %}
                   </div>
                 </main>
-              <h1 style="text-align: center;"><a href="/" >Content Agregator v1</a></h1>
             </div>
           </div>
         </header>
