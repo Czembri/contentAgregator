@@ -29,6 +29,11 @@ with open('contentagregator/app_config.ini', 'r', encoding='utf-8') as f:
         'jwt_secret_key':config['SECRETS']['jwt_secret_key']
     }
 
+    google_config = {
+        'google_client_id':config['GOOGLE']['google_client_id'],
+        'google_client_secret':config['GOOGLE']['google_client_secret']
+    }
+
 
 DB_URL = 'mysql://{user}:{password}@{url}/{db}'.format(
     user=db_config['login'], password=db_config['password'], url=db_config['url'], db=db_config['database'])
@@ -61,6 +66,11 @@ class Config:
     JWT_SECRET_KEY = secrets['jwt_secret_key']
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
+    GOOGLE_CLIENT_ID = google_config['google_client_id']
+    GOOGLE_CLIENT_SECRET = google_config['google_client_secret']
+    GOOGLE_DISCOVERY_URL = (
+        "https://accounts.google.com/.well-known/openid-configuration"
+    )
 
 
 class ProductionConfig(Config):
