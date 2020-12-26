@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ url_for('redactor_zone.static', filename='css/redactor_zone.css') }}">
 {% endblock %}
 {% block app %}
-<form>
+<form method='POST'>
     <div class="container">
         <div class="row justify-content-center">
             <div class="d-flex justify-content-center">
@@ -90,6 +90,31 @@
             </div>
         </div>
     </div>
+    <div class="article-text-container">
+        <div class="row justify-content-center">
+            <div class="col d-flex jusify-content-center">
+                <div class="form-group col-md-12">
+                    <b><label for="editor">Type Your article!</label></b>
+                    <textarea id="editor" name="editor" class="form-control" placeholder="It was shinning..." autofocus></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buttons-container">
+        <div class="row">
+            <div class="col">
+                <div class="attach float-right">
+                    <label for="attachments" class="choose-attachment">
+                        <i class="fas fa-paperclip"></i>
+                            Add attachments
+                    </label>
+                    <input id="attachments" name="attachments[]" type="file" accept="image/*, application/*" multiple hidden>
+                    <button class="btn btn-light" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </form>
 <script type="text/javascript" src="{{ url_for('redactor_zone.static', filename='scripts/redactor_zone.js') }}"></script>
 {% endblock %}
