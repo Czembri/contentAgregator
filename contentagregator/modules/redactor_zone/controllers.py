@@ -23,14 +23,9 @@ def create_an_article():
 @app.route('/redactor-zone/create-an-article', methods=['POST'])
 def create_an_article_post():
     json_response = {}
-    json_response['category'] = request.form.get('check-category')
+    json_response['category'] = request.form.getlist('check-category')
     json_response['title'] = request.form.get('title')
     json_response['editor'] = request.form.get('editor')
-
-    for file in request.files.getlist('attachments[]'):
-        if file.filename:
-            ext = file.filename.split('.')[-1]
-            ext = ext.lower()
-            json_response['file'] = filename
+    json_response['file'] = [file.filename.split('.')[0] for file in request.files.getlist('attachments[]') if file.filename]
 
     return jsonify(json_response)
