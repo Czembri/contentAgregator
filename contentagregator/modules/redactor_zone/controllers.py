@@ -25,7 +25,7 @@ def create_an_article_post():
     json_response = {}
     json_response['category'] = request.form.getlist('check-category')
     json_response['title'] = request.form.get('title')
-    json_response['editor'] = request.form.get('editor')
+    json_response['editor'] = request.form['trumbowyg']
     json_response['file'] = [file.filename.split('.')[0] for file in request.files.getlist('attachments[]') if file.filename]
 
     return jsonify(json_response)

@@ -5,11 +5,15 @@
     {% assets 'vendors_js' %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
+    {% assets 'trumbowyg_js' %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
     <title>Content Agregator v1</title>
     {% block links %} {% endblock %}
     {% assets 'base_css' %}
     <link rel="stylesheet" href="{{ ASSET_URL }}">
     {% endassets %}
+
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 </head>
 <body>
@@ -112,5 +116,6 @@
     {% block scripts %} {% endblock %}
     <script src="{{ url_for('static', filename='scripts/base.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/trumbowyg.js') }}"></script>
 </body>
 </html>

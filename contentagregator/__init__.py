@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+from sassutils.wsgi import SassMiddleware
 
 app = Flask(__name__)
 
@@ -17,6 +18,11 @@ migrate = Migrate(app, db)
 api = Api(app)
 jwt = JWTManager(app)
 mail = Mail(app)
+
+# scss setup
+app.wsgi_app = SassMiddleware(app.wsgi_app, {
+    'contentagregator': ('static/sass', 'static/css/compiled', '/static/css/compiled', False)
+})
 
 # endpoints that don't require logging in
 allowedEndpoints = (

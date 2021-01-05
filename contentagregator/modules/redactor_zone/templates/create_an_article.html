@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block links %} 
 <link rel="stylesheet" href="{{ url_for('redactor_zone.static', filename='css/redactor_zone.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendors/trumbowyg.min.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendors/trumbowyg.colors.min.css') }}" />
+
 {% endblock %}
 {% block app %}
 <form method='POST' enctype='multipart/form-data'>
@@ -94,8 +97,8 @@
         <div class="row justify-content-center">
             <div class="col d-flex jusify-content-center">
                 <div class="form-group col-md-12">
-                    <b><label for="editor">Type Your article!</label></b>
-                    <textarea id="editor" name="editor" class="form-control" placeholder="It was shinning..." autofocus></textarea>
+                    <b><label for="trumbowyg">Type Your article!</label></b>
+                    <div name="trumbowyg" id="trumbowyg" placeholder="Start typing here"></div>
                 </div>
             </div>
         </div>
