@@ -5,22 +5,10 @@
 {% block app %}
 <div class="row justify-content-center">
   <div class='col'>
-    <h2>Google News</h2>
+    <h2 class="title">Google News</h2>
     <div class="newses"></div>
   </div>
 </div>
-<div class="row justify-content-center move-down">
-  <div class="col">
-    <a href="https://news.google.com/?hl=en-US&gl=US&ceid=US:en">
-      <div class="cont">
-        <img class="main-img" src="{{ url_for('google.static', filename='img/google.png') }}"/>
-        <div class="overlay">
-          <div class="text">Click Me</div>
-          <h5>To get more info...</h5>
-        </div>
-      </div>
-    </a>
-  </div>
 </div>
 {% endblock %}
 {% block scripts %} 

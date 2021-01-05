@@ -1,3 +1,5 @@
+var colors = ["#4285f4", "#ea4335", "#fbbc05", "#34a853"], idx;
+
 $.get("/api/v1/en/google", function(data) {
     setTimeout(fetchNewses, 2000);
     function fetchNewses() {
@@ -8,4 +10,17 @@ $.get("/api/v1/en/google", function(data) {
             `);
         }
     }
+});
+
+
+
+$(function() {
+var googleTitle = $('.title'); 
+var chars = googleTitle.text().split('');
+googleTitle.html('');     
+for(var i=0; i<chars.length; i++) {
+    idx = Math.floor(Math.random() * colors.length);
+    var span = $('<span>' + chars[i] + '</span>').css("color", colors[idx]);
+    googleTitle.append(span);
+}
 });
