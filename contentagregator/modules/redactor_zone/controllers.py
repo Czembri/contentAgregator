@@ -1,4 +1,5 @@
 from contentagregator import app, db
+from contentagregator.modules.redactor_zone.models import Article_categories
 
 from flask import render_template, Blueprint, session, request, jsonify
 
@@ -17,13 +18,21 @@ def how_to_start():
 
 @app.route('/redactor-zone/create-an-article')
 def create_an_article():
-    return render_template('create_an_article.html')
+    article_categories = Article_categories.query.all()
+    categories = [category.category_id for category in article_categories]
+    return render_template('create_an_article.html', categories=sorted(categories, key=int))
 
 
 @app.route('/redactor-zone/create-an-article', methods=['POST'])
 def create_an_article_post():
     json_response = {}
-    json_response['category'] = request.form.getlist('check-category')
+    unpacked_categories = []
+    article_categories_form = request.form.getlist('check-category')
+    categories_to_display = [Article_categories.query.filter_by(category_id=x).all() for x in article_categories_form]
+    for packed in categories_to_display:
+        for to_unpack in packed:
+            unpacked_categories.append(to_unpack.category_name)
+    json_response['category'] = unpacked_categories
     json_response['title'] = request.form.get('title')
     json_response['editor'] = request.form['trumbowyg']
     json_response['file'] = [file.filename.split('.')[0] for file in request.files.getlist('attachments[]') if file.filename]
