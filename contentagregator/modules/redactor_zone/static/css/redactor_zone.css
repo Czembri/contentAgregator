@@ -93,3 +93,14 @@ div#wave .dot:nth-child(3) {
   cursor: pointer;
   margin-top: 1rem;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#trumbowyg::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#trumbowyg {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
