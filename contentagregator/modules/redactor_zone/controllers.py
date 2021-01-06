@@ -30,7 +30,7 @@ def create_an_article():
 @app.route('/redactor-zone/articles')
 def articles_view_get():
     user_id = session['user_id']
-    user_articles = Article_cooperators.query.filter_by(user_id=user_id).group_by(Article_cooperators.article_id).all()
+    user_articles = Article_cooperators.query.filter_by(user_id=user_id).all()
     return render_template('articles.html', user_articles=user_articles)
 
 
