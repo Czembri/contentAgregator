@@ -35,7 +35,7 @@ with open('contentagregator/app_config.ini', 'r', encoding='utf-8') as f:
     }
 
 
-DB_URL = 'mysql://{user}:{password}@{url}/{db}'.format(
+DB_URL = 'postgresql://{user}:{password}@{url}/{db}'.format(
     user=db_config['login'], password=db_config['password'], url=db_config['url'], db=db_config['database'])
 
 

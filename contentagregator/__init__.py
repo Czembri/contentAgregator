@@ -6,6 +6,7 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from sassutils.wsgi import SassMiddleware
+from flask_seeder import FlaskSeeder
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ migrate = Migrate(app, db)
 api = Api(app)
 jwt = JWTManager(app)
 mail = Mail(app)
+seeder = FlaskSeeder(app, db)
 
 # scss setup
 app.wsgi_app = SassMiddleware(app.wsgi_app, {
