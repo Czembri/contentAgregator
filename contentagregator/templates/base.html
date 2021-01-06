@@ -5,11 +5,15 @@
     {% assets 'vendors_js' %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
+    {% assets 'trumbowyg_js' %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
     <title>Content Agregator v1</title>
     {% block links %} {% endblock %}
     {% assets 'base_css' %}
     <link rel="stylesheet" href="{{ ASSET_URL }}">
     {% endassets %}
+
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 </head>
 <body>
@@ -26,7 +30,7 @@
               <a class="nav-link" href="{{ url_for('contact_form_view') }}">Contact Me</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://github.com/Czembri">Github</a>
+              <a class="nav-link" href="https://github.com/Czembri">GitHub</a>
             </li>
             {% endif %}
             {% if session['redactor'] %}
@@ -39,7 +43,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Your zone</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Your articles</a>
+                <a class="dropdown-item" href="{{ url_for('articles_view_get') }}">Your articles</a>
                 <a class="dropdown-item" href="{{ url_for('create_an_article') }}">Create an article</a>
                 <a class="dropdown-item" href="#">Invite to Your zone</a>
                 <a class="dropdown-item" href="#">Achievements</a>
@@ -112,5 +116,6 @@
     {% block scripts %} {% endblock %}
     <script src="{{ url_for('static', filename='scripts/base.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/trumbowyg.js') }}"></script>
 </body>
 </html>

@@ -128,12 +128,9 @@ img {
 }
 
 .newses {
-  background-color: white;
   font-size: 16px;
-  border-style: groove;
   padding-top: 20px;
   padding-bottom: 20px;
-  background-color: #9078AD;
   min-width: 1000px;
 }
 
