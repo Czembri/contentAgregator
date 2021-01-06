@@ -104,3 +104,40 @@ div#wave .dot:nth-child(3) {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.card-content {
+  position: relative;
+  margin: 5px 0;
+}
+
+.card{
+  width: 237px;
+  height: 121px;
+  border-radius: 25px;
+  border: 1px solid lightgray;
+  margin: 1rem;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+       box-shadow: 0 10px 6px -6px #777;
+}
+
+.articles-container{
+  max-width: 1650px;
+  margin-top: 1rem ;
+}
+
+.article-link{
+  display: flex;
+  align-items: flex-start;
+  text-decoration: none;
+  color: black;
+}
+
+.article-link:hover{
+  text-decoration: none;
+  color: #007bff;
+}
+
+.btn-delete-row {
+  padding: 0 !important;
+}

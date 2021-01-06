@@ -11,6 +11,8 @@ class User(db.Model):
     password = db.Column(db.String(120), nullable = False)
     name= db.Column(db.String(40), unique=True)
     email = db.Column(db.String(70), unique=True)
+    is_verified = db.Column(db.Integer, server_default="1")
+    articles = db.relationship("User_article", secondary="article_cooperators")
     
     def save_to_db(self):
         db.session.add(self)
