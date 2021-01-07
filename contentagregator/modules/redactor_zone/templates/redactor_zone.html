@@ -1,10 +1,73 @@
 {% extends "base.html" %}
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('redactor_zone.static', filename='css/redactor_zone.css') }}" type="text/css"/>
+{% endblock %}
 {% block app %}
-<div class="container">
-  <div class="row justify-content-center">
-      <div class="col">
-        <h1>DASHBOARD</h1>
-      </div>
+<div class="w">
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+  <div class="i"></div>
+</div>
+
+<div class="row justify-content-center status-bar-container">
+  <div class="col d-flex justify-content-center">
+    <h1 id="color">
+      Your activity: 
+    </h1>
   </div>
 </div>
+  <div id="progressionContainer">
+    <div id="progressionBar"></div>
+  </div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('redactor_zone.static', filename='scripts/redactor_zone.js') }}"></script>
 {% endblock %}
