@@ -1,13 +1,19 @@
 {% extends "base.html" %}
+{% block links %}
+<link href="{{ url_for('auth.static', filename='css/index.css') }}" rel="stylesheet">
+{% endblock %}
 {% block app %}
 <div class="container">
   <div class="row justify-content-center" style="margin-top: 25%;">
     <div class="col d-flex justify-content-center">
-      <a href="{{ url_for('news') }}"><h2>I want to <strong>see</strong> the news</h2></a>
+      <a href="{{ url_for('news') }}"><h2 class="fade-in" >I want to <strong>see</strong> the news</h2></a>
     </div>
     <div class="col d-flex justify-content-center">
-      <a href="{{ url_for('redactor_zone_get_view') }}"><h2>I want to <strong>write</strong> the news</h2></a>
+      <a href="{{ url_for('redactor_zone_get_view') }}"><h2 class="write-news">I want to <strong>write</strong> the news</h2></a>
     </div>
   </div>
 </div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('auth.static', filename='scripts/auth.js') }}"></script>
 {% endblock %}
