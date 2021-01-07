@@ -1,25 +1,18 @@
-// jQuery(function ($) {
-//     // init the state from the input
-//     $(".image-checkbox").each(function () {
-//         if ($(this).find('input[type="radio"]').first().attr("checked")) {
-//             $(this).addClass('image-checkbox-checked');
-//         }
-//         else {
-//             $(this).removeClass('image-checkbox-checked');
-//         }
-//     });
-
-//     // sync the state to the input
-//     $(".image-checkbox").on("click", function (e) {
-//         if ($(this).hasClass('image-checkbox-checked')) {
-//             $(this).removeClass('image-checkbox-checked');
-//             $(this).find('input[type="radio"]').first().removeAttr("checked");
-//         }
-//         else {
-//             $(this).addClass('image-checkbox-checked');
-//             $(this).find('input[type="radio"]').first().attr("checked", "checked");
-//         }
-
-//         e.preventDefault();
-//     });
-// });
+$.get("/redactor-zone/api/user-articles", function(data) {
+    var articles_count = data.length;
+    var i = 0;
+    function move() {
+      if (i == 0) {
+        i = 1;
+        var elem = document.getElementById("progressionBar");
+        var max_count = 50;
+        var width = (articles_count * 100) / max_count;
+        var id = setInterval(frame, 10);
+        function frame() {
+            elem.style.width = width + "%";
+        }
+      }
+    }
+   
+    move();
+})

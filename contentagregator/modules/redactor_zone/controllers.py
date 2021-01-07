@@ -12,7 +12,22 @@ redactor_zone_module = Blueprint('redactor_zone', __name__, url_prefix='/redacto
 @app.route('/redactor-zone')
 def redactor_zone_get_view():
     session['redactor'] = True
-    return render_template('redactor_zone.html')
+    user_id = session['user_id']
+    articles_count = Article_cooperators.query.filter_by(user_id=user_id).count()
+    return render_template('redactor_zone.html', articles_count=articles_count)
+
+@app.route('/redactor-zone/api/user-articles')
+def redactor_zone_api_user_articles():
+    user_id = session['user_id']
+    user_articles = Article_cooperators.query.filter_by(user_id=user_id).all()
+    serialized_articles = []
+    for article in user_articles:
+        article_cat = Article_categories.query.filter_by(category_id=article.article_category_id).one_or_none()
+        serialized_article = article.article.__dict__
+        serialized_article['article_category'] = article_cat.category_name
+        serialized_article.pop('_sa_instance_state', None)
+        serialized_articles.append(serialized_article)
+    return jsonify(serialized_articles)
 
 
 @app.route('/redactor-zone/how-to-start')
