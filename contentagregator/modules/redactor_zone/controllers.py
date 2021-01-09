@@ -14,7 +14,8 @@ def redactor_zone_get_view():
     session['redactor'] = True
     user_id = session['user_id']
     articles_count = Article_cooperators.query.filter_by(user_id=user_id).count()
-    return render_template('redactor_zone.html', articles_count=articles_count)
+    latest_notes = User_notes.query.filter_by(user_id=user_id).order_by(User_notes.note_id.desc()).limit(3)
+    return render_template('redactor_zone.html', articles_count=articles_count, latest_notes=latest_notes)
 
 @app.route('/redactor-zone/api/user-articles')
 def redactor_zone_api_user_articles():

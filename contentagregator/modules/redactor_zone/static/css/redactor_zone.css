@@ -236,3 +236,13 @@ textarea {
 }
 textarea:hover { box-shadow:0 5px 8px rgba(0,0,0,0.15); }
 textarea:focus { box-shadow:0 5px 12px rgba(0,0,0,0.2); outline:none; }
+
+
+.latest-notes-title {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.dashboard-notes{
+  padding: 10px;
+}
