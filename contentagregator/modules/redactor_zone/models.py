@@ -34,3 +34,11 @@ class Article_attachments(db.Model):
     article_id = db.Column(db.Integer, db.ForeignKey('user_article.article_id'))
     article = db.relationship("User_article", backref="article_attachment")
     file_name = db.Column(db.String(255))
+
+
+class User_notes(db.Model):
+    __tablename__ = 'user_notes'
+
+    note_id = db.Column(db.Integer, primary_key = True)
+    note_content = db.Column(db.Text, unique=False)
+    user_id = db.Column(db.ForeignKey(User.id, ondelete='CASCADE'))

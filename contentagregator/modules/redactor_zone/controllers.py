@@ -1,5 +1,5 @@
 from contentagregator import app, db
-from contentagregator.modules.redactor_zone.models import Article_categories, User_article, Article_cooperators, Article_attachments
+from contentagregator.modules.redactor_zone.models import Article_categories, User_article, Article_cooperators, Article_attachments, User_notes
 from contentagregator.modules.auth.models import User
 
 from collections import defaultdict
@@ -100,3 +100,20 @@ def create_an_article_post(article_id=None):
                 db.session.commit()
     flash(message=flash_message)
     return redirect(url_for('articles_view_get'))
+
+
+@app.route('/redactor-zone/user-notes')
+def user_notes():
+    user_id = session['user_id']
+    user_notes = User_notes.query.filter_by(user_id=user_id).all()
+    return render_template('notes.html', user_id=user_id, user_notes=user_notes)
+
+
+@app.route('/redactor-zone/user-notes/add-note', methods=['POST'])
+def user_notes_post():
+    user_id = session['user_id']
+    note_content = request.form['note_content']
+    note = User_notes(note_content=note_content, user_id=user_id)
+    db.session.add(note)
+    db.session.commit()
+    return str(note.note_id)
