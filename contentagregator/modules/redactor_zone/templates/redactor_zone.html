@@ -3,58 +3,61 @@
 <link rel="stylesheet" href="{{ url_for('redactor_zone.static', filename='css/redactor_zone.css') }}" type="text/css"/>
 {% endblock %}
 {% block app %}
-<div class="w">
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
-  <div class="i"></div>
+<div class="row">
+  <div class="w">
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+    <div class="i"></div>
+  </div>
 </div>
+
 
 <div class="row justify-content-center status-bar-container">
   <div class="col d-flex justify-content-center">
@@ -67,7 +70,47 @@
     <div id="progressionBar"></div>
   </div>
 
+<div class="row justify-content-center">
+  <div class="col d-flex justify-content-end">
+    <small>*quantity of the articles that you have provided</small>
+  </div>
+</div>
+
+<div class="latest-notes-title">
+  <h2>Your latest notes:</h2>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col d-flex justify-content-center">
+    {% for note in latest_notes %}
+    <div class="dashboard-notes">
+      <textarea data-id='{{ note.note_id }}' readonly>{{ note.note_content }}</textarea>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('redactor_zone.static', filename='scripts/redactor_zone.js') }}"></script>
+<script>
+  $.get("/redactor-zone/api/user-articles", function(data) {
+    var articles_count = data.length;
+    var i = 0;
+    function move() {
+      if (i == 0) {
+        i = 1;
+        var elem = document.getElementById("progressionBar");
+        var max_count = 50;
+        var width = (articles_count * 100) / max_count;
+        var id = setInterval(frame, 10);
+        function frame() {
+            elem.style.width = width + "%";
+        }
+      }
+    }
+   
+    move();
+})
+</script>
 {% endblock %}

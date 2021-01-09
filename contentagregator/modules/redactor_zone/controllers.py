@@ -1,5 +1,5 @@
 from contentagregator import app, db
-from contentagregator.modules.redactor_zone.models import Article_categories, User_article, Article_cooperators, Article_attachments
+from contentagregator.modules.redactor_zone.models import Article_categories, User_article, Article_cooperators, Article_attachments, User_notes
 from contentagregator.modules.auth.models import User
 
 from collections import defaultdict
@@ -14,7 +14,8 @@ def redactor_zone_get_view():
     session['redactor'] = True
     user_id = session['user_id']
     articles_count = Article_cooperators.query.filter_by(user_id=user_id).count()
-    return render_template('redactor_zone.html', articles_count=articles_count)
+    latest_notes = User_notes.query.filter_by(user_id=user_id).order_by(User_notes.note_id.desc()).limit(3)
+    return render_template('redactor_zone.html', articles_count=articles_count, latest_notes=latest_notes)
 
 @app.route('/redactor-zone/api/user-articles')
 def redactor_zone_api_user_articles():
@@ -100,3 +101,20 @@ def create_an_article_post(article_id=None):
                 db.session.commit()
     flash(message=flash_message)
     return redirect(url_for('articles_view_get'))
+
+
+@app.route('/redactor-zone/user-notes')
+def user_notes():
+    user_id = session['user_id']
+    user_notes = User_notes.query.filter_by(user_id=user_id).all()
+    return render_template('notes.html', user_id=user_id, user_notes=user_notes)
+
+
+@app.route('/redactor-zone/user-notes/add-note', methods=['POST'])
+def user_notes_post():
+    user_id = session['user_id']
+    note_content = request.form['note_content']
+    note = User_notes(note_content=note_content, user_id=user_id)
+    db.session.add(note)
+    db.session.commit()
+    return str(note.note_id)
