@@ -33,3 +33,49 @@ if(!localStorage['cookiesAccepted']){
         localStorage['cookiesAccepted'] = true;
 	}
 }
+
+var modalDeleteID = document.getElementById('delete-modal-view');
+if (modalDeleteID){
+    modalDeleteID.innerHTML = `
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="accept-cookies-bjsonifody">Are you sure?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="delete-modal-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+`
+}
+
+
+var currentURL = window.location.href;
+var deleteModalCaller;
+var deleteModalUrl;
+$('#delete-modal-view').on('show.bs.modal', function(e){
+	deleteModalCaller = e.relatedTarget;
+	deleteModalUrl = deleteModalCaller.dataset.url;
+});
+$("#delete-modal-btn").click(function(){
+	$.ajax({
+        url: deleteModalUrl,
+        type: 'DELETE',
+    });
+	var lastChar = currentURL.slice(-1);
+	if(isNaN(lastChar)){ // if lastChar is not a digit
+		var card = deleteModalCaller.parentNode.parentNode.parentNode.parentNode;
+		card.remove();
+		$("#delete-modal-view").modal("hide");
+	}
+	else{
+		currentURL = redirect;
+	}
+});
