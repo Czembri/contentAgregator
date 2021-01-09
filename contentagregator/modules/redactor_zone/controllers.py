@@ -117,6 +117,14 @@ def create_an_article_post(article_id=None):
     return redirect(url_for('articles_view_get'))
 
 
+@app.route('/redactor-zone/delete-article/<int:article_id>', methods=['DELETE'])
+def delete_an_article(article_id):
+    article = User_article.query.get(article_id)
+    db.session.delete(article)
+    db.session.commit()
+    return jsonify('Article deleted')
+
+
 @app.route('/redactor-zone/user-notes')
 def user_notes():
     user_id = session['user_id']
