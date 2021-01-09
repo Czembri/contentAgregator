@@ -119,11 +119,13 @@ def create_an_article_post(article_id=None):
 
 @app.route('/redactor-zone/delete-article/<int:article_id>', methods=['DELETE'])
 def delete_an_article(article_id):
-    article = User_article.query.get(article_id)
-    db.session.delete(article)
-    db.session.commit()
-    return jsonify('Article deleted')
-
+    try:
+        article = User_article.query.get(article_id)
+        db.session.delete(article)
+        db.session.commit()
+        return jsonify({'message':'Article deleted'})
+    except Exception as err:
+        return jsonify({'message':err})
 
 @app.route('/redactor-zone/user-notes')
 def user_notes():

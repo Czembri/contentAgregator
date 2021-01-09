@@ -167,22 +167,35 @@
             </div>		
     </div>
 
-    <div class="buttons-container">
-        <div class="row">
-            <div class="col">
-                <div class="attach float-right">
-                    <label for="attachments" class="choose-attachment">
-                        <i class="fas fa-paperclip"></i>
-                            Add attachments
-                    </label>
-                    <input id="attachments" name="attachments[]" type="file" accept="image/*, application/*" multiple hidden>
-                    <button class="btn btn-light" type="submit">Submit</button>
-                </div>
+    <div class="row">
+        <div class="col">
+            <div class="attach float-right">
+                <label for="attachments" class="choose-attachment">
+                    <i class="fas fa-paperclip"></i>
+                        Add attachments
+                </label>
+                <input id="attachments" name="attachments[]" type="file" accept="image/*, application/*" multiple hidden>
+                <button class="btn btn-light" type="submit">Submit</button>
             </div>
         </div>
-    </div>
-    
+    </div>    
 </form>
+{% if user_article %}
+<div class="row">
+    <div class="col">
+        <div class="attach float-right" style="margin-bottom: 20px;">
+            <button 
+            class="btn btn-danger" 
+            data-target="#delete-modal-view"
+            data-toggle="modal"
+            data-url="/redactor-zone/delete-article/{{ user_article.article_id }}"
+            >
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('redactor_zone.static', filename='scripts/redactor_zone.js') }}"></script>
