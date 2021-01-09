@@ -245,3 +245,21 @@ input[type=submit]:hover {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* cookies bar */
+#cookies{
+	display: none;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	background-color: white;
+	font-size: 1rem;
+	vertical-align: middle;
+	text-align: center;
+	border-top: 1px solid black;
+}
+
+.accept-cookies-body {
+  color: black;
+  text-align:center;
+}
