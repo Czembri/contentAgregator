@@ -184,14 +184,11 @@
 <div class="row">
     <div class="col">
         <div class="attach float-right" style="margin-bottom: 20px;">
-            <button 
-            class="btn btn-danger" 
-            data-target="#delete-modal-view"
-            data-toggle="modal"
-            data-url="/redactor-zone/delete-article/{{ user_article.article_id }}"
-            >
+            <a 
+            class="btn btn-danger delete-one" 
+            data-url="/redactor-zone/delete-article/{{ user_article.article_id }}">
                 Delete
-            </button>
+        </a>
         </div>
     </div>
 </div>
@@ -205,6 +202,13 @@
         if ($(this).val() == category_id){
             $(this).prop('checked', true);
         }
+    })
+
+    var currentURL = window.location.href;
+    $('.delete-one').click(function () {
+        var url = $(this).attr('data-url');
+        $.post(url);
+        location.href = '/redactor-zone/articles'
     })
 </script>
 {% endblock %}

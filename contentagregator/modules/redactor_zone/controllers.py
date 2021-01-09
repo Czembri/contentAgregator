@@ -49,6 +49,7 @@ def how_to_start():
 @app.route('/redactor-zone/create-an-article')
 def create_an_article(article_id=None):
     user_article = None
+    attachments=None
     if article_id is not None:
         user_article = Article_cooperators.query.filter_by(article_id=article_id).one_or_none()
         attachments = Article_attachments.query.filter_by(article_id=article_id).all()
@@ -117,13 +118,13 @@ def create_an_article_post(article_id=None):
     return redirect(url_for('articles_view_get'))
 
 
-@app.route('/redactor-zone/delete-article/<int:article_id>', methods=['DELETE'])
+@app.route('/redactor-zone/delete-article/<int:article_id>', methods=['DELETE', 'POST'])
 def delete_an_article(article_id):
     try:
         article = User_article.query.get(article_id)
         db.session.delete(article)
         db.session.commit()
-        return jsonify({'message':'Article deleted'})
+        return redirect({'message':'Article deleted'})
     except Exception as err:
         return jsonify({'message':err})
 
@@ -142,3 +143,14 @@ def user_notes_post():
     db.session.add(note)
     db.session.commit()
     return str(note.note_id)
+
+
+@app.route('/redactor-zone/delete-note/<int:note_id>', methods=['DELETE'])
+def delete_note(note_id):
+    try:
+        note = User_notes.query.get(note_id)
+        db.session.delete(note)
+        db.session.commit()
+        return jsonify({'message':'Note deleted'})
+    except Exception as err:
+        return jsonify({'message':err})

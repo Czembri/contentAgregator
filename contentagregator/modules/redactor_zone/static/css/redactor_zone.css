@@ -225,3 +225,7 @@ textarea:focus { box-shadow:0 5px 12px rgba(0,0,0,0.2); outline:none; }
 .dashboard-notes{
   padding: 10px;
 }
+
+.note-container {
+  margin: 10px 10px;
+}

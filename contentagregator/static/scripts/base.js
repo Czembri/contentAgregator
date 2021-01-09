@@ -45,7 +45,7 @@ if (modalDeleteID){
                 </button>
             </div>
             <div class="modal-body">
-                <h3 class="accept-cookies-body">Are you sure?</h3>
+                <h3 class="accept-cookies-bjsonifody">Are you sure?</h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

@@ -3,16 +3,45 @@
 <link rel="stylesheet" href="{{ url_for('redactor_zone.static', filename='css/redactor_zone.css') }}" type="text/css"/>
 {% endblock %}
 {% block app %}
-    <div id="accept" class="create">
-        <i class="fa fa-check"></i>
-    </div> 
-
-<div id="note-container">
-    <div id="create" class="create">+</div>
-    {% for note in user_notes %}
-    <div><textarea data-id='{{ note.note_id }}' readonly>{{ note.note_content }}</textarea></div>
-    {% endfor %}
+<div class="row">
+    <div class="col-sm-4">
+        <div class="row justify-content-start">
+            <div class="col d-flex justify-content-start">
+                <div id="accept" class="create">
+                    <i class="fa fa-check"></i>
+                </div> 
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col d-flex justify-content-start">
+                <div id="create" class="create">+</div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row justify-content-start">
+            <div class="d-flex align-content-start flex-wrap ideas-container">
+            {% for note in user_notes %}
+            <div class="note-container">
+                <textarea data-id='{{ note.note_id }}' readonly>
+                    {{ note.note_content }}
+                </textarea>
+                <button  type="button" class="btn btn-light" id="delete-thrash"
+                    data-url="/redactor-zone/delete-note/{{ note.note_id }}">
+                    <i class="fa fa-trash"></i>
+            </button>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
+
+ 
+
+    
+
+
 
 
 
@@ -21,5 +50,13 @@
 <script src="{{ url_for('redactor_zone.static', filename='scripts/redactor_zone.js') }}"></script>
 <script>
     var user_id = {{ user_id }}
+    $('#delete-thrash').click(function () {
+    var url_ = $(this).attr('data-url');
+    $.ajax({
+        url: url_,
+        type: 'DELETE',
+    });
+        location.href='/redactor-zone/user-notes';
+    })
 </script>
 {% endblock %}

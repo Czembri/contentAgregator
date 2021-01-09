@@ -20,7 +20,9 @@ $('#accept').click(function(){
   })
 })
 
-attachment.addEventListener( 'change', showFileName );
+if (attachment){
+  attachment.addEventListener( 'change', showFileName );
+}
 
 function showFileName( event ) {
   var input = event.srcElement;
@@ -44,3 +46,4 @@ function showFileName( event ) {
   }
 
 }
+
