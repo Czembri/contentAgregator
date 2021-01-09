@@ -82,8 +82,10 @@
 
 <div class="row justify-content-center">
   <div class="col d-flex justify-content-center">
+    {% set counter=0 %}
     {% for note in latest_notes %}
     <div class="dashboard-notes">
+      <h1>{{ loop.index }}.</h1>
       <textarea data-id='{{ note.note_id }}' readonly>{{ note.note_content }}</textarea>
     </div>
     {% endfor %}
