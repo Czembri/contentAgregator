@@ -5,10 +5,6 @@ var attachment = document.getElementById( 'attachments_view' );
     $(".notes-container").append(
       `<div id="single-note" class="single-note">
         <textarea id="note-input">This is a sticky note you can type and edit.</textarea>
-        <button  type="button" class="btn btn-light" id="delete-thrash"
-                    data-url="/redactor-zone/delete-note/{{ note.note_id }}">
-              <i class="fa fa-trash"></i>
-        </button>
       </div>`
     );
   });
@@ -23,12 +19,24 @@ $('#accept').click(function(){
     $(".added-note").append(`
       <textarea data-id=${note_id} readonly>${content}</textarea>
       <button  type="button" class="btn btn-light" id="delete-thrash"
-            data-url="/redactor-zone/delete-note/{{ note.note_id }}">
+            data-url="/redactor-zone/delete-note/${note_id}">
       <i class="fa fa-trash"></i>
       </button>
     `);
   })
 })
+
+
+// deleting notes
+$('#delete-thrash').click(function () {
+  $.ajax({
+      url: $(this).attr('data-url'),
+      type: 'DELETE',
+  });
+      location.href='/redactor-zone/user-notes';
+  })
+
+  // attachments
 
 if (attachment){
   attachment.addEventListener( 'change', showFileName );
@@ -56,13 +64,3 @@ function showFileName( event ) {
   }
 
 }
-
-// deleting notes
-
-$('#delete-thrash').on('click', function () {
-  $.ajax({
-      url: $(this).attr('data-url'),
-      type: 'DELETE',
-  });
-      location.href='/redactor-zone/user-notes';
-  })
