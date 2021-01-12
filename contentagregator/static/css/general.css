@@ -263,3 +263,13 @@ input[type=submit]:hover {
   color: black;
   text-align:center;
 }
+
+.nav-logo {
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+}
+
+.nav-item {
+  padding: 10px;
+}

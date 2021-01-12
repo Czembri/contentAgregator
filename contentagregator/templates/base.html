@@ -21,30 +21,30 @@
         
         <b><a class="navbar-brand" href="/"> Content Agregator v1 </a></b>
         <div class="collapse navbar-collapse justify-content-center" id="main-navbar">
-          <ul class="navbar-nav mb-2 mb-lg-0">
+          <ul class="navbar-nav">
             {% if not session['redactor'] %}
             <li class="nav-item">
-              <a class="nav-link" href="/about">About APP</a>
+              <a class="nav-link" href="/about"><img class='nav-logo' src="{{ url_for('static', filename='img/nav/about.png') }}"></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('contact_form_view') }}">Contact Me</a>
+              <a class="nav-link" href="{{ url_for('contact_form_view') }}"><img class='nav-logo' src="{{ url_for('static', filename='img/nav/mail.png') }}"></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://github.com/Czembri">GitHub</a>
+              <a class="nav-link" href="https://github.com/Czembri"><img class='nav-logo' src="{{ url_for('static', filename='img/nav/github-logo.png') }}"></a>
             </li>
             {% endif %}
             {% if session['redactor'] %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('redactor_zone_get_view') }}">Dashboard</a>
+              <a class="nav-link" href="{{ url_for('redactor_zone_get_view') }}"><img class='nav-logo' src="{{ url_for('static', filename='img/nav/dashboard.png') }}"></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('how_to_start') }}">How to start?</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Forum</a>
+              <a class="nav-link" href="#"><img class='nav-logo' src="{{ url_for('static', filename='img/nav/discussion.png') }}"></a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Your zone</a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list"></i></a>
               <div class="dropdown-menu">
                 <a class="dropdown-item nav-link" href="{{ url_for('articles_view_get') }}">Your articles</a>
                 <a class="dropdown-item nav-link" href="{{ url_for('create_an_article') }}">Create an article</a>
