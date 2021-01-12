@@ -50,12 +50,5 @@
 <script src="{{ url_for('redactor_zone.static', filename='scripts/redactor_zone.js') }}"></script>
 <script>
     var user_id = {{ user_id }}
-    $('#delete-thrash').on('click', function () {
-    $.ajax({
-        url: $(this).attr('data-url'),
-        type: 'DELETE',
-    });
-        location.href='/redactor-zone/user-notes';
-    })
 </script>
 {% endblock %}

@@ -47,3 +47,12 @@ function showFileName( event ) {
 
 }
 
+// deleting notes
+
+$('#delete-thrash').on('click', function () {
+  $.ajax({
+      url: $(this).attr('data-url'),
+      type: 'DELETE',
+  });
+      location.href='/redactor-zone/user-notes';
+  })
