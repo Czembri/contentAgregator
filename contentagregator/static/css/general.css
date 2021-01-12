@@ -210,7 +210,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #45a049;ccept-cookies-bjsonifody
 }
 
 
@@ -272,4 +272,10 @@ input[type=submit]:hover {
 
 .nav-item {
   padding: 10px;
+}
+
+.accept-cookies-bjsonifody{
+  color: black;
+  text-align: center;
+  ;
 }

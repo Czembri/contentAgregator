@@ -64,3 +64,27 @@ function showFileName( event ) {
   }
 
 }
+
+
+// articles on dashboard
+$.get('/redactor-zone/api/user-articles', function(data){
+
+  for( let article of data.slice(-3)) {
+    $('#dashboard-articles').append(`
+    <div class="row justify-content-center">
+        <div class="card w-75">
+          <div class="card-body">
+            <h5 class="card-title"> 
+              <a class="article-link" href="/redactor-zone/user-article/${article['article_id']}">
+              <b>${article['title']}</b>
+              </a>
+            </h5>
+            <p class="card-text">
+            ${article['content']}
+            </p>
+          </div>
+        </div>   
+      </div>   
+    `);
+  } 
+})
