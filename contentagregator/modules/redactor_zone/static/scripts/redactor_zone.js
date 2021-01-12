@@ -1,11 +1,13 @@
 var attachment = document.getElementById( 'attachments_view' );
 
-$( function() {
-  $("#create").click(function() {
-     $sticky = $('<div id="single-note" class="single-note"><textarea id="note-input">This is a sticky note you can type and edit.</textarea></div>');
-    $("#note-container").append($sticky);
+
+  $("#create").click( function() {
+    $(".notes-container").append(
+      `<div id="single-note" class="single-note">
+        <textarea id="note-input">This is a sticky note you can type and edit.</textarea>
+      </div>`
+    );
   });
-} );
 
 
 $('#accept').click(function(){
@@ -16,9 +18,25 @@ $('#accept').click(function(){
     $(".added-note").empty();
     $(".added-note").append(`
       <textarea data-id=${note_id} readonly>${content}</textarea>
+      <button  type="button" class="btn btn-light delete-thrash"
+            data-url="/redactor-zone/delete-note/${note_id}">
+      <i class="fa fa-trash"></i>
+      </button>
     `);
   })
 })
+
+
+// deleting notes
+$('.delete-thrash').click(function () {
+  $.ajax({
+      url: $(this).attr('data-url'),
+      type: 'DELETE',
+  });
+      location.href='/redactor-zone/user-notes';
+  })
+
+  // attachments
 
 if (attachment){
   attachment.addEventListener( 'change', showFileName );
@@ -47,3 +65,26 @@ function showFileName( event ) {
 
 }
 
+
+// articles on dashboard
+$.get('/redactor-zone/api/user-articles', function(data){
+
+  for( let article of data.slice(-3)) {
+    $('#dashboard-articles').append(`
+    <div class="row justify-content-center">
+        <div class="card w-75">
+          <div class="card-body">
+            <h5 class="card-title"> 
+              <a class="article-link" href="/redactor-zone/user-article/${article['article_id']}">
+              <b>${article['title']}</b>
+              </a>
+            </h5>
+            <p class="card-text">
+            ${article['content']}
+            </p>
+          </div>
+        </div>   
+      </div>   
+    `);
+  } 
+})

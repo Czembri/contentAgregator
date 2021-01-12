@@ -4,6 +4,7 @@ from contentagregator.modules.auth.models import User
 
 from collections import defaultdict
 import re
+from datetime import datetime
 
 from sqlalchemy import func
 from flask import render_template, Blueprint, session, request, jsonify, flash, redirect, url_for
@@ -23,8 +24,16 @@ def redactor_zone_get_view():
     session['redactor'] = True
     user_id = session['user_id']
     articles_count = Article_cooperators.query.filter_by(user_id=user_id).count()
-    latest_notes = User_notes.query.filter_by(user_id=user_id).order_by(User_notes.note_id.desc()).limit(3)
-    return render_template('redactor_zone.html', articles_count=articles_count, latest_notes=latest_notes)
+    latest_notes = User_notes.query.filter_by(
+        user_id=user_id
+        ).order_by(
+            User_notes.note_id.desc()
+            ).limit(3)
+    return render_template(
+        'redactor_zone.html', 
+        articles_count=articles_count, 
+        latest_notes=latest_notes)
+
 
 @app.route('/redactor-zone/api/user-articles')
 def redactor_zone_api_user_articles():
@@ -32,7 +41,9 @@ def redactor_zone_api_user_articles():
     user_articles = Article_cooperators.query.filter_by(user_id=user_id).all()
     serialized_articles = []
     for article in user_articles:
-        article_cat = Article_categories.query.filter_by(category_id=article.article_category_id).one_or_none()
+        article_cat = Article_categories.query.filter_by(
+            category_id=article.article_category_id
+            ).one_or_none()
         serialized_article = article.article.__dict__
         serialized_article['article_category'] = article_cat.category_name
         serialized_article.pop('_sa_instance_state', None)
@@ -55,7 +66,11 @@ def create_an_article(article_id=None):
         attachments = Article_attachments.query.filter_by(article_id=article_id).all()
     article_categories = Article_categories.query.all()
     categories = [category.category_id for category in article_categories]
-    return render_template('create_an_article.html', categories=sorted(categories, key=int), user_article=user_article, attachments=attachments)
+    return render_template(
+        'create_an_article.html', 
+        categories=sorted(categories, key=int), 
+        user_article=user_article, 
+        attachments=attachments)
 
 
 @app.route('/redactor-zone/articles')
@@ -78,7 +93,8 @@ def create_an_article_post(article_id=None):
         flash_message = 'The Article has been successfully added!'
         article = User_article(
             title = article_title,
-            content=article_content
+            content=article_content,
+            creation_time=datetime.utcnow()
         )
 
         db.session.add(article)
@@ -97,6 +113,7 @@ def create_an_article_post(article_id=None):
         article = User_article.query.filter_by(article_id=article_id).one_or_none()
         article.title = request.form.get('title')
         article.content = delete_html_tags(request.form['trumbowyg'])
+        article.last_modified = datetime.utcnow()
         db.session.commit()
 
         article_coop = Article_cooperators.query.filter_by(article_id=article_id).one_or_none()

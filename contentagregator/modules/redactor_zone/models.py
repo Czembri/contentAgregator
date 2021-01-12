@@ -1,12 +1,16 @@
 from contentagregator import db
 from contentagregator.modules.auth.models import User
 
+from datetime import datetime
+
 class User_article(db.Model):
     __tablename__ = 'user_article'
 
     article_id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(500), nullable = False)
     content= db.Column(db.Text, unique=False)
+    creation_time = db.Column(db.DateTime, default=datetime.utcnow)
+    last_modified = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class Article_categories(db.Model):

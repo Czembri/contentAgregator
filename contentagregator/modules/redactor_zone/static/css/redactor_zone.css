@@ -105,7 +105,7 @@ div#wave .dot:nth-child(3) {
   margin-top: 1rem ;
 }
 
-.article-link{
+.article-link, .card-text{
   display: flex;
   align-items: flex-start;
   text-decoration: none;
@@ -228,4 +228,12 @@ textarea:focus { box-shadow:0 5px 12px rgba(0,0,0,0.2); outline:none; }
 
 .note-container {
   margin: 10px 10px;
+}
+
+.w-75 {
+  height: fit-content; 
+}
+
+.card-title {
+  width: fit-content;
 }
