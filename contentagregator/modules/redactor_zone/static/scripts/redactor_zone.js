@@ -18,7 +18,7 @@ $('#accept').click(function(){
     $(".added-note").empty();
     $(".added-note").append(`
       <textarea data-id=${note_id} readonly>${content}</textarea>
-      <button  type="button" class="btn btn-light" id="delete-thrash"
+      <button  type="button" class="btn btn-light delete-thrash"
             data-url="/redactor-zone/delete-note/${note_id}">
       <i class="fa fa-trash"></i>
       </button>
@@ -28,7 +28,7 @@ $('#accept').click(function(){
 
 
 // deleting notes
-$('#delete-thrash').click(function () {
+$('.delete-thrash').click(function () {
   $.ajax({
       url: $(this).attr('data-url'),
       type: 'DELETE',
