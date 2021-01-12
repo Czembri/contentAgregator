@@ -1,11 +1,17 @@
 var attachment = document.getElementById( 'attachments_view' );
 
-$( function() {
-  $("#create").click(function() {
-     $sticky = $('<div id="single-note" class="single-note"><textarea id="note-input">This is a sticky note you can type and edit.</textarea></div>');
-    $("#note-container").append($sticky);
+
+  $("#create").click( function() {
+    $(".notes-container").append(
+      `<div id="single-note" class="single-note">
+        <textarea id="note-input">This is a sticky note you can type and edit.</textarea>
+        <button  type="button" class="btn btn-light" id="delete-thrash"
+                    data-url="/redactor-zone/delete-note/{{ note.note_id }}">
+              <i class="fa fa-trash"></i>
+        </button>
+      </div>`
+    );
   });
-} );
 
 
 $('#accept').click(function(){
@@ -16,6 +22,10 @@ $('#accept').click(function(){
     $(".added-note").empty();
     $(".added-note").append(`
       <textarea data-id=${note_id} readonly>${content}</textarea>
+      <button  type="button" class="btn btn-light" id="delete-thrash"
+            data-url="/redactor-zone/delete-note/{{ note.note_id }}">
+      <i class="fa fa-trash"></i>
+      </button>
     `);
   })
 })
