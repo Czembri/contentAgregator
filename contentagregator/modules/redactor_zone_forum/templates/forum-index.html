@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('redactor_zone_forum.static', filename='css/forum-main.css') }}" type="text/css"/>
+
+{% endblock %}
+
+{% block app %}
+<div id="forum-container">
+    <div class="row justify-content-center">
+        <img class="forum-main-img" src="{{ url_for('static', filename='img/idea.jpg') }}" class="img-fluid">
+    </div>
+    <div class="row justify-content-center">
+        <div class="col d-flex justify-content-between">
+            <div class="card border-danger mb-3" style="max-width: 18rem;">
+                <div class="card-body text-light">
+                    <h5 class="card-title">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/029-movie.png') }}"/>
+                      </h5>
+                      <p class="card-text">Some quick example text.</p>
+                </div>
+              </div>
+              <div class="card border-danger mb-3" style="max-width: 18rem;">
+                <div class="card-body text-light">
+                    <h5 class="card-title">
+                        <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/029-movie.png') }}"/>
+                    </h5>
+                    <p class="card-text">Some quick example text.</p>
+                </div>
+              </div>
+              <div class="card border-danger mb-3" style="max-width: 18rem;">
+                <div class="card-body text-light">
+                  <h5 class="card-title">
+                    <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/029-movie.png') }}"/>
+                  </h5>
+                  <p class="card-text">Some quick example text.</p>
+                </div>
+              </div>
+        </div>
+    </div>
+    
+    <div class="row justify-content-start" style="margin-top: 30px;">
+        <div class="col d-flex justify-content-start">
+            <h2><span style="color: red;">LATEST</span>POSTS</h2>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

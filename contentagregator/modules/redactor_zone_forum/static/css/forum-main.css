@@ -1,0 +1,18 @@
+#forum-container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.forum-main-img {
+    width: 60vw;
+    height: 55vh;
+}
+
+
+.row {
+    width: 60vw;
+}
+
+.card {
+    background-color: inherit !important;
+}
