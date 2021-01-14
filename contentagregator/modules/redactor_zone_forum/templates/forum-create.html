@@ -10,8 +10,8 @@
     <label for="username" class="form-label">Username</label>
     <input id="username" class="form-control" type="text" placeholder="{{ user.username }}" aria-label="readonly input example" readonly>
     <label for="post-categories" class="form-label">Datalist example</label>
-    <input class="form-control" list="datalistOptions" placeholder="Type to search category...">
-    <datalist id="datalistOptions" name="post_categories">
+    <input class="form-control" list="datalistOptions" placeholder="Type to search group...">
+    <datalist id="datalistOptions" name="post_groups">
         <option value="Help">
         <option value="Newest">
         <option value="Trends">
@@ -29,7 +29,13 @@
         <label for="post-attachments" class="form-label">Add attachments</label>
         <input name="post_attachments[]" class="form-control" id="post-attachments" type="file" accept="image/*, application/*" multiple>
     </div>
-    <button class="btn btn-light float-right">Add a post</button>
+    <button
+    class="btn btn-light float-right" 
+    id="add-edit-post-btn"
+    >Add a post</button>
 </div>
 
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('redactor_zone_forum.static', filename='scripts/forum.js') }}"></script>
 {% endblock %}

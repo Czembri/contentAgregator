@@ -18,6 +18,7 @@ from flask import (
     )
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 auth_module = Blueprint('auth', __name__, url_prefix='/news',  template_folder='templates', static_folder='static')
 
@@ -41,6 +42,8 @@ def login():
         if user:
             if User.verify_hash(form.password.data, user.password):
                 flash('You have successfully logged in.', "success")
+                user.last_seen = datetime.utcnow()
+                db.session.commit()
                 session['logged_in'] = True
                 session['username'] = user.username
                 session['user_id'] = user.id
@@ -88,6 +91,10 @@ def register():
 
 @app.route('/logout')
 def logout():
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    user.last_seen = datetime.utcnow()
+    db.session.commit()
     session['logged_in'] = False
     session['redactor'] = False
     return redirect(url_for('login'))

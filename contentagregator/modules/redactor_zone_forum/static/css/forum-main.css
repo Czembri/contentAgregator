@@ -26,3 +26,8 @@
 .post-section {
     margin: 50px auto;
 }
+
+.badge {
+    margin-right: 15px;
+    height: fit-content;
+}

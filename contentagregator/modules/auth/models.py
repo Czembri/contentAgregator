@@ -2,6 +2,7 @@
 from contentagregator import db
 from passlib.hash import pbkdf2_sha256 as sha256
 
+from datetime import datetime
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -13,7 +14,9 @@ class User(db.Model):
     email = db.Column(db.String(70), unique=True)
     is_verified = db.Column(db.Integer, server_default="1")
     articles = db.relationship("User_article", secondary="article_cooperators")
-    
+    posts = db.relationship("User_post", secondary="post_cooperators")
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
@@ -22,6 +25,7 @@ class User(db.Model):
     def return_all(cls):
         def to_json(x):
             return {
+                'id':x.id,
                 'username': x.username,
                 'password': x.password
             }

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('redactor_zone_forum.static', filename='css/forum-main.css') }}" type="text/css"/>
+
+{% endblock %}
+
+{% block app %}
+<div id="forum-container">
+    <div class="post-area">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <div class="card border-danger mb-3">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h5>{{ user.username }}</h5>
+                        </div>
+                        <div class="card-text">
+                            <small class="text-muted">
+                                Last seen at: {{ user.last_seen }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <article>
+                    <h2>{{ post.post.title }}</h2>
+                    <span>{{ post.post.content }}</span>
+                </article>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col d-flex justify-content-end">
+                <small style="color: gray;">Created: </small>
+                <span class="badge badge-secondary">{{ creation_time }}</span>
+
+                <small style="color: teal;">Modified: </small>
+                <span class="badge badge-info">{{ modification_time }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="comentary-area" style="margin-top: 50px;">
+        {% for response in post_response %}
+        <div class="row justify-content-start comment">
+            <div class="col-sm-4">
+                <div class="card border-danger mb-3">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <div data-id="{{ response.user_id }}" class="user-info"></div>
+                        </div>
+                        <div class="card-text">
+                            {{ response.content or '' }}
+                        </div>
+                    </div>
+                </div>
+                
+            </div>        
+            <div class="col">
+                <h5>
+                    {{ response.content or '' }}
+                </h5>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="input-comentary-area" style="margin-top: 50px;">
+        <div class="row">
+            <label for="add-commentary" class="form-label">Add a comment</label>
+            <textarea name="add_commentary" class="form-control" id="add-commentary" rows="3"></textarea>
+        </div>
+        <div class="row justify-content-end">
+            <button 
+            data-post = "{{ post.post_id }}"
+            data-user="{{ session_user }}"
+            id="add-commentary-btn" 
+            class="btn btn-danger">Add</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('redactor_zone_forum.static', filename='scripts/forum.js') }}"></script>
+{% endblock %}
