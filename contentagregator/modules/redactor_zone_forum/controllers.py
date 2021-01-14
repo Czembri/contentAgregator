@@ -9,3 +9,11 @@ redactor_zone_forum_module = Blueprint('redactor_zone_forum', __name__, url_pref
 @app.route('/redactor-zone/forum')
 def redactor_zone_forum_main_get():
     return render_template('forum-index.html')
+
+
+
+@app.route('/redactor-zone/forum/create-post')
+def redactor_zone_forum_create_post_get():
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    return render_template('forum-create.html', user=user)

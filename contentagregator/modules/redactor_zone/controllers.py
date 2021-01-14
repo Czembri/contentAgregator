@@ -1,5 +1,15 @@
 from contentagregator import app, db
-from contentagregator.modules.redactor_zone.models import Article_categories, User_article, Article_cooperators, Article_attachments, User_notes
+from contentagregator.modules.redactor_zone.models import (
+    Article_categories, 
+    User_article, 
+    Article_cooperators, 
+    Article_attachments, 
+    User_notes,
+    Article_schema,
+    Article_categories_schema,
+    Article_coop_schema,
+    Article_attach_schema
+    )
 from contentagregator.modules.auth.models import User
 
 from collections import defaultdict
