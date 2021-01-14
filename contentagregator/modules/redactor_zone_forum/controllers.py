@@ -35,18 +35,19 @@ def redactor_zone_forum_create_post_post(post_id=None):
     post_content = request.form.get('post_content')
     now = datetime.utcnow()
     filenames = []
-
-    if post_group is None:
-        post_group = 1
-    elif Post_groups.query.filter_by(group_name=post_group).one_or_none() is None:
-        post_group_db = Post_groups(
+    _group_id = 1
+    check_if_group_exists = Post_groups.query.filter_by(group_name=post_group).one_or_none()
+    if check_if_group_exists:
+        _group_id = check_if_group_exists.group_id
+    else:
+        post_group_id = Post_groups(
             group_name=post_group,
             creation_time=now
         )
-        db.session.add(post_group_db)
+        db.session.add(post_group_id)
         db.session.commit()
-    else:
-        post_group_db = Post_groups.query.filter_by(group_name=post_group).one_or_none()
+        _group_id = post_group_id.group_id
+            
 
     if post_id is None:
         post = User_post(
@@ -62,7 +63,7 @@ def redactor_zone_forum_create_post_post(post_id=None):
         post_coop = Post_cooperators(
             post_id=post.post_id,
             user_id=user_id,
-            post_group_id=post_group_db.group_id if post_group_db.group_id else post_group
+            post_group_id=_group_id
         )
 
         db.session.add(post_coop)
@@ -103,7 +104,13 @@ def redactor_zone_forum_show_post(post_id):
     modification_time = datetime.strftime(post.post.last_modified, '%Y-%b-%d %H:%M:%S')
     user = User.query.get(post.user_id)
     session_user = User.query.get(user_id)
-    post_response = Post_response.query.filter_by(post_id=post_id).all()
+    post_response = db.session.query(
+        Post_response, User
+    ).filter(
+        Post_response.post_id==post_id
+    ).join(
+        User
+    ).all()
     return render_template(
         'forum-post.html', 
         post=post, 
@@ -137,3 +144,41 @@ def add_comment(post_id):
         'creation_time':now,
         'last_modified':now
     })
+
+
+@app.route('/redactor-zone/forum/api/posts')
+def api_posts():
+    post_list = []
+    posts_coop = Post_cooperators.query.all()
+
+    for post in posts_coop:
+        post_comments = Post_response.query.filter_by(post_id=post.post_id).all()
+        post_attach = Post_attachments.query.filter_by(post_id=post.post_id).all()
+        post_dict = {
+                'post_id':post.post_id,
+                'title': post.post.title,
+                'content': post.post.content,
+                'post_creation_time':post.post.creation_time,
+                'post_modification_time':post.post.last_modified,
+                'comments':[{
+                    'response_id':c.response_id,
+                    'user_id':c.user_id,
+                    'content':c.content,
+                    'comment_creation_time':c.creation_time,
+                    'comment_modification_time':c.last_modified
+                } for c in post_comments]
+                ,
+                'group_id':post.post_group_id,
+                'group_name': db.session.query(Post_groups.group_name).filter_by(group_id=post.post_group_id).one_or_none(),
+                'user_id':post.user_id,
+                'attachments':[{
+                'attachment_id':a.attachment_id,
+                'filename':a.file_name,
+                'attachment_creation_time':a.creation_time
+                } for a in post_attach]
+               
+            }
+        post_list.append(post_dict)
+        post_list.sort(key=lambda item:item['post_modification_time'], reverse=True)
+    return jsonify(post_list)
+

@@ -1,7 +1,7 @@
 $('#add-edit-post-btn').click(function () {
     var url = "/redactor-zone/forum/create-post"
     const data = {
-        "post_groups":$('#datalistOptions').val(),
+        "post_groups":$('#post-group').val(),
         "post_title": $('#post-title').val(),
         "post_content":$('#post-content').val(),
         "post_attachments[]":$('#post-attachments').val()
@@ -29,16 +29,15 @@ $('#add-commentary-btn').click(function () {
     const data = {
         "user_id": user_id,
         "post_id": post_id,
-        "post_content":$('#add-commentary').val(),
+        "add_commentary":$('#add-commentary').val(),
         "creation_time": now.toUTCString(),
         "modification_time": now.toUTCString() 
     }
-    $.ajax({
+    var request = $.ajax({
         url:url,
         type:"POST",
         data:data,
         success: function (result){
-            console.log(result);
             location.href = `/redactor-zone/forum/show-post/${result['post_id']}`
         },
         error: function (error){
@@ -46,20 +45,4 @@ $('#add-commentary-btn').click(function () {
         }
     })
     
-})
-
-$.get('/api/users', function(data){
-    var id = $(".user-info").data("id");
-    for (let user in data){
-        if (id == user['id']){
-            $('.user-info').append(`
-            <h2>${user['username']}</h2>
-            `);
-        }else{
-            $('.user-info').append(`
-            <h2>No name</h2>
-            `);
-        }
-        
-    }
 })

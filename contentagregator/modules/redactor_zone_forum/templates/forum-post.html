@@ -40,26 +40,27 @@
             </div>
         </div>
     </div>
-    <div class="comentary-area" style="margin-top: 50px;">
+    <div class="commentary-area" style="margin-top: 50px;">
         {% for response in post_response %}
-        <div class="row justify-content-start comment">
+        <div class="row justify-content-start c-2">
             <div class="col-sm-4">
                 <div class="card border-danger mb-3">
                     <div class="card-body">
                         <div class="card-title">
-                            <div data-id="{{ response.user_id }}" class="user-info"></div>
+                            <div class="user-info">{{ response.User.username }}</div>
                         </div>
                         <div class="card-text">
-                            {{ response.content or '' }}
+                            <small class="created">Created: {{ response.Post_response.creation_time }}</small>
                         </div>
                     </div>
                 </div>
-                
             </div>        
             <div class="col">
-                <h5>
-                    {{ response.content or '' }}
-                </h5>
+                <article>
+                    <h5 class="response-content">
+                        {{ response.Post_response.content or '' }}
+                    </h5>
+                </article>
             </div>
         </div>
         {% endfor %}
