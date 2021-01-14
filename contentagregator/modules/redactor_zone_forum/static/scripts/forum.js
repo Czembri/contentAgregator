@@ -46,3 +46,41 @@ $('#add-commentary-btn').click(function () {
     })
     
 })
+
+$.get('/redactor-zone/forum/api/posts', function(data) {
+    retreivePosts();
+    function retreivePosts(){
+        for (let post of data){
+            var content = post['content'].length > 140 ? post['content'].substring(0,140)+'...' : post['content']
+            var title = post['title'].length > 40 ? post['title'].substring(0,40)+'...' : post['title']
+            $('#forum-container-explore').append(`
+            <div class="row justify-content-center c-2" style="margin-top: 30px;">
+                <div class="col-sm-4">
+                    <div class="card border-danger mb-3">
+                        <div class="card-body">
+                        <h5 class="card-title">${post['username']}</h5>
+                        <p class="card-text"><small>Last modified: ${post['post_modification_time']}</small></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                       <div style="width: fit-content;">
+                            <h6>Post title: </h6>
+                            <a href="#">
+                                <h3 >${title}</h3>
+                            </a>
+                       </div>
+                        <article>
+                            <span>
+                                ${content}
+                            </span>
+                        </article>
+                </div>
+            </div>
+        
+            `);
+        }
+    }
+
+
+})

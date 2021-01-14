@@ -18,6 +18,10 @@ def redactor_zone_forum_main_get():
     return render_template('forum-index.html')
 
 
+@app.route('/redactor-zone/forum/explore')
+def redactor_zone_forum_explore():
+    return render_template('forum-explore.html')
+
 
 @app.route('/redactor-zone/forum/create-post')
 def redactor_zone_forum_create_post_get():
@@ -154,6 +158,7 @@ def api_posts():
     for post in posts_coop:
         post_comments = Post_response.query.filter_by(post_id=post.post_id).all()
         post_attach = Post_attachments.query.filter_by(post_id=post.post_id).all()
+        user = User.query.get(post.user_id)
         post_dict = {
                 'post_id':post.post_id,
                 'title': post.post.title,
@@ -170,7 +175,8 @@ def api_posts():
                 ,
                 'group_id':post.post_group_id,
                 'group_name': db.session.query(Post_groups.group_name).filter_by(group_id=post.post_group_id).one_or_none(),
-                'user_id':post.user_id,
+                'user_id':user.id,
+                'username':user.username,
                 'attachments':[{
                 'attachment_id':a.attachment_id,
                 'filename':a.file_name,
