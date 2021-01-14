@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('redactor_zone_forum.static', filename='css/forum-main.css') }}" type="text/css"/>
+
+{% endblock %}
+
+{% block app %}
+<div id="forum-container">
+    <label for="username" class="form-label">Username</label>
+    <input id="username" class="form-control" type="text" placeholder="{{ user.username }}" aria-label="readonly input example" readonly>
+    <label for="post-categories" class="form-label">Datalist example</label>
+    <input class="form-control" list="datalistOptions" placeholder="Type to search group...">
+    <datalist id="datalistOptions" name="post_groups">
+        <option value="Help">
+        <option value="Newest">
+        <option value="Trends">
+        <option value="Want to cooperate">
+    </datalist>
+    <div class="mb-3 post-section">
+        <label for="post-title" class="form-label">Title</label>
+        <input name="post_title" type="text" class="form-control" id="post-title" placeholder="Type title...">
+    </div>
+    <div class="mb-3">
+        <label for="post-content" class="form-label">Content</label>
+        <textarea name="post_content" class="form-control" id="post-content" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="post-attachments" class="form-label">Add attachments</label>
+        <input name="post_attachments[]" class="form-control" id="post-attachments" type="file" accept="image/*, application/*" multiple>
+    </div>
+    <button
+    class="btn btn-light float-right" 
+    id="add-edit-post-btn"
+    >Add a post</button>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('redactor_zone_forum.static', filename='scripts/forum.js') }}"></script>
+{% endblock %}

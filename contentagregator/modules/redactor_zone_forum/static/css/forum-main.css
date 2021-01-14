@@ -1,0 +1,33 @@
+#forum-container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.forum-main-img {
+    width: 60vw;
+    height: 55vh;
+    border: 1px solid red;
+}
+
+
+.row {
+    width: 60vw;
+}
+
+.card {
+    background-color: inherit !important;
+    width: 21rem;
+}
+
+.col {
+    margin: 20px auto;
+}
+
+.post-section {
+    margin: 50px auto;
+}
+
+.badge {
+    margin-right: 15px;
+    height: fit-content;
+}

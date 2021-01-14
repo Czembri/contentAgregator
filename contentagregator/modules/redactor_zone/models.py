@@ -1,6 +1,7 @@
 from contentagregator import db
 from contentagregator.modules.auth.models import User
 
+from marshmallow_sqlalchemy import SQLAlchemySchema
 from datetime import datetime
 
 class User_article(db.Model):
@@ -46,3 +47,33 @@ class User_notes(db.Model):
     note_id = db.Column(db.Integer, primary_key = True)
     note_content = db.Column(db.Text, unique=False)
     user_id = db.Column(db.ForeignKey(User.id, ondelete='CASCADE'))
+
+
+class Article_schema(SQLAlchemySchema):
+    class Meta:
+        model = User_article
+        load_instance = True
+        include_relationships = True
+
+
+class Article_coop_schema(SQLAlchemySchema):
+    class Meta:
+        model = Article_cooperators
+        include_fk = True
+        load_instance = True
+
+
+class Article_attach_schema(SQLAlchemySchema):
+    class Meta:
+        model = Article_attachments
+        include_relationships = True
+        include_fk = True
+        load_instance = True
+
+
+class Article_categories_schema(SQLAlchemySchema):
+    class Meta:
+        model = Article_categories
+        include_fk = True
+        load_instance = True
+
