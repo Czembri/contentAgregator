@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('redactor_zone_forum.static', filename='css/forum-main.css') }}" type="text/css"/>
+
+{% endblock %}
+
+{% block app %}
+<div id="forum-container">
+    <div id="forum-container-explore"></div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('redactor_zone_forum.static', filename='scripts/forum.js') }}"></script>
+{% endblock %}

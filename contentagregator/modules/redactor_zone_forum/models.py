@@ -13,6 +13,7 @@ class User_post(db.Model):
     last_modified = db.Column(db.DateTime, default=datetime.utcnow)
 
 
+
 class Post_response(db.Model):
     __tablename__ = 'post_response'
 
@@ -52,8 +53,6 @@ class Post_attachments(db.Model):
     post = db.relationship("User_post", backref="post_attachment")
     file_name = db.Column(db.String(255))
     creation_time = db.Column(db.DateTime, default=datetime.utcnow)
-
-
 
 
 

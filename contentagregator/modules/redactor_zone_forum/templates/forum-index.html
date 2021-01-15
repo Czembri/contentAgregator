@@ -25,7 +25,7 @@
                     <h5 class="card-title">
                         <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/025-Jigsaw.png') }}"/>
                     </h5>
-                    <p class="card-text">Explore.</p>
+                    <a href="{{ url_for('redactor_zone_forum_explore') }}"><p class="card-text">Explore.</p></a>
                 </div>
               </div>
               <div class="card border-danger mb-3">
@@ -43,7 +43,15 @@
         <div class="col d-flex justify-content-start">
             <h2><span style="color: red;">LATEST</span>POSTS</h2>
         </div>
+        <div class="col d-flex justify-content-start">
+          <div class="posts-container-1"></div>
+      </div>
     </div>
+    <div class="row justify-content-center" style="margin-top: 30px;">
+      <div class="col d-flex justify-content-start">
+        <div class="posts-container-1"></div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
