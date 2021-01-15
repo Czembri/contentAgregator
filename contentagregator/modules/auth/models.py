@@ -13,9 +13,10 @@ class User(db.Model):
     name= db.Column(db.String(40), unique=True)
     email = db.Column(db.String(70), unique=True)
     is_verified = db.Column(db.Integer, server_default="1")
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     articles = db.relationship("User_article", secondary="article_cooperators")
     posts = db.relationship("User_post", secondary="post_cooperators")
-    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    
 
     def save_to_db(self):
         db.session.add(self)

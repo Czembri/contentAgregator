@@ -47,7 +47,7 @@ class User_notes(db.Model):
     note_id = db.Column(db.Integer, primary_key = True)
     note_content = db.Column(db.Text, unique=False)
     user_id = db.Column(db.ForeignKey(User.id, ondelete='CASCADE'))
-
+    user = db.relationship(User, foreign_keys=user_id, backref=db.backref('user_notes', cascade='all'))
 
 class Article_schema(SQLAlchemySchema):
     class Meta:
