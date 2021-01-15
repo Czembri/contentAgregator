@@ -57,5 +57,24 @@ class TestGetApi(BaseTestCase):
                 self.assert500
 
 
+    def test_posts(self):
+        with self.client:
+            try:
+                self.client.get('/redactor-zone/forum/api/posts', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
+
+
+    def test_articles(self):
+        with self.client:
+            try:
+                self.client.get('/redactor-zone/api/all-articles', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
+
+
+
 if __name__ == '__main__':
     unittest.main()
