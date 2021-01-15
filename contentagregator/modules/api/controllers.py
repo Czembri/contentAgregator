@@ -7,8 +7,6 @@ from contentagregator.modules.api.scrap import (
     interia, 
     gazeta, 
     rmf, 
-    tvn_24,
-    wp, 
     bbc,
     google,
     cnn
@@ -57,16 +55,3 @@ def gazeta_get():
     gazeta_data = gazeta()
     return jsonify(gazeta_data)
 
-
-# fix scraping for wp and tvn24
-
-@app.route('/api/v1/pl/wp')
-def wp_get():
-    wp_data = wp()
-    return jsonify(wp_data)
-
-
-@app.route('/api/v1/pl/tvn24')
-def tvn_24_get():
-    tvn_24_data = wp()
-    return jsonify(tvn_24_data)

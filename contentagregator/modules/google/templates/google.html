@@ -3,10 +3,19 @@
 <link rel="stylesheet" href="{{ url_for('google.static', filename='css/google.css') }}" type="text/css"/>
 {% endblock %}
 {% block app %}
+<div class="row justify-content-start">
+  <div class='col d-flex justify-content-start'>
+    <a href="{{ url_for('news') }}"><i class="fa fa-arrow-left"></i></a>
+  </div>
+</div>
 <div class="row justify-content-center">
-  <div class='col'>
+  <div class='col d-flex justify-content-center'>
     <h2 class="title">Google News</h2>
-    <div class="newses"></div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class='col d-flex justify-content-center'>
+    <div class="newses google"></div>
   </div>
 </div>
 </div>

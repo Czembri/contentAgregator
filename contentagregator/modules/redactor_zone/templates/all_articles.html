@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('redactor_zone.static', filename='css/redactor_zone.css') }}" type="text/css"/>
+
+{% endblock %}
+
+{% block app %}
+<div id="articles-container">
+    <div id="articles-container-append"></div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('redactor_zone.static', filename='scripts/redactor_zone.js') }}"></script>
+{% endblock %}

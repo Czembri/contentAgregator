@@ -88,3 +88,42 @@ $.get('/redactor-zone/api/user-articles', function(data){
     `);
   } 
 })
+
+
+$.get('/redactor-zone/api/all-articles', function(data) {
+  retreivePosts();
+  function retreivePosts(){
+      for (let article of data){
+          var content = article['content'].length > 140 ? article['content'].substring(0,140)+'...' : article['content']
+          var title = article['title'].length > 40 ? article['title'].substring(0,40)+'...' : article['title']
+          $('#articles-container-append').append(`
+          <div class="row justify-content-center c-2" style="margin-top: 30px;">
+              <div class="col-sm-4">
+                  <div class="card border-danger text-dark mb-3">
+                      <div class="card-body">
+                      <h5 class="card-title">${article['username']}</h5>
+                      <p class="card-text"><small>Last modified: ${article['article_modification_time']}</small></p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col">
+                     <div style="width: fit-content;">
+                          <h6>Article title: </h6>
+                          <a href="/redactor-zone/user-article/${article['article_id']}">
+                              <h3 >${title}</h3>
+                          </a>
+                     </div>
+                      <article>
+                          <span>
+                              ${content}
+                          </span>
+                      </article>
+              </div>
+          </div>
+      
+          `);
+      }
+  }
+
+
+})

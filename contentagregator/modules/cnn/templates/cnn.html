@@ -10,15 +10,16 @@
 </div>
 <div class="row justify-content-center">
   <div class='col d-flex justify-content-center'>
-    <h2 style="text-align: center;">BBC News</h2>
+    <h2 class="title">CNN News</h2>
   </div>
 </div>
 <div class="row justify-content-center">
   <div class='col d-flex justify-content-center'>
-    <div class="newses bbc"></div>
+    <div class="newses cnn"></div>
   </div>
+</div>
 </div>
 {% endblock %}
 {% block scripts %} 
-<script src="{{ url_for('bbc.static', filename='scripts/bbc.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('cnn.static', filename='scripts/cnn.js') }}" type="text/javascript"></script>
 {% endblock %}
