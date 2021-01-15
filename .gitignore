@@ -8,3 +8,5 @@ app_config.ini
 
 # old migrations for mysql database
 migrations_old/
+
+.DS_Store # file for macOS
