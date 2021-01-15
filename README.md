@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Czembri/contentAgregator">
-    <img src="https://github.com/Czembri/contentAgregator/issues/26" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/57504533/104786284-c9f13c00-578c-11eb-86ce-eaeb16547a30.png" width="80" height="80">
   </a>
 
   <h3 align="center">Redactor Zone</h3>
