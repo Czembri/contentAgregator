@@ -279,3 +279,12 @@ input[type=submit]:hover {
   text-align: center;
   ;
 }
+
+.brain {
+  width: 20vw;
+  height: 35vh;
+}
+
+.other-news {
+  margin: 50px auto;
+}

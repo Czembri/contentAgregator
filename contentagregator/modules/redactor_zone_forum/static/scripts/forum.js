@@ -66,7 +66,7 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
                 <div class="col">
                        <div style="width: fit-content;">
                             <h6>Post title: </h6>
-                            <a href="#">
+                            <a href="/redactor-zone/forum/show-post/${post['post_id']}">
                                 <h3 >${title}</h3>
                             </a>
                        </div>

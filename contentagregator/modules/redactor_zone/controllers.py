@@ -83,7 +83,7 @@ def create_an_article(article_id=None):
         attachments=attachments)
 
 
-@app.route('/redactor-zone/articles')
+@app.route('/redactor-zone/user-articles')
 def articles_view_get():
     user_id = session['user_id']
     user_articles = Article_cooperators.query.filter_by(user_id=user_id).all()
@@ -181,3 +181,37 @@ def delete_note(note_id):
         return jsonify({'message':'Note deleted'})
     except Exception as err:
         return jsonify({'message':err})
+
+
+@app.route('/redactor-zone/api/all-articles')
+def redactor_zone_api_all_articles():
+    articles_list = []
+    articles_coop = Article_cooperators.query.all()
+
+    for article in articles_coop:
+        article_attach = Article_attachments.query.filter_by(article_id=article.article_id).all()
+        user = User.query.get(article.user_id)
+        articles_dict = {
+                'post_id':article.article_id,
+                'title': article.article.title,
+                'content': article.article.content,
+                'article_creation_time':article.article.creation_time,
+                'article_modification_time':article.article.last_modified,
+                'category_id':article.article_category_id,
+                'category_name': db.session.query(Article_categories.category_name).filter_by(category_id=article.article_category_id).one_or_none(),
+                'user_id':user.id,
+                'username':user.username,
+                'attachments':[{
+                'attachment_id':a.attachment_id,
+                'filename':a.file_name
+                } for a in article_attach]
+               
+            }
+        articles_list.append(articles_dict)
+        articles_list.sort(key=lambda item:item['article_modification_time'], reverse=True)
+    return jsonify(articles_list)
+
+
+@app.route('/redactor-zone/all-articles')
+def redactor_zone_all_articles():
+    return render_template('all_articles.html')

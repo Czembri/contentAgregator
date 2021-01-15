@@ -1,27 +1,53 @@
 {% extends "base.html" %}
 {% block app %}
 <div class="container">
-  <div class="row row-my">
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('google_get_view') }}"><img src="{{ url_for('google.static', filename='img/google.png') }}"/><p>Google News</p></a>
+  <div class="row justify-content-center row-my" style="margin-top: 50px; border-bottom: 1px solid rgb(76, 75, 75);">
+    <div class="col d-flex justify-content-center zoom">
+      <a href="{{ url_for('redactor_zone_all_articles') }}">
+        <h2 style="text-align: center;">Discover custom <strong>NEWS</strong></h2>
+      </a>
     </div>
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('bbc_get_view') }}"><img src="{{ url_for('bbc.static', filename='img/bbc.png') }}"/><p>BBC News</p></a>
+  </div>  
+  <div id="images">
+    <div class="row justify-content-center ">
+      <div class="col d-flex justify-content-center">
+        <img class='brain' src="{{ url_for('static', filename='img/brain.jpg') }}" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col d-flex justify-content-center">
+        <img class='brain' src="{{ url_for('static', filename='img/watch.jpg') }}" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col d-flex justify-content-center">
+        <img class='brain' src="{{ url_for('static', filename='img/brach.jpg') }}" class="img-fluid" alt="Responsive image">
+      </div>
     </div>
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('cnn_get') }}"><img src="static/img/cnn.png"/><p>CNN News</p></a>
+  
+    <div class="row justify-content-center " style="padding-top: 0;">
+      <div class="col d-flex justify-content-center">
+        <img class='brain' src="{{ url_for('static', filename='img/dog_cat.jpg') }}" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col d-flex justify-content-center">
+        <img class='brain' src="{{ url_for('static', filename='img/snowboard.jpg') }}" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col d-flex justify-content-center">
+        <img class='brain' src="{{ url_for('static', filename='img/time.jpg') }}" class="img-fluid" alt="Responsive image">
+      </div>
     </div>
   </div>
-  <div class="row row-my">
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('rmf_get_view') }}"><img src="{{ url_for('rmf.static', filename='img/RMF_FM_logo.svg.png') }}"/><p>RMF24</p></a>
+  <div class="row justify-content-center row-my" style="margin-top: 50px; border-bottom: 1px solid rgb(76, 75, 75);">
+    <div class="col d-flex justify-content-center">
+      <h2 style="text-align: center;">Or check <strong>popular</strong> one</h2>
     </div>
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('test') }}"><img src="static/img/test.png"/><p>Test News</p></a>
+  </div> 
+    <div class="row justify-content-center other-news">
+      <div class="col d-flex justify-content-center zoom">
+        <a href="{{ url_for('google_get_view') }}"><img src="{{ url_for('google.static', filename='img/google.png') }}"/><p>Google News</p></a>
+      </div>
+      <div class="col justify-content-center zoom">
+        <a href="{{ url_for('bbc_get_view') }}"><img src="{{ url_for('bbc.static', filename='img/bbc.png') }}"/><p>BBC News</p></a>
+      </div>
+      <div class="col justify-content-center zoom">
+        <a href="{{ url_for('cnn_get_view') }}"><img src="static/img/cnn.png"/><p>CNN News</p></a>
+      </div>
     </div>
-    <div class="col justify-content-center zoom">
-      <a href="{{ url_for('test') }}"><img src="static/img/test.png"/><p>Test News</p></a>
-    </div>
-  </div>
 </div>
 {% endblock %}

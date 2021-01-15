@@ -1,12 +1,12 @@
 from bs4 import BeautifulSoup, NavigableString, Tag
 import requests
-from datetime import date
+from datetime import datetime
 from contentagregator import db
 from contentagregator.config import SCRAP_URLS
 
 
 class Scrap:
-    today = date.today()
+    today = datetime.utcnow()
     def __init__(self, tag, tag_class, name):
         self.tag = tag
         self.tag_class = tag_class
@@ -25,7 +25,7 @@ class Scrap:
 
     def scrap_data_en(self, data, soup):
         i = 1
-        news = soup.find_all(self.tag)[1:6]
+        news = soup.find_all(self.tag)[1:10]
         for content in news:
             a = soup.find_all('a', class_=self.tag_class)[i]
             data += [
@@ -53,15 +53,6 @@ def interia():
     scrap = Scrap('a', 'tile-magazine-title-url', 'Interia').scrap_data(data, soup)
     return data
 
-    
-
-def wp():
-    data = []
-    url = SCRAP_URLS['wp']
-    soup = get_source(url)
-    scrap = Scrap('div', 'zb8eqt-1 gPSBdI', 'WP').scrap_data(data, soup)  
-    return data
-
 
 def gazeta():
     data = []
@@ -77,17 +68,9 @@ def gazeta():
                     {
                         'Description':a.get_text(),
                         'Source':'Gazeta.pl',
-                        'Scraped':date.today()
+                        'Scraped':datetime.utcnow()
                     }
                 ]
-    return data
-
-
-def tvn_24():
-    data = []
-    url = SCRAP_URLS['tvn24']
-    soup = get_source(url)
-    scrap = Scrap('h2', 'heading article-title', 'TVN24').scrap_data(data, soup)
     return data
 
 
@@ -108,7 +91,7 @@ def rmf():
                         'Description':a.get_text().rstrip(),
                         'Link': link,
                         'Source':'RMF24',
-                        'Scraped':date.today()
+                        'Scraped':datetime.utcnow()
                     }
                 ]
 
@@ -128,7 +111,7 @@ def google():
     url = SCRAP_URLS['google']
     soup = get_source(url)
 
-    for content_goo in soup.find_all('a', class_='DY5T1d')[0:5]:
+    for content_goo in soup.find_all('a', class_='DY5T1d')[0:9]:
         google_content = content_goo.getText().split(',')
         next_ = soup.find_all('article')[0]
         a_ = next_.find('a')
@@ -136,7 +119,7 @@ def google():
                     {
                         'Description': google_content,
                         'Source':'Google',
-                        'Scraped':date.today(),
+                        'Scraped':datetime.utcnow(),
                         'Link':a_['href']
                     }
                 ]
@@ -147,26 +130,16 @@ def cnn():
     data = []
     url = SCRAP_URLS['cnn']
     soup = get_source(url)
-    
-    article_1 = soup.find('h3', class_="cd__headline").a
-    data += [
-                    {
-                        'Description': str(article_1),
-                        'Source':'CNN',
-                        'Scraped':date.today(),
-                        'Link':article_1['href']
-                    }
-                ]
     i=1
-    for content_cnn in soup.find_all('span', class_='cd__headline-text')[0:5]:
+    for content_cnn in soup.find_all('span', class_='cd__headline-text')[0:9]:
         cnn_content = content_cnn.getText().split(',')
-        next_link = soup.find_all('h3', class_="cd__headline")[i]
+        next_link = soup.find_all('h3', class_="cd__headline")[i-1]
         a_ = next_link.find('a')
         data += [
                     {
-                        'Description': str(cnn_content),
+                        'Description': cnn_content,
                         'Source':'CNN',
-                        'Scraped':date.today(),
+                        'Scraped':datetime.utcnow(),
                         'Link':a_['href']
                     }
                 ]

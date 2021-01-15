@@ -10,9 +10,43 @@
     font-size: 100px;
 }
 
-.newses {
-    border-top: 1px solid #4285f4;
-    border-bottom: 1px solid #ea4335;
-    border-left: 1px solid #fbbc05;
-    border-right: 1px solid #34a853;
+.google {
+    width: fit-content;
+    border-top: 2px solid #4285f4;
+    border-bottom: 2px solid #ea4335;
+    border-left: 2px solid #fbbc05;
+    border-right: 2px solid #34a853;
+    background-color:rgb(226, 220, 220);
+}
+
+.descr {
+    color: rgb(26, 26, 26);
+    font-weight: 600;
+    font-feature-settings: "vrt2";
+}
+
+.descr:hover {
+    color: rgb(231, 56, 56);
+}
+
+.bbc {
+    width: fit-content;
+    border: 2px solid white;
+    background-color:rgb(31, 29, 29);
+}
+
+.cnn {
+    width: fit-content;
+    border: 2px solid rgb(189, 34, 34);
+    background-color:rgb(255, 255, 255);
+    color: white;
+}
+
+.cnn-descr {
+    text-align: center;
+    color: rgb(20, 11, 11);
+}
+
+.cnn-descr:hover {
+    color: rgb(231, 56, 56);
 }
