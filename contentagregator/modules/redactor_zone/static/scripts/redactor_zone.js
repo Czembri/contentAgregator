@@ -100,9 +100,11 @@ $.get('/redactor-zone/api/all-articles', function(data) {
           <div class="row justify-content-center c-2" style="margin-top: 30px;">
               <div class="col-sm-4">
                   <div class="card border-danger text-dark mb-3">
-                      <div class="card-body">
-                      <h5 class="card-title">${article['username']}</h5>
-                      <p class="card-text"><small>Last modified: ${article['article_modification_time']}</small></p>
+                      <div class="container-fluid">
+                        <div class="card-body">
+                          <h5 class="card-title">${article['username']}</h5>
+                          <p class="card-text"><small>Last modified: ${article['article_modification_time']}</small></p>
+                        </div>
                       </div>
                   </div>
               </div>

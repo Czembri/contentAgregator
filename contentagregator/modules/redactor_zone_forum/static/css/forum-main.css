@@ -10,9 +10,6 @@
 }
 
 
-.row {
-    width: 60vw;
-}
 
 .card {
     background-color: inherit !important;
@@ -40,4 +37,8 @@
 .response-content {
     font-family:sans-serif;
     font-weight:300;
+}
+
+.latest-posts {
+    padding-left: 50px;
 }
