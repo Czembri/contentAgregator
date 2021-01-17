@@ -6,34 +6,38 @@
 {% endblock %}
 
 {% block app %}
-<div id="forum-container">
+      <img class="forum-main-img" src="{{ url_for('static', filename='img/idea.jpg') }}" class="img-fluid">
+    
     <div class="row justify-content-center">
-        <img class="forum-main-img" src="{{ url_for('static', filename='img/idea.jpg') }}" class="img-fluid">
-    </div>
-    <div class="row justify-content-center">
-        <div class="col d-flex justify-content-between">
-            <div class="card border-danger mb-3">
-                <div class="card-body text-light">
+        <div class="d-flex justify-content-center">
+            <div class="card mb-3">
+                <div class="container-fluid">
+                  <div class="card-body text-light">
                     <h5 class="card-title">
                         <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/049-writing.png') }}"/>
                       </h5>
                       <a href="{{ url_for('redactor_zone_forum_create_post_get') }}"><p class="card-text">Write a post.</p></a>
+                  </div>
                 </div>
               </div>
-              <div class="card border-danger mb-3">
-                <div class="card-body text-light">
+              <div class="card mb-3">
+                <div class="container-fluid">
+                  <div class="card-body text-light">
                     <h5 class="card-title">
                         <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/025-Jigsaw.png') }}"/>
                     </h5>
                     <a href="{{ url_for('redactor_zone_forum_explore') }}"><p class="card-text">Explore.</p></a>
+                  </div>
                 </div>
               </div>
-              <div class="card border-danger mb-3">
-                <div class="card-body text-light">
-                  <h5 class="card-title">
-                    <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/046-stamp collecting.png') }}"/>
-                  </h5>
-                  <p class="card-text">Go to Your posts.</p>
+              <div class="card mb-3">
+                <div class="container-fluid">
+                  <div class="card-body text-light">
+                    <h5 class="card-title">
+                      <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/046-stamp collecting.png') }}"/>
+                    </h5>
+                    <p class="card-text">Go to Your posts.</p>
+                  </div>
                 </div>
               </div>
         </div>
@@ -41,7 +45,7 @@
     
     <div class="row justify-content-start" style="margin-top: 30px;">
         <div class="col d-flex justify-content-start">
-            <h2><span style="color: red;">LATEST</span>POSTS</h2>
+            <h2 class="latest-posts"><span style="color: red;">LATEST</span>POSTS</h2>
         </div>
         <div class="col d-flex justify-content-start">
           <div class="posts-container-1"></div>
@@ -52,6 +56,5 @@
         <div class="posts-container-1"></div>
     </div>
   </div>
-</div>
 
 {% endblock %}

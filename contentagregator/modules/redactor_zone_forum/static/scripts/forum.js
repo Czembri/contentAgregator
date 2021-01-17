@@ -55,11 +55,13 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
             var title = post['title'].length > 40 ? post['title'].substring(0,40)+'...' : post['title']
             $('#forum-container-explore').append(`
             <div class="row justify-content-center c-2" style="margin-top: 30px;">
-                <div class="col-sm-4">
-                    <div class="card border-danger mb-3">
-                        <div class="card-body">
-                        <h5 class="card-title">${post['username']}</h5>
-                        <p class="card-text"><small>Last modified: ${post['post_modification_time']}</small></p>
+                <div class="col-sm-6">
+                    <div class="card mb-3">
+                        <div class='container-fluid'>
+                            <div class="card-body">
+                                <h5 class="card-title">${post['username']}</h5>
+                                <p class="card-text"><small>Last modified: ${post['post_modification_time']}</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
