@@ -188,3 +188,8 @@ def api_posts():
         post_list.sort(key=lambda item:item['post_modification_time'], reverse=True)
     return jsonify(post_list)
 
+
+@app.route('/redactor-zone/forum/my-posts')
+def redactor_zone_forum_my_posts():
+    user_id = session['user_id']
+    return render_template('forum-my-posts.html', user_id=user_id)
