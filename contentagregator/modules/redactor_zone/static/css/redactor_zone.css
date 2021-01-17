@@ -91,7 +91,7 @@ div#wave .dot:nth-child(3) {
 
 .card{
   width: 237px;
-  height: 121px;
+  height: fit-content;
   border-radius: 25px;
   border: 1px solid lightgray;
   margin: 1rem;

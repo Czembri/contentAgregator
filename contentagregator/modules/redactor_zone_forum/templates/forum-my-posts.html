@@ -12,6 +12,6 @@
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('redactor_zone_forum.static', filename='scripts/forum.js') }}"></script>
 <script>
-    var user_id = NaN;
+    var user_id = {{ user_id }};
 </script>
 {% endblock %}
