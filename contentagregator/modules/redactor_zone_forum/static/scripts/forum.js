@@ -102,3 +102,90 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
 
 
 })
+
+
+$.get('/redactor-zone/forum/api/posts', function(data) {
+    retreivePosts();
+    function retreivePosts(){
+        var dict = {}
+        var list = []
+        for (let post of data.slice(0, 4)){
+            var content = post['content'].length > 140 ? post['content'].substring(0,140)+'...' : post['content']
+            var title = post['title'].length > 40 ? post['title'].substring(0,40)+'...' : post['title']
+
+                dict = {
+                    'title':title,
+                    'content':content,
+                    'username':post['username'],
+                    'last_mod':post['post_modification_time']
+                }
+            list.push(dict);
+        }
+        appendPosts(list);
+
+    }
+})
+
+
+function appendPosts (list) {
+        $('.posts-container-1').append(`
+        <div class="row justify-content-center" style="margin-top: 30px;">
+            <div class="col">
+                <div class="row justify-content-center">
+                    <div class="card mb-3">
+                        <div class='container-fluid'>
+                            <div class="card-body">
+                                <h5 class="card-title">${list[0]['title']}</h5>
+                                <p class="card-text"><small>${list[0]['content']}</small></p>
+                            </div>
+                            <div class="card-footer text-muted">
+                            ${list[0]['username']}: ${list[0]['last_mod']}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="card mb-3">
+                        <div class='container-fluid'>
+                            <div class="card-body">
+                                <h5 class="card-title">${list[1]['title']}</h5>
+                                <p class="card-text"><small>${list[1]['content']}</small></p>
+                            </div>
+                            <div class="card-footer text-muted">
+                            ${list[1]['username']}: ${list[1]['last_mod']}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="card mb-3">
+                        <div class='container-fluid'>
+                            <div class="card-body">
+                                <h5 class="card-title">${list[2]['title']}</h5>
+                                <p class="card-text"><small>${list[2]['content']}</small></p>
+                            </div>
+                            <div class="card-footer text-muted">
+                            ${list[2]['username']}: ${list[2]['last_mod']}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <div class="card mb-3">
+                    <div class='container-fluid'>
+                        <div class="card-body">
+                            <h5 class="card-title">${list[3]['title']}</h5>
+                            <p class="card-text"><small>${list[3]['content']}</small></p>
+                        </div>
+                        <div class="card-footer text-muted">
+                        ${list[3]['username']}: ${list[3]['last_mod']}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `);
+        
+    
+}
