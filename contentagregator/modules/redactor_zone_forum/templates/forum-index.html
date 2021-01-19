@@ -43,18 +43,16 @@
         </div>
     </div>
     
-    <div class="row justify-content-start" style="margin-top: 30px;">
+    <div class="row justify-content-center" style="margin-top: 30px;">
         <div class="col d-flex justify-content-start">
             <h2 class="latest-posts"><span style="color: red;">LATEST</span>POSTS</h2>
         </div>
-        <div class="col d-flex justify-content-start">
-          <div class="posts-container-1"></div>
-      </div>
     </div>
-    <div class="row justify-content-center" style="margin-top: 30px;">
-      <div class="col d-flex justify-content-start">
-        <div class="posts-container-1"></div>
-    </div>
-  </div>
+    <div class="posts-container-1"></div>
+   
+</div>
 
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('redactor_zone_forum.static', filename='scripts/forum.js') }}"></script>
 {% endblock %}
