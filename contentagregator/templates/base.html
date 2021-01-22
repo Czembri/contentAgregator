@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     {% assets 'vendors_js' %}
@@ -88,6 +88,15 @@
             Search
           </button>
         </form>
+        <div class="nav-item dropdown ml-auto">
+          <button id="lang_nav" type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span id="lang" class="w-75 nav-btn-text"></span>
+              </button>
+          <div class="dropdown-menu shadow" aria-labelledby="projecten_nav">
+              <a class="dropdown-item list-group-item list-group-item-action" id="en" >English</a>
+              <a class="dropdown-item list-group-item list-group-item-action" id="pl" >Polish</a>
+          </div>
+      </div>
       </nav>
      
       <div class="container-fluid">
@@ -121,5 +130,6 @@
     <script src="{{ url_for('static', filename='scripts/base.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/common.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/trumbowyg.js') }}"></script>
-</body>
+    <script src="{{ url_for('static', filename='scripts/language_cookie.js') }}"></script>
+  </body>
 </html>
