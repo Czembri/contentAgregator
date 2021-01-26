@@ -7,27 +7,27 @@
 
 {% block app %}
 <div id="forum-container">
-    <label for="username" class="form-label">Username</label>
+    <label for="username" class="form-label t-user">Username</label>
     <input id="username" class="form-control" type="text" placeholder="{{ user.username }}" aria-label="readonly input example" readonly>
     <div class="mb-3 post-section">
-        <label for="post-group" class="form-label">Group</label>
+        <label for="post-group" class="form-label t-group">Group</label>
         <input class="form-control" name="post_groups" id="post-group" placeholder="Type group...">
     </div>
     <div class="mb-3 post-section">
-        <label for="post-title" class="form-label">Title</label>
+        <label for="post-title" class="form-label t-title">Title</label>
         <input name="post_title" type="text" class="form-control" id="post-title" placeholder="Type title...">
     </div>
     <div class="mb-3">
-        <label for="post-content" class="form-label">Content</label>
+        <label for="post-content" class="form-label t-content">Content</label>
         <textarea name="post_content" class="form-control" id="post-content" rows="3"></textarea>
     </div>
     <div class="mb-3">
-        <label for="post-attachments" class="form-label">Add attachments</label>
+        <label for="post-attachments" class="form-label t-attach">Add attachments</label>
         <input name="post_attachments[]" class="form-control" id="post-attachments" type="file" accept="image/*, application/*" multiple>
     </div>
     <button
     class="btn btn-light float-right" 
-    id="add-edit-post-btn"
+    id="add-edit-post-btn t-btn"
     >Add a post</button>
 </div>
 

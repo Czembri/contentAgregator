@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, redirect, url_for
+from flask import Flask, render_template, session, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_assets import Environment
 from flask_migrate import Migrate
@@ -7,6 +7,7 @@ from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from sassutils.wsgi import SassMiddleware
 from flask_seeder import FlaskSeeder
+from flask_language import Language, current_language
 
 app = Flask(__name__)
 
@@ -20,6 +21,7 @@ api = Api(app)
 jwt = JWTManager(app)
 mail = Mail(app)
 seeder = FlaskSeeder(app, db)
+lang = Language(app)
 
 # scss setup
 app.wsgi_app = SassMiddleware(app.wsgi_app, {
@@ -69,6 +71,7 @@ api.add_resource(resources.UserLogoutRefresh, '/api/auth/logout/refresh')
 api.add_resource(resources.TokenRefresh, '/api/token/refresh')
 api.add_resource(resources.AllUsers, '/api/users')
 api.add_resource(resources.SecretResource, '/api/secret')
+api.add_resource(resources.Translations, '/api/translations')
 
 # custom errors
 @app.errorhandler(404)
@@ -90,6 +93,35 @@ def before_request():
             (request.endpoint.split('.')[-1] != 'static')  # not static file
     ):
         return redirect(url_for('login'))
+
+
+@lang.allowed_languages
+def get_allowed_languages():
+    return ['en', 'pl']
+
+
+@lang.default_language
+def get_default_language():
+    return 'en'
+
+
+@app.route('/api/language')
+def get_language():
+    return jsonify({
+        'language': str(current_language),
+    })
+
+
+@app.route('/api/language', methods=['POST'])
+def set_language():
+    req = request.get_json()
+    language = req.get('language', None)
+
+    lang.change_language(language)
+
+    return jsonify({
+        'language': str(current_language),
+    })
 
 
 #import assets
