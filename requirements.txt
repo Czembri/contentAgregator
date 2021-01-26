@@ -63,7 +63,6 @@ pyOpenSSL==20.0.1
 python-dateutil==2.8.1
 python-editor==1.0.4
 pytz==2020.4
-pywin32==227
 requests==2.25.0
 rsa==4.6
 six==1.15.0
