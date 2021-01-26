@@ -4,7 +4,6 @@ env/
 __pycache__
 venv/
 .webassets-cache
-app_config.ini
 
 # old migrations for mysql database
 migrations_old/
