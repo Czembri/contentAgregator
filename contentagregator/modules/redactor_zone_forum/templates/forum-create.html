@@ -11,27 +11,67 @@
     <input id="username" class="form-control" type="text" placeholder="{{ user.username }}" aria-label="readonly input example" readonly>
     <div class="mb-3 post-section">
         <label for="post-group" class="form-label t-group">Group</label>
+        {% if user_posts %}
+        <input class="form-control" name="post_groups" id="post-group" placeholder="Type group..." value="{{ group_name.group_name }}" readonly>
+        {% else %}
         <input class="form-control" name="post_groups" id="post-group" placeholder="Type group...">
+        {% endif %}
     </div>
     <div class="mb-3 post-section">
         <label for="post-title" class="form-label t-title">Title</label>
+        {% if user_posts %}
+        <input name="post_title" type="text" class="form-control" id="post-title" placeholder="Type title..." value="{{ user_posts.post.title }}">
+        {% else %}
         <input name="post_title" type="text" class="form-control" id="post-title" placeholder="Type title...">
+        {% endif %}
     </div>
     <div class="mb-3">
         <label for="post-content" class="form-label t-content">Content</label>
+        {% if user_posts %}
+        <textarea name="post_content" class="form-control" id="post-content" rows="3" > {{ user_posts.post.content }}</textarea>
+        {% else %}
         <textarea name="post_content" class="form-control" id="post-content" rows="3"></textarea>
+        {% endif %}
     </div>
     <div class="mb-3">
         <label for="post-attachments" class="form-label t-attach">Add attachments</label>
         <input name="post_attachments[]" class="form-control" id="post-attachments" type="file" accept="image/*, application/*" multiple>
     </div>
+    <div class="d-flex flex-column align-items-end">
+        <div class="display-attachment-container">
+        {% if attachments %}
+        <h4 class="attach-title">Attachments:</h4>
+            {% for attachment in attachments %}
+                {% if attachment.file_name[36:]|length > 24 %}
+                <div class="row justify-content-end">
+                    <span style="margin: 10px 0; width: fit-content;" class="btn btn-outline-secondary" data-id="{{ attachment.id }}">{{ attachment.file_name[0:20] }}...  <i class="fas fa-times"></i></span>
+                </div>
+                {% else %}
+                <div class="row justify-content-end">
+                    <span style="margin: 10px 0; width: fit-content;" class="btn btn-outline-secondary" data-id="{{ attachment.id }}">{{ attachment.file_name }}  <i class="fas fa-times"></i></span>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>		
+    {% if user_posts %}
     <button
     class="btn btn-light float-right" 
-    id="add-edit-post-btn t-btn"
+    id="edit-post-btn"
+    data-url="/redactor-zone/forum/edit-post/{{ user_posts.post.post_id }}"
+    >Update</button>
+    {% else %}
+    <button
+    class="btn btn-light float-right" 
+    id="add-edit-post-btn"
     >Add a post</button>
+    {% endif %}
 </div>
 
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('redactor_zone_forum.static', filename='scripts/forum.js') }}"></script>
+<script>
+    var user_id = undefined;
+</script>
 {% endblock %}

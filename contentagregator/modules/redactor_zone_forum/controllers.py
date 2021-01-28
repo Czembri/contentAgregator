@@ -23,11 +23,24 @@ def redactor_zone_forum_explore():
     return render_template('forum-explore.html')
 
 
+@app.route('/redactor-zone/forum/edit-post/<int:post_id>')
 @app.route('/redactor-zone/forum/create-post')
-def redactor_zone_forum_create_post_get():
+def redactor_zone_forum_create_post_get(post_id=None):
     user_id = session['user_id']
     user = User.query.get(user_id)
-    return render_template('forum-create.html', user=user)
+    user_posts = None
+    attachments = None
+    if post_id is not None:
+        user_posts = Post_cooperators.query.filter_by(post_id=post_id).first()
+        attachments = Post_attachments.query.filter_by(post_id=post_id).all()
+        group_name = Post_groups.query.get(post_id)
+    return render_template(
+        'forum-create.html', 
+        user=user, 
+        attachments=attachments, 
+        user_posts=user_posts,
+        group_name=group_name
+        )
 
 
 @app.route('/redactor-zone/forum/create-post', methods=['POST'])
@@ -40,20 +53,18 @@ def redactor_zone_forum_create_post_post(post_id=None):
     now = datetime.utcnow()
     filenames = []
     _group_id = 1
-    check_if_group_exists = Post_groups.query.filter_by(group_name=post_group).one_or_none()
-    if check_if_group_exists:
-        _group_id = check_if_group_exists.group_id
-    else:
-        post_group_id = Post_groups(
-            group_name=post_group,
-            creation_time=now
-        )
-        db.session.add(post_group_id)
-        db.session.commit()
-        _group_id = post_group_id.group_id
-            
-
     if post_id is None:
+        check_if_group_exists = Post_groups.query.filter_by(group_name=post_group).one_or_none()
+        if check_if_group_exists:
+            _group_id = check_if_group_exists.group_id
+        else:
+            post_group_id = Post_groups(
+                group_name=post_group,
+                creation_time=now
+            )
+            db.session.add(post_group_id)
+            db.session.commit()
+            _group_id = post_group_id.group_id
         post = User_post(
             title=post_title,
             content=post_content,
@@ -73,6 +84,15 @@ def redactor_zone_forum_create_post_post(post_id=None):
         db.session.add(post_coop)
         db.session.commit()
 
+    else:
+        post_coop = Post_cooperators.query.filter_by(post_id=post_id).one_or_none()
+        post_coop.post.title = request.form.get('post_title')
+        post_coop.post.content = request.form.get('post_content')
+        post_coop.post.last_modified = now
+        db.session.commit()
+
+        flash('The Post has been successfully updated', 'success')
+
     for file in request.files.getlist('post_attachments[]'):
             if file.filename:
                 filename = file.filename.split('.')[0]
@@ -88,11 +108,11 @@ def redactor_zone_forum_create_post_post(post_id=None):
                 db.session.commit()
 
     return jsonify({
-        'post_id':post.post_id,
+        'post_id':post_coop.post.post_id,
         'info':{
-            'title':post.title,
-            'content':post.content,
-            'creation_time':post.creation_time,
+            'title':post_coop.post.title,
+            'content':post_coop.post.content,
+            'creation_time':post_coop.post.creation_time,
         },
         'user_id':post_coop.user_id,
         'post_group_id' :post_coop.post_group_id,

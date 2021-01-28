@@ -21,6 +21,28 @@ $('#add-edit-post-btn').click(function () {
     
 })
 
+$('#edit-post-btn').click(function () {
+    var url = $('#edit-post-btn').attr('data-id');
+    const data = {
+        "post_title": $('#post-title').val(),
+        "post_content":$('#post-content').val(),
+        "post_attachments[]":$('#post-attachments').val()
+    }
+    $.ajax({
+        url:url,
+        type:"PUT",
+        data:data,
+        success: function (result){
+            console.log(result);
+            window.location.href = `/redactor-zone/forum/show-post/${result['post_id']}`
+        },
+        error: function (error){
+            console.log(error);
+        }
+    })
+    
+})
+
 $('#add-commentary-btn').click(function () {
     var post_id = $(this).data("post");
     var user_id = $(this).data("user");
@@ -54,10 +76,10 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
             var content = post['content'].length > 140 ? post['content'].substring(0,140)+'...' : post['content']
             var title = post['title'].length > 40 ? post['title'].substring(0,40)+'...' : post['title']
             if (isNaN(user_id)){
-                appendTo(post, content, title);
+                appendTo(post, content, title, post['user_id']);
             } else {
                 if (user_id == post['user_id']){
-                    appendTo(post, content, title);
+                    appendTo(post, content, title, post['user_id']);
                 }
                 else {
                     continue
@@ -68,8 +90,13 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
         }
     }
 
+    function checkIfEqual (post_id) {
+        if ( $('.edit').data('user') ){
+            $('.btn-edit').removeAttr("style");
+        }
+    }
 
-    function appendTo(post, content, title){
+    function appendTo(post, content, title, usr_post_id){
         $('#forum-container-explore').append(`
         <div class="row justify-content-center c-2" style="margin-top: 30px;">
             <div class="col-sm-6">
@@ -95,9 +122,13 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
                         </span>
                     </article>
             </div>
+            <div class="col edit" data-user=${user_id} data-post=${usr_post_id}>
+                <a style="display:None;" href="/redactor-zone/forum/edit-post/${post['post_id']}" class="btn btn-light btn-edit">Edit post</a>
+            </div>
         </div>
     
         `);
+        checkIfEqual();
     }
 
 
@@ -128,6 +159,7 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
 
 
 function appendPosts (list) {
+    if ($('div.posts-container-1')[0]){
         $('.posts-container-1').append(`
         <div class="row justify-content-center" style="margin-top: 30px;">
             <div class="col">
@@ -186,6 +218,8 @@ function appendPosts (list) {
             </div>
         </div>
         `);
+        
+    }
         
     
 }
