@@ -94,19 +94,19 @@ def redactor_zone_forum_create_post_post(post_id=None):
 
         flash('The Post has been successfully updated', 'success')
 
-    for file in request.files.getlist('post_attachments[]'):
-            if file.filename:
-                filename = file.filename.split('.')[0]
-                filenames.append(filename)
+    # file = request.files['post_attachment']
+    # if file:
+    #     filename = file.filename.split('.')[0]
+    #     filenames.append(filename)
 
-                attachment = Post_attachments(
-                    post_id=post.post_id,
-                    file_name=filename,
-                    creation_time=now
-                )
+    #     attachment = Post_attachments(
+    #         post_id=post.post_id,
+    #         file_name=filename,
+    #         creation_time=now
+    #     )
 
-                db.session.add(attachment)
-                db.session.commit()
+    #     db.session.add(attachment)
+    #     db.session.commit()
 
     return jsonify({
         'post_id':post_coop.post.post_id,
@@ -117,7 +117,7 @@ def redactor_zone_forum_create_post_post(post_id=None):
         },
         'user_id':post_coop.user_id,
         'post_group_id' :post_coop.post_group_id,
-        'filenames':filenames
+        'filenames':'filenames'
     })
 
 

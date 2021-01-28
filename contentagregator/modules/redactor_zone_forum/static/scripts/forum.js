@@ -4,7 +4,7 @@ $('#add-edit-post-btn').click(function () {
         "post_groups":$('#post-group').val(),
         "post_title": $('#post-title').val(),
         "post_content":$('#post-content').val(),
-        "post_attachments[]":$('#post-attachments').val()
+        "post_attachment":$('#post-attachments').val()
     }
     $.ajax({
         url:url,
@@ -26,7 +26,7 @@ $('#edit-post-btn').click(function () {
     const data = {
         "post_title": $('#post-title').val(),
         "post_content":$('#post-content').val(),
-        "post_attachments[]":$('#post-attachments').val()
+        "post_attachment":$('#post-attachments').val()
     }
     $.ajax({
         url:url,
