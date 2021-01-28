@@ -47,7 +47,7 @@ def login():
                 session['logged_in'] = True
                 session['username'] = user.username
                 session['user_id'] = user.id
-                avatar = f'img/letters/{user.username[0].uppeer()}.png' 
+                avatar = f'/letters/{user.username[0].upper()}.png' 
                 session['avatar'] = avatar
                 response = make_response(redirect(url_for('index')))
                 return response
@@ -66,10 +66,9 @@ def login():
             session['logged_in'] = True
             session['username'] = new_user.username
             session['user_id'] = new_user.id
-            response = make_response(redirect(url_for('index')))
+            response = make_response(redirect(url_for('login')))
             flash('User created', 'success')
             return response
-            
     return render_template('login.html', form=form)
 
 

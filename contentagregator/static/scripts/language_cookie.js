@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var plButton = document.getElementById("pl")
 
     function setLangCookie(lang) {
-        document.cookie = "user_lang =" + lang;
+        document.cookie = "user_lang=" + lang;
     }
 
     function getCookie(name) {
