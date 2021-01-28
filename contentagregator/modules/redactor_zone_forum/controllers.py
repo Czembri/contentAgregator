@@ -30,6 +30,7 @@ def redactor_zone_forum_create_post_get(post_id=None):
     user = User.query.get(user_id)
     user_posts = None
     attachments = None
+    group_name=None
     if post_id is not None:
         user_posts = Post_cooperators.query.filter_by(post_id=post_id).first()
         attachments = Post_attachments.query.filter_by(post_id=post_id).all()
