@@ -66,7 +66,6 @@ def login():
             session['user_id'] = new_user.id
             response = make_response(redirect(url_for('index')))
             flash('User created', 'success')
-            response.set_cookie('user_lang', g.oidc_id_token.get('locale', 'en'))
             return response
             
     return render_template('login.html', form=form)
