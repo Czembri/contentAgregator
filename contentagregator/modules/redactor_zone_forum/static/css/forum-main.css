@@ -42,3 +42,16 @@
 .latest-posts {
     padding-left: 50px;
 }
+
+.post-avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 12px;
+}
+
+.mod-time {
+    font-size: xx-small;
+}

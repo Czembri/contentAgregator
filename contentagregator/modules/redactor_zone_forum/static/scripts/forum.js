@@ -71,6 +71,7 @@ $('#add-commentary-btn').click(function () {
 
 $.get('/redactor-zone/forum/api/posts', function(data) {
     retreivePosts();
+    getAvatar();
     function retreivePosts(){
         for (let post of data){
             var content = post['content'].length > 140 ? post['content'].substring(0,140)+'...' : post['content']
@@ -90,21 +91,37 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
         }
     }
 
+    function getAvatar(){
+        var username = ''
+        for (let post of data){
+            if (post['post_id'] == post_id){
+                username = post['username'][0];
+            }
+        }
+        $('#add-avatar').attr('src', `/static/img/letters/${username.toUpperCase()}.png`)
+        
+    }
+
     function checkIfEqual (post_id) {
         if ( $('.edit').data('user') ){
             $('.btn-edit').removeAttr("style");
         }
     }
 
+    
+
     function appendTo(post, content, title, usr_post_id){
+        var avatar = post['username'].slice(0,1)
+
         $('#forum-container-explore').append(`
         <div class="row justify-content-center c-2" style="margin-top: 30px;">
             <div class="col-sm-6">
                 <div class="card mb-3">
                     <div class='container-fluid'>
                         <div class="card-body">
+                            <img class="post-avatar" src="/static/img/letters/${avatar.toUpperCase()}.png"
                             <h5 class="card-title">${post['username']}</h5>
-                            <p class="card-text"><small>Last modified: ${post['post_modification_time']}</small></p>
+                            <p class="card-text"><small class="mod-time">Last modified: ${post['post_modification_time']}</small></p>
                         </div>
                     </div>
                 </div>

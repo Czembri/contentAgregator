@@ -47,6 +47,8 @@ def login():
                 session['logged_in'] = True
                 session['username'] = user.username
                 session['user_id'] = user.id
+                avatar = f'img/letters/{user.username[0].uppeer()}.png' 
+                session['avatar'] = avatar
                 response = make_response(redirect(url_for('index')))
                 return response
             else:
@@ -83,6 +85,7 @@ def register():
             password = hashed_password )
         db.session.add(new_user)
         db.session.commit()
+
         flash('You have successfully registered', 'success')
         return redirect(url_for('login'))
     else:

@@ -3,6 +3,8 @@ from contentagregator import db
 from passlib.hash import pbkdf2_sha256 as sha256
 
 from datetime import datetime
+import os
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -16,7 +18,8 @@ class User(db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     articles = db.relationship("User_article", secondary="article_cooperators")
     posts = db.relationship("User_post", secondary="post_cooperators")
-    
+    avatar = db.Column(db.String(255))
+
 
     def save_to_db(self):
         db.session.add(self)
