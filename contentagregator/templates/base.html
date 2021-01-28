@@ -67,7 +67,7 @@
             </li>
             {% if session['logged_in'] %}
             <li class="nav-item">
-              <a class="nav-link" href="#">{{ session['username'] }}</a>
+              <a class="nav-link" href="/user/{{ session['username'] }}/{{ session['user_id'] }}">{{ session['username'] }}</a>
             </li>
             {% endif %}     
             </ul>

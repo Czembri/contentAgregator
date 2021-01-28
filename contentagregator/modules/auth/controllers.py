@@ -101,3 +101,8 @@ def logout():
     session['logged_in'] = False
     session['redactor'] = False
     return redirect(url_for('login'))
+
+
+@app.route('/user/<string:username>/<int:user_id>')
+def user(username,user_id):
+    return render_template('user.html')
