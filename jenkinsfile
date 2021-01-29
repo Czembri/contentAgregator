@@ -12,6 +12,7 @@ pipeline {
       steps {
         sh 'sudo -u postgres -i'
       }
+    }
     stage('build') {
       steps {
         sh 'pip install -r requirements.txt'
