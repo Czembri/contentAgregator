@@ -6,6 +6,16 @@ pipeline {
         sh 'pip install -r requirements.txt'
       }
     }
+    stage('init_app') {
+      steps {
+        sh 'export FLASK_APP=run.py'
+      }
+    }
+    stage('upgrade_db') {
+      steps {
+        sh 'flask db upgrade'
+      }
+    }
     stage('test') {
       steps {
         sh 'python -m unittest discover'
