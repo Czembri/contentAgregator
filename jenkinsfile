@@ -1,16 +1,12 @@
 pipeline {
-  agent { 
-    docker { 
-      image 'python:3.8.5' 
-    }  
-  }
+  agent any
   environment {
         FLASK_APP = 'run.py'
     }
   stages {
-    stage('user') {
+    stage('activate_env') {
       steps {
-        sh '-u postgres -i'
+        sh 'jenkins_scripts/env.sh'
       }
     }
     stage('build') {
