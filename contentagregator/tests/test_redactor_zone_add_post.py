@@ -113,18 +113,3 @@ class TestCreateAPost(BaseTestCase):
                 follow_redirects=True
             )
             self.assert400
-
-
-    def update_post(self):
-        with self.client:
-            post_id=1
-            to_send={
-                'post_id':post_id,
-                'post_content':'simple content',
-                'post_title': 'simple post title',            }
-            result = client.PUT(
-                f'/redactor-zone/forum/edit-post/{post_id}',
-                data=to_send,
-                follow_redirects=True
-            )
-            self.assert400
