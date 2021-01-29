@@ -8,12 +8,6 @@ pipeline {
         FLASK_APP = 'run.py'
     }
   stages {
-    stage('user') {
-      steps {
-        sh 'sudo -u postgres -i'
-      }
-    }
-  stages {
     stage('build') {
       steps {
         sh 'pip install -r requirements.txt'
