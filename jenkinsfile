@@ -1,11 +1,7 @@
 pipeline {
   agent { 
     docker { 
-        image 'python:3.8.5' 
-      } 
-    docker {
-      image 'postgres:latest'
-      args  '--name postgres -e POSTGRES_DB=redactorzone_test -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres'
+      image 'python:3.8.5' 
     }  
   }
   environment {
@@ -13,6 +9,12 @@ pipeline {
     }
   stages {
     stage('build') {
+      agent {
+        docker {
+          image 'postgres:latest'
+          args  '--name postgres -e POSTGRES_DB=redactorzone_test -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres'
+        } 
+      }
       steps {
         sh 'pip install -r requirements.txt'
         sh  'python -m flask db upgrade'
