@@ -4,7 +4,7 @@ $('#add-edit-post-btn').click(function () {
         "post_groups":$('#post-group').val(),
         "post_title": $('#post-title').val(),
         "post_content":$('#post-content').val(),
-        "post_attachments[]":$('#post-attachments').val()
+        "post_attachment":$('#post-attachments').val()
     }
     $.ajax({
         url:url,
@@ -13,6 +13,28 @@ $('#add-edit-post-btn').click(function () {
         success: function (result){
             console.log(result);
             location.href = `/redactor-zone/forum/show-post/${result['post_id']}`
+        },
+        error: function (error){
+            console.log(error);
+        }
+    })
+    
+})
+
+$('#edit-post-btn').click(function () {
+    var url = $('#edit-post-btn').attr('data-id');
+    const data = {
+        "post_title": $('#post-title').val(),
+        "post_content":$('#post-content').val(),
+        "post_attachment":$('#post-attachments').val()
+    }
+    $.ajax({
+        url:url,
+        type:"PUT",
+        data:data,
+        success: function (result){
+            console.log(result);
+            window.location.href = `/redactor-zone/forum/show-post/${result['post_id']}`
         },
         error: function (error){
             console.log(error);
@@ -49,15 +71,16 @@ $('#add-commentary-btn').click(function () {
 
 $.get('/redactor-zone/forum/api/posts', function(data) {
     retreivePosts();
+    getAvatar();
     function retreivePosts(){
         for (let post of data){
             var content = post['content'].length > 140 ? post['content'].substring(0,140)+'...' : post['content']
             var title = post['title'].length > 40 ? post['title'].substring(0,40)+'...' : post['title']
             if (isNaN(user_id)){
-                appendTo(post, content, title);
+                appendTo(post, content, title, post['user_id']);
             } else {
                 if (user_id == post['user_id']){
-                    appendTo(post, content, title);
+                    appendTo(post, content, title, post['user_id']);
                 }
                 else {
                     continue
@@ -68,16 +91,37 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
         }
     }
 
+    function getAvatar(){
+        var username = ''
+        for (let post of data){
+            if (post['post_id'] == post_id){
+                username = post['username'][0];
+            }
+        }
+        $('#add-avatar').attr('src', `/static/img/letters/${username.toUpperCase()}.png`)
+        
+    }
 
-    function appendTo(post, content, title){
+    function checkIfEqual (post_id) {
+        if ( $('.edit').data('user') ){
+            $('.btn-edit').removeAttr("style");
+        }
+    }
+
+    
+
+    function appendTo(post, content, title, usr_post_id){
+        var avatar = post['username'].slice(0,1)
+
         $('#forum-container-explore').append(`
         <div class="row justify-content-center c-2" style="margin-top: 30px;">
             <div class="col-sm-6">
                 <div class="card mb-3">
                     <div class='container-fluid'>
                         <div class="card-body">
+                            <img class="post-avatar" src="/static/img/letters/${avatar.toUpperCase()}.png"
                             <h5 class="card-title">${post['username']}</h5>
-                            <p class="card-text"><small>Last modified: ${post['post_modification_time']}</small></p>
+                            <p class="card-text"><small class="mod-time">Last modified: ${post['post_modification_time']}</small></p>
                         </div>
                     </div>
                 </div>
@@ -95,9 +139,13 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
                         </span>
                     </article>
             </div>
+            <div class="col edit" data-user=${user_id} data-post=${usr_post_id}>
+                <a style="display:None;" href="/redactor-zone/forum/edit-post/${post['post_id']}" class="btn btn-light btn-edit">Edit post</a>
+            </div>
         </div>
     
         `);
+        checkIfEqual();
     }
 
 
@@ -128,6 +176,7 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
 
 
 function appendPosts (list) {
+    if ($('div.posts-container-1')[0]){
         $('.posts-container-1').append(`
         <div class="row justify-content-center" style="margin-top: 30px;">
             <div class="col">
@@ -186,6 +235,8 @@ function appendPosts (list) {
             </div>
         </div>
         `);
+        
+    }
         
     
 }

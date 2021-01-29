@@ -10,6 +10,13 @@
                 "Addpost":"Dodaj post"
 
             }
+        ],
+        "forum-index":[
+            {
+                "Writeapost":"Napisz post.",
+                "Explore":"Eksploruj.",
+                "GoTo":"Idź do swoich postów."
+            }
         ]
     }
 ]
