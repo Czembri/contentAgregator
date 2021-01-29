@@ -47,6 +47,8 @@ def login():
                 session['logged_in'] = True
                 session['username'] = user.username
                 session['user_id'] = user.id
+                avatar = f'/letters/{user.username[0].upper()}.png' 
+                session['avatar'] = avatar
                 response = make_response(redirect(url_for('index')))
                 return response
             else:
@@ -64,10 +66,9 @@ def login():
             session['logged_in'] = True
             session['username'] = new_user.username
             session['user_id'] = new_user.id
-            response = make_response(redirect(url_for('index')))
+            response = make_response(redirect(url_for('login')))
             flash('User created', 'success')
             return response
-            
     return render_template('login.html', form=form)
 
 
@@ -83,6 +84,7 @@ def register():
             password = hashed_password )
         db.session.add(new_user)
         db.session.commit()
+
         flash('You have successfully registered', 'success')
         return redirect(url_for('login'))
     else:
@@ -98,3 +100,8 @@ def logout():
     session['logged_in'] = False
     session['redactor'] = False
     return redirect(url_for('login'))
+
+
+@app.route('/user/<string:username>/<int:user_id>')
+def user(username,user_id):
+    return render_template('user.html')

@@ -4,7 +4,10 @@ env/
 __pycache__
 venv/
 .webassets-cache
+
 app_config.ini
+jenkinsfile copy
+*.log
 
 # old migrations for mysql database
 migrations_old/

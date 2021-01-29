@@ -16,7 +16,7 @@
                     <h5 class="card-title">
                         <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/049-writing.png') }}"/>
                       </h5>
-                      <a href="{{ url_for('redactor_zone_forum_create_post_get') }}"><p class="card-text">Write a post.</p></a>
+                      <a href="{{ url_for('redactor_zone_forum_create_post_get') }}"><p class="card-text write-post">Write a post.</p></a>
                   </div>
                 </div>
               </div>
@@ -26,7 +26,7 @@
                     <h5 class="card-title">
                         <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/025-Jigsaw.png') }}"/>
                     </h5>
-                    <a href="{{ url_for('redactor_zone_forum_explore') }}"><p class="card-text">Explore.</p></a>
+                    <a href="{{ url_for('redactor_zone_forum_explore') }}"><p class="card-text explore">Explore.</p></a>
                   </div>
                 </div>
               </div>
@@ -36,7 +36,7 @@
                     <h5 class="card-title">
                       <img src="{{ url_for('redactor_zone.static', filename='img/categories/png/046-stamp collecting.png') }}"/>
                     </h5>
-                    <a href="{{ url_for('redactor_zone_forum_my_posts') }}"><p class="card-text">Go to Your posts.</p></a>
+                    <a href="{{ url_for('redactor_zone_forum_my_posts') }}"><p class="card-text go-to">Go to Your posts.</p></a>
                   </div>
                 </div>
               </div>
@@ -54,5 +54,9 @@
 
 {% endblock %}
 {% block scripts %}
+<script>
+  var user_id = undefined;
+  var markPage = "index";
+</script
 <script type="text/javascript" src="{{ url_for('redactor_zone_forum.static', filename='scripts/forum.js') }}"></script>
 {% endblock %}

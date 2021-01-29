@@ -1,0 +1,22 @@
+[
+    {
+        "forum-create":[
+            {
+                "Username":"Nazwa użytkownika",
+                "Group":"Grupa",
+                "Title":"Tytuł",
+                "Content":"Treść",
+                "AddAttachment":"Dodaj załącznik",
+                "Addpost":"Dodaj post"
+
+            }
+        ],
+        "forum-index":[
+            {
+                "Writeapost":"Napisz post.",
+                "Explore":"Eksploruj.",
+                "GoTo":"Idź do swoich postów."
+            }
+        ]
+    }
+]

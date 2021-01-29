@@ -11,7 +11,7 @@ from flask_jwt_extended import (
     get_jwt_identity, 
     get_raw_jwt
     )
-
+import json
 
 parser = reqparse.RequestParser()
 parser.add_argument('username', help = 'This field cannot be blank', required = True)
@@ -111,6 +111,12 @@ class SecretResource(Resource):
             'answer': 42
         }
 
+class Translations(Resource):
+    def get(self):
+        t_file = open('./contentagregator/translations/pl.json', 'r', encoding="utf-8")
+        data = json.load(t_file)
+        return data
+        
 # url rules
 app.add_url_rule('/api/auth/login', view_func=UserLogin.as_view('user_login_api'))
 app.add_url_rule('/api/auth/register', view_func=UserRegistration.as_view('user_register_api'))

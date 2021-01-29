@@ -75,6 +75,23 @@ class TestGetApi(BaseTestCase):
                 self.assert500
 
 
+    def test_currentlanguage(self):
+        with self.client:
+            try:
+                self.client.get('/api/language', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
+
+    def test_translations(self):
+        with self.client:
+            try:
+                self.client.get('/api/translations', follow_redirects=True)
+                self.assert200
+            except:
+                self.assert500
+
+
 
 if __name__ == '__main__':
     unittest.main()
