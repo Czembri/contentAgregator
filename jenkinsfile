@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('user') {
       steps {
-        sh 'sudo -u postgres -i'
+        sh '-u postgres -i'
       }
     }
     stage('build') {
