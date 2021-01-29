@@ -1,16 +1,12 @@
 pipeline {
   agent { docker { image 'python:3.8.5' } }
-  stages {
-    stage('env') {
-      steps {
-        sh 'python -m venv venv'
-        sh 'source venv/bin/activate'
-      }
+  environment {
+        FLASK_APP = 'run.py'
     }
+  stages {
     stage('build') {
       steps {
         sh 'pip install -r requirements.txt'
-        sh 'export FLASK_APP=run.py'
         sh  'python -m flask db upgrade'
       }
     }
