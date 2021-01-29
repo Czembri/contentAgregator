@@ -3,9 +3,9 @@ pipeline {
   stages {
     stage('build') {
       steps {
+        sh 'pip install -r requirements.txt'
         sh 'export FLASK_APP=run.py'
         sh  'python -m flask db upgrade'
-        sh 'pip install -r requirements.txt'
       }
     }
     stage('test') {
