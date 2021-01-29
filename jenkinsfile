@@ -11,7 +11,7 @@ pipeline {
     stage('build') {
       agent {
         docker {
-          image 'postgres:latest'
+          image 'postgres'
           args  '--name postgres -e POSTGRES_DB=redactorzone_test -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres'
         } 
       }
