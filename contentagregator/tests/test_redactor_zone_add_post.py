@@ -74,7 +74,7 @@ class TestCreateAPost(BaseTestCase):
                 self.assert500
 
 
-    def add_commentary(self):
+    def test_add_commentary(self):
         with self.client:
             post_id, user_id=1
             try:
@@ -98,7 +98,7 @@ class TestCreateAPost(BaseTestCase):
                 self.assert500
 
 
-    def add_commentary(self): # no user id - user not in session
+    def test_add_commentary(self): # no user id - user not in session
         with self.client:
             post_id=1
             to_send={
@@ -107,9 +107,29 @@ class TestCreateAPost(BaseTestCase):
                 'creation_time': datetime.utcnow(),
                 'modification_time':datetime.utcnow()
             }
-            result = client.post(
-                f'/redactor-zone/forum/add-comment/{post_id}',
-                data=to_send,
-                follow_redirects=True
-            )
-            self.assert400
+            try:
+                result = client.post(
+                    f'/redactor-zone/forum/add-comment/{post_id}',
+                    data=to_send,
+                    follow_redirects=True
+                )
+            except:
+                self.assert400
+
+
+    def test_update_post(self): # no user id - user not in session
+        with self.client:
+            post_id=1
+            to_send={
+                'post_id':post_id,
+                'post_title':'simple title',
+                'post_content': 'simple content'
+            }
+            try:
+                result = client.PUT(
+                    f'/redactor-zone/forum/edit-post/{post_id}',
+                    data=to_send,
+                    follow_redirects=True
+                )
+            except:
+                self.assert400

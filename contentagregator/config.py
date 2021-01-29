@@ -55,7 +55,6 @@ MAIL_SENDER = mail_config['mail_sender']
 MAIL_RECEIVER = mail_config['mail_receiver']
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = DB_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets['secret_key'] 
     MAKO_TRANSLATE_EXCEPTIONS = False
@@ -74,6 +73,7 @@ class Config:
 
 
 class ProductionConfig(Config):
+    SQLALCHEMY_DATABASE_URI = DB_URL
     ENV = 'production'
     DEBUG = False
     TESTING = False
@@ -81,6 +81,7 @@ class ProductionConfig(Config):
 
 
 class DevelopmentConfig(Config):
+    SQLALCHEMY_DATABASE_URI = DB_URL
     ENV = 'development'
     DEBUG = True
     TESTING = True
@@ -100,6 +101,8 @@ class DevelopmentConfig(Config):
 
 
 class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'postgresql://{user}:{password}@{url}/{db}'.format(
+    user=db_config['login'], password=db_config['password'], url=db_config['url'], db='contentagregator_test')
     DEBUG = True
     TESTING = True
     WTF_CSRF_ENABLED = False
