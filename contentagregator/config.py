@@ -103,7 +103,7 @@ class DevelopmentConfig(Config):
 class TestConfig(Config):
     SECRET_KEY = os.environ.get('FLASK_APP', 'run.py')
     SQLALCHEMY_DATABASE_URI = 'postgresql://{user}:{password}@{url}/{db}'.format(
-    user=db_config['login'], password=db_config['password'], url=db_config['url'], db='redactorzone_test')
+    user=db_config['login'], password=db_config['password'], url='172.17.0.3', db='redactorzone_test')
     DEBUG = True
     TESTING = True
     WTF_CSRF_ENABLED = False
