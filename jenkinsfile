@@ -1,5 +1,13 @@
 pipeline {
-  agent { docker { image 'python:3.8.5' } }
+  agent { 
+    docker { 
+        image 'python:3.8.5' 
+      } 
+    docker {
+      image 'postgres:latest'
+      args  '--name postgres -e POSTGRES_DB=redactorzone_test -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres'
+    }  
+  }
   environment {
         FLASK_APP = 'run.py'
     }
