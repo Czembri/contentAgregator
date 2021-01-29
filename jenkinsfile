@@ -1,15 +1,9 @@
 pipeline {
-  agent any
+  agent { docker { image 'python:3.8.5' } }
   environment {
         FLASK_APP = 'run.py'
     }
   stages {
-    stage('activate_env') {
-      steps {
-        sh 'python -m venv venv'
-        sh 'venv/Scripts/activate'
-      }
-    }
     stage('build') {
       steps {
         sh 'pip install -r requirements.txt'
