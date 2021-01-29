@@ -4,7 +4,7 @@ pipeline {
     stage('env') {
       steps {
         sh 'python -m venv venv'
-        sh 'source venv\bin\activate'
+        sh 'source venv/bin/activate'
       }
     }
     stage('build') {
