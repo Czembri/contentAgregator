@@ -6,7 +6,8 @@ pipeline {
   stages {
     stage('activate_env') {
       steps {
-        sh 'jenkins_scripts/env.sh'
+        sh 'python -m venv venv'
+        sh 'venv/Scripts/activate'
       }
     }
     stage('build') {
