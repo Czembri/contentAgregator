@@ -6,6 +6,7 @@ venv/
 .webassets-cache
 
 app_config.ini
+jenkinsfile copy
 
 # old migrations for mysql database
 migrations_old/
