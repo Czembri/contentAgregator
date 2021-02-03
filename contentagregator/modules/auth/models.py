@@ -19,6 +19,7 @@ class User(db.Model):
     articles = db.relationship("User_article", secondary="article_cooperators")
     posts = db.relationship("User_post", secondary="post_cooperators")
     avatar = db.Column(db.String(255))
+    created = db.Column(db.DateTime, default=datetime.utcnow)
 
 
     def save_to_db(self):
@@ -68,3 +69,23 @@ class RevokedToken(db.Model):
     def is_jti_blacklisted(cls, jti):
         query = cls.query.filter_by(jti = jti).first()
         return bool(query)
+
+
+class Actions(db.Model):
+    __tablename__ = 'actions'
+    id = db.Column(db.Integer, primary_key=True)
+    action_name = db.Column(db.String(250))
+
+
+class User_actions(db.Model):
+    __tablename__ = 'user_actions'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.ForeignKey(User.id, ondelete='CASCADE'))
+    action_id = db.Column(db.ForeignKey(Actions.id, ondelete='CASCADE'))
+    action = db.relationship(Actions, foreign_keys=action_id, backref=db.backref('actions', cascade='all'))
+    action_name = db.Column(db.String(250))
+    changed_on = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+
+    
