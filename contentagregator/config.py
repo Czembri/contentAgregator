@@ -70,6 +70,8 @@ class Config:
     GOOGLE_DISCOVERY_URL = (
         "https://accounts.google.com/.well-known/openid-configuration"
     )
+    CELERY_BROKER_URL='redis://localhost:6379'
+    CELERY_RESULT_BACKEND='redis://localhost:6379'
 
 
 class ProductionConfig(Config):

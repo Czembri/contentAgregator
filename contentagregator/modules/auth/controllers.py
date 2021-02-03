@@ -1,6 +1,7 @@
 from contentagregator import app, db
 from contentagregator.modules.auth.forms.auth_forms import LoginForm, RegisterForm
 from contentagregator.modules.auth.models import User
+from contentagregator.tasks import run_scraper
 
 from flask.views import MethodView
 from flask import (
@@ -31,6 +32,7 @@ def index():
 
 @app.route('/news')
 def news():
+    run_scraper()
     return render_template('choose_news.html')
 
 
