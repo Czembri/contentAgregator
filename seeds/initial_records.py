@@ -1,4 +1,5 @@
 from contentagregator.modules.redactor_zone.models import Article_categories
+from contentagregator.modules.auth.models import Actions
 
 from flask_seeder import Seeder, Faker, generator
 from flask_seeder.generator import Generator
@@ -51,6 +52,25 @@ class ArticleCategories(Seeder):
             self.db.session.add(record)
         self.db.session.commit()
 
+
+class Actions_(Seeder):
+    def __init__(self):
+        super().__init__()
+        self.priority = 4
+
+    def run(self):
+        faker = Faker(
+            cls=Actions,
+            init={
+                "id" : generator.Sequence(),
+                "action_name" : CustomFromListGenerator(["Updated post", "Updated article"]),
+            }
+        )
+
+        for record in faker.create(2):
+            print("Adding:", record)
+            self.db.session.add(record)
+        self.db.session.commit()
 
 
 

@@ -97,8 +97,7 @@ def logout():
     user = User.query.get(user_id)
     user.last_seen = datetime.utcnow()
     db.session.commit()
-    session['logged_in'] = False
-    session['redactor'] = False
+    session.clear()
     return redirect(url_for('login'))
 
 
