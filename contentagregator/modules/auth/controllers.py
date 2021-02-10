@@ -80,7 +80,8 @@ def register():
     if request.method == 'POST' and form.validate():
         hashed_password = User.generate_hash(form.password.data)
         new_user = User(
-            name = form.name.data, 
+            first_name = form.first_name.data, 
+            last_name = form.last_name.data, 
             username = form.username.data, 
             email = form.email.data, 
             password = hashed_password )
@@ -105,4 +106,28 @@ def logout():
 
 @app.route('/user/<string:username>/<int:user_id>')
 def user(username,user_id):
-    return render_template('user.html')
+    avatar = username[0].upper()
+    user = User.query.get(user_id)
+    return render_template('user.html', avatar=avatar, user=user)
+
+@app.route('/user/<string:username>/<int:user_id>/update', methods=['PUT'])
+def user_put(username,user_id):
+    user_id_session = session['user_id']
+    if user_id_session == user_id:
+        user = User.query.get(user_id)
+        fullname = request.form.get('fullname').split()
+        username =  request.form.get('username')
+        email = request.form.get('email')
+        user.first_name = fullname[0]
+        user.last_name = fullname[1]
+        user.username = username
+        user.email = email
+
+        db.session.commit()
+
+    return jsonify(
+        {'first_name':fullname[0],
+        'last_name': fullname[1],
+        'username': username,
+        'email': email}
+        )

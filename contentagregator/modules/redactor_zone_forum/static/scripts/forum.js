@@ -119,7 +119,7 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
                 <div class="card mb-3">
                     <div class='container-fluid'>
                         <div class="card-body">
-                            <img class="post-avatar" src="/static/img/letters/${avatar.toUpperCase()}.png"
+                            <img class="post-avatar" src="/static/img/letters/${avatar.toUpperCase()}.png">
                             <h5 class="card-title">${post['username']}</h5>
                             <p class="card-text"><small class="mod-time">Last modified: ${post['post_modification_time']}</small></p>
                         </div>
