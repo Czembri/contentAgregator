@@ -118,16 +118,19 @@ def user_put(username,user_id):
         fullname = request.form.get('fullname').split()
         username =  request.form.get('username')
         email = request.form.get('email')
-        user.first_name = fullname[0]
-        user.last_name = fullname[1]
+        if len(fullname) > 1:
+            user.first_name = fullname[0]
+            user.last_name = fullname[1]
+        else:
+            user.first_name = fullname[0]
         user.username = username
-        user.email = email
+        user.email = email if email else ''
 
         db.session.commit()
 
     return jsonify(
-        {'first_name':fullname[0],
-        'last_name': fullname[1],
+        {'first_name':fullname[0] if len(fullname) > 1 else fullname[0],
+        'last_name': fullname[1] if len(fullname) > 1 else '',
         'username': username,
         'email': email}
         )
