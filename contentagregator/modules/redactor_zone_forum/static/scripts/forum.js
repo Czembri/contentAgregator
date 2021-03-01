@@ -102,7 +102,7 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
         
     }
 
-    function checkIfEqual (post_id) {
+    function checkIfEqual () {
         if ( $('.edit').data('user') ){
             $('.btn-edit').removeAttr("style");
         }
@@ -155,82 +155,82 @@ $.get('/redactor-zone/forum/api/posts', function(data) {
 $.get('/redactor-zone/forum/api/posts', function(data) {
     retreivePosts();
     function retreivePosts(){
-        var dict = {}
-        var list = []
+        // var dict = {}
+        // var list = []
         for (let post of data.slice(0, 4)){
             var content = post['content'].length > 140 ? post['content'].substring(0,140)+'...' : post['content']
             var title = post['title'].length > 40 ? post['title'].substring(0,40)+'...' : post['title']
 
-                dict = {
-                    'title':title,
-                    'content':content,
-                    'username':post['username'],
-                    'last_mod':post['post_modification_time']
-                }
-            list.push(dict);
+            //     dict = {
+            //         'title':title,
+            //         'content':content,
+            //         'username':post['username'],
+            //         'last_mod':post['post_modification_time']
+            //     }
+            // list.push(dict);
+            var avatar = post['username'].slice(0,1)
+            appendPosts(content, 
+                title, 
+                post['username'],
+                post['post_modification_time'], 
+                post['post_creation_time'], 
+                post['post_id'], 
+                post['user_id'], 
+                avatar
+            );
+
         }
-        appendPosts(list);
 
     }
 })
 
 
-function appendPosts (list) {
+function appendPosts (content, title, username, last_modified, created, post_id, user_id, avatar) {
     if ($('div.posts-container-1')[0]){
         $('.posts-container-1').append(`
-        <div class="row justify-content-center" style="margin-top: 30px;">
-            <div class="col">
-                <div class="row justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center c-2" style="margin-top: 30px;">
+                <div class="col-sm-6">
                     <div class="card mb-3">
                         <div class='container-fluid'>
                             <div class="card-body">
-                                <h5 class="card-title">${list[0]['title']}</h5>
-                                <p class="card-text"><small>${list[0]['content']}</small></p>
+                                <img class="post-avatar" src="/static/img/letters/${avatar.toUpperCase()}.png">
+                                <div style="width:fit-content" class="row align-items-end">
+                                    <a href="/user/${username}/${user_id}">
+                                        <h5 class="card-title">${username}</h5>
+                                    </a>
+                                </div>   
                             </div>
-                            <div class="card-footer text-muted">
-                            ${list[0]['username']}: ${list[0]['last_mod']}
+                            <div class="card-footer">
+                                <span class="card-text">
+                                    <small class="mod-time">
+                                        Last modified: ${last_modified.slice(0,26)}
+                                    </small>
+                                </span>
+                                <span class="card-text float-left">
+                                    <small class="mod-time">
+                                        Created: ${created.slice(0,26)}
+                                    </small>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="card mb-3">
-                        <div class='container-fluid'>
-                            <div class="card-body">
-                                <h5 class="card-title">${list[1]['title']}</h5>
-                                <p class="card-text"><small>${list[1]['content']}</small></p>
-                            </div>
-                            <div class="card-footer text-muted">
-                            ${list[1]['username']}: ${list[1]['last_mod']}
-                            </div>
-                        </div>
+                <div class="col">
+                    <div style="width: fit-content;">
+                            <h6>Post title: </h6>
+                            <a href="/redactor-zone/forum/show-post/${post_id}">
+                                <h3 >${title}</h3>
+                            </a>
                     </div>
+                        <article>
+                            <span>
+                                ${content}
+                            </span>
+                        </article>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="card mb-3">
-                        <div class='container-fluid'>
-                            <div class="card-body">
-                                <h5 class="card-title">${list[2]['title']}</h5>
-                                <p class="card-text"><small>${list[2]['content']}</small></p>
-                            </div>
-                            <div class="card-footer text-muted">
-                            ${list[2]['username']}: ${list[2]['last_mod']}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col d-flex justify-content-center">
-                <div class="card mb-3">
-                    <div class='container-fluid'>
-                        <div class="card-body">
-                            <h5 class="card-title">${list[3]['title']}</h5>
-                            <p class="card-text"><small>${list[3]['content']}</small></p>
-                        </div>
-                        <div class="card-footer text-muted">
-                        ${list[3]['username']}: ${list[3]['last_mod']}
-                        </div>
-                    </div>
+                <div class="col edit" data-user=${user_id} data-post=${post_id}>
+                    <a style="display:None;" href="/redactor-zone/forum/edit-post/${post_id}" class="btn btn-light btn-edit">Edit post</a>
                 </div>
             </div>
         </div>
