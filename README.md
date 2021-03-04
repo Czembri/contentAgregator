@@ -117,7 +117,7 @@ You need to have installed python 3.8 > and postgres database.
    ```
 5. Upgrade Your database using:
   ```sh
-    flash db upgrade
+    flask db upgrade
   ```
 6. Seed Your database using:
   ```sh
