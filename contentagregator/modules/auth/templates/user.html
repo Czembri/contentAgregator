@@ -1,13 +1,50 @@
 {% extends "base.html" %}
 
 {% block links %}
+<link rel="stylesheet" href="{{ url_for('auth.static', filename='css/index.css') }}" type="text/css"/>
 
 {% endblock %}
 
 {% block app %}
 
+<div class="container" id="user">
+    <div class="row justify-content-center">
+        <div class="col">
+            <img class="__avatar" src="/static/img/letters/{{ avatar }}.png">
+        </div>
+    </div>
+    <div class="row justify-content-center" id="edit-user">
+        <div class="col-6">
+            <form>
+                <div class="form-group">
+                  <label for="fullname">Fullname</label>
+                  <input type="text" class="form-control" id="fullname" value="{{ user.first_name if user.first_name else ''}} {{ user.last_name if user.last_name else ''}}">
+                </div>
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" class="form-control" id="username" value="{{ user.username }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>  
+                    <input type="email" class="form-control" id="email" value="{{ user.email if user.email else '' }}">
+                </div>
+                <button
+                    data-url="/user/{{ user.username }}/{{ user.id }}/update"
+                    type="submit" class="btn btn-light float-right" id="update-user">
+                    Submit 
+                    <i class="fa fa-bolt"></i>
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 {% block scripts %}
-
+<script>
+    var username = '{{ user.username }}';
+    var user_id = {{ user.id }};
+</script>
+<script src="{{ url_for('auth.static', filename='scripts/auth.js') }}"></script>
 {% endblock %}

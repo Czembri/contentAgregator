@@ -8,6 +8,8 @@ venv/
 app_config.ini
 jenkinsfile copy
 *.log
+cert.pem
+key.pem
 
 # old migrations for mysql database
 migrations_old/

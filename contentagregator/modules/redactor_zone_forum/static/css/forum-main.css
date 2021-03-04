@@ -55,3 +55,9 @@
 .mod-time {
     font-size: xx-small;
 }
+
+.straight-border {
+    margin: 50px auto;
+    width: 60%;
+    border-top: 1px solid red;
+}

@@ -12,7 +12,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(120), unique = True, nullable = False)
     password = db.Column(db.String(120), nullable = False)
-    name= db.Column(db.String(40), unique=True)
+    first_name= db.Column(db.String(40), unique=False)
+    last_name = db.Column(db.String(60), unique=False)
     email = db.Column(db.String(70), unique=True)
     is_verified = db.Column(db.Integer, server_default="1")
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
@@ -20,6 +21,7 @@ class User(db.Model):
     posts = db.relationship("User_post", secondary="post_cooperators")
     avatar = db.Column(db.String(255))
     created = db.Column(db.DateTime, default=datetime.utcnow)
+    google_auth_id = db.Column(db.Text, unique=True, nullable=True)
 
 
     def save_to_db(self):

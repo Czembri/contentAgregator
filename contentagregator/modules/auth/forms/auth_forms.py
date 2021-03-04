@@ -12,7 +12,8 @@ class LoginForm(Form):
 
 class RegisterForm(Form):
 
-    name = StringField("Fullname", validators=[validators.Length(min=3, max=25), validators.DataRequired(message="Please Fill This Field")])
+    first_name = StringField("Firstname", validators=[validators.Length(min=3, max=40), validators.DataRequired(message="Please Fill This Field")])
+    last_name = StringField("Lastname", validators=[validators.Length(min=3, max=60), validators.DataRequired(message="Please Fill This Field")])
     username = StringField("Username", validators=[validators.Length(min=3, max=25), validators.DataRequired(message="Please Fill This Field")])
     email = StringField("Email", validators=[validators.Email(message="Please enter a valid email address")])
     password = PasswordField("Password", validators=[

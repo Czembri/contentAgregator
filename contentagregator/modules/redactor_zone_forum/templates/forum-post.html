@@ -44,6 +44,24 @@
             </div>
         </div>
     </div>
+    <div class="d-flex flex-column align-items-end">
+        <div class="display-attachment-container">
+        {% if attachments %}
+        <h4 class="attach-title">Attachments:</h4>
+            {% for attachment in attachments %}
+                {% if attachment.file_name[36:]|length > 24 %}
+                <div class="row justify-content-end">
+                    <span style="margin: 10px 0; width: fit-content;" class="btn btn-outline-secondary" data-id="{{ attachment.attachment_id }}">{{ attachment.file_name[0:20] }}...  <i class="fas fa-times"></i></span>
+                </div>
+                {% else %}
+                <div class="row justify-content-end">
+                    <span style="margin: 10px 0; width: fit-content;" class="btn btn-outline-secondary" data-id="{{ attachment.attachment_id }}">{{ attachment.file_name }}  <i class="fas fa-times"></i></span>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>		
     <div class="commentary-area" style="margin-top: 50px;">
         {% for response in post_response %}
         <div class="row justify-content-start c-2">

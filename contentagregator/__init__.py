@@ -8,6 +8,9 @@ from flask_mail import Mail
 from sassutils.wsgi import SassMiddleware
 from flask_seeder import FlaskSeeder
 from flask_language import Language, current_language
+from celery import Celery
+from oauthlib.oauth2 import WebApplicationClient
+from contentagregator.config import google_config
 
 app = Flask(__name__)
 
@@ -22,6 +25,23 @@ jwt = JWTManager(app)
 mail = Mail(app)
 seeder = FlaskSeeder(app, db)
 lang = Language(app)
+client = WebApplicationClient(google_config['google_client_id'])
+
+# celery setup
+def make_celery(app):
+    celery = Celery(app.import_name, backend=app.config['CELERY_RESULT_BACKEND'],
+                    broker=app.config['CELERY_BROKER_URL'])
+    celery.conf.update(app.config)
+    TaskBase = celery.Task
+    class ContextTask(TaskBase):
+        abstract = True
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return TaskBase.__call__(self, *args, **kwargs)
+    celery.Task = ContextTask
+    return celery
+
+celery = make_celery(app)
 
 # scss setup
 app.wsgi_app = SassMiddleware(app.wsgi_app, {
@@ -36,7 +56,9 @@ allowedEndpoints = (
     'register',
     'contact_form_view',
     'contact_form_post',
-    'user_login_api'
+    'user_login_api',
+    'google_auth',
+    'callback'
     )
 
 #register blueprints

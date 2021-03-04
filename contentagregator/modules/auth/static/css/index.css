@@ -55,3 +55,27 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-style: italic;
 }
+
+.__avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+#user {
+  margin-top: 100px;
+}
+
+.username {
+  font-style: italic;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(204, 102, 34);
+}
+
+.fa {
+  margin-left: 10px;
+}
+
+#edit-user {
+  margin-top: 30px;
+}
