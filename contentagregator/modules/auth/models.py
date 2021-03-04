@@ -21,6 +21,7 @@ class User(db.Model):
     posts = db.relationship("User_post", secondary="post_cooperators")
     avatar = db.Column(db.String(255))
     created = db.Column(db.DateTime, default=datetime.utcnow)
+    google_auth_id = db.Column(db.Text, unique=True, nullable=True)
 
 
     def save_to_db(self):

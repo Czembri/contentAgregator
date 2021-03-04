@@ -54,6 +54,13 @@ SCRAP_URLS = {
 MAIL_SENDER = mail_config['mail_sender']
 MAIL_RECEIVER = mail_config['mail_receiver']
 
+#google section
+GOOGLE_CLIENT_ID = google_config['google_client_id']
+GOOGLE_CLIENT_SECRET = google_config['google_client_secret']
+GOOGLE_DISCOVERY_URL = (
+    "https://accounts.google.com/.well-known/openid-configuration"
+)
+
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets['secret_key'] 
@@ -65,11 +72,6 @@ class Config:
     JWT_SECRET_KEY = secrets['jwt_secret_key']
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
-    GOOGLE_CLIENT_ID = google_config['google_client_id']
-    GOOGLE_CLIENT_SECRET = google_config['google_client_secret']
-    GOOGLE_DISCOVERY_URL = (
-        "https://accounts.google.com/.well-known/openid-configuration"
-    )
     CELERY_BROKER_URL='redis://localhost:6379'
     CELERY_RESULT_BACKEND='redis://localhost:6379'
 
