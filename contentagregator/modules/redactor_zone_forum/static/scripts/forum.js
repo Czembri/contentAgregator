@@ -189,7 +189,7 @@ function appendPosts (content, title, username, last_modified, created, post_id,
     if ($('div.posts-container-1')[0]){
         $('.posts-container-1').append(`
         <div class="container">
-            <div class="row justify-content-center c-2" style="margin-top: 30px;">
+            <div class="row justify-content-center c-2" style="margin-top: 30px; border: 1px solid red;">
                 <div class="col-sm-6">
                     <div class="card mb-3">
                         <div class='container-fluid'>
