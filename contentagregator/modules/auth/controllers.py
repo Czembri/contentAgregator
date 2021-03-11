@@ -87,8 +87,8 @@ def callback():
         users_email = userinfo_response.json()["email"]
         picture = userinfo_response.json()["picture"]
         users_name = userinfo_response.json()["given_name"]
-        exists = User.query.filter_by(google_auth_id=unique_id).first()
-        if exists:
+        exists = User.query.filter_by(google_auth_id=unique_id).one_or_none()
+        if exists is not None:
             session['logged_in']=True
             session['username'] = exists.username
             session['user_id'] = exists.id
@@ -100,14 +100,15 @@ def callback():
             '''
             Send email with password to user!!!
             '''
-
+            username = users_email.split('@')[0]
             user = User(
-                google_auth_id=unique_id, username=users_name, email=users_email, avatar=picture, password=hashed_passw
+                google_auth_id=unique_id, username=username, email=users_email, avatar=picture, password=hashed_passw
             )
             db.session.add(user)
             db.session.commit()
             session['logged_in']=True
-            session['user_id'] = exists.id
+            session['user_id'] = user.id
+            session['username'] = user.username
             return response
     else:
         return "User email not available or not verified by Google.", 400
