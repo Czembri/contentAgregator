@@ -205,7 +205,8 @@ def user_put(username,user_id):
     user_id_session = session['user_id']
     if user_id_session == user_id:
         user = User.query.get(user_id)
-        fullname = request.form.get('fullname').split()
+        if fullname:
+            fullname = request.form.get('fullname').split()
         username =  request.form.get('username')
         email = request.form.get('email')
         if len(fullname) > 1:
