@@ -58,7 +58,7 @@ class TestCreateAPost(BaseTestCase):
         with self.client:
             try:
                 to_send={
-                    'post_title':'TEST',
+                    'post_title':'testtest',
                     'post_content':"test content"
                 }
                 result = client.post(
