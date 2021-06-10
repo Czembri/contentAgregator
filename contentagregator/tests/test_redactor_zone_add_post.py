@@ -1,5 +1,6 @@
 from contentagregator.tests.base import BaseTestCase
 import io
+import json
 
 from datetime import datetime
 
@@ -15,14 +16,14 @@ class TestCreateAPost(BaseTestCase):
                     'post_content':"test content",
                     'post_attachments[]': (io.BytesIO(b"some initial text data"), file_name)
                 }
-                result = client.post(
+                result = self.client.post(
                     '/redactor-zone/forum/create-post',
                     data=to_send,
                     follow_redirects=True
                 )
                 self.assertEqual(
                 result.data,
-                json.dumps(sent)
+                json.dumps(to_send)
                 )
             except:
                 self.assert500
@@ -42,14 +43,14 @@ class TestCreateAPost(BaseTestCase):
                         (io.BytesIO(b"some initial text data 2"), file_name_2)
                         ]
                 }
-                result = client.post(
+                result = self.client.post(
                     '/redactor-zone/forum/create-post',
                     data=to_send,
                     follow_redirects=True
                 )
                 self.assertEqual(
                 result.data,
-                json.dumps(sent)
+                json.dumps(to_send)
                 )
             except:
                 self.assert500
@@ -58,17 +59,17 @@ class TestCreateAPost(BaseTestCase):
         with self.client:
             try:
                 to_send={
-                    'post_title':'TEST',
+                    'post_title':'testtest',
                     'post_content':"test content"
                 }
-                result = client.post(
+                result = self.client.post(
                     '/redactor-zone/forum/create-post',
                     data=to_send,
                     follow_redirects=True
                 )
                 self.assertEqual(
                 result.data,
-                json.dumps(sent)
+                json.dumps(to_send)
                 )
             except:
                 self.assert500
@@ -85,14 +86,14 @@ class TestCreateAPost(BaseTestCase):
                     'creation_time': datetime.utcnow(),
                     'modification_time':datetime.utcnow()
                 }
-                result = client.post(
+                result = self.client.post(
                     f'/redactor-zone/forum/add-comment/{post_id}',
                     data=to_send,
                     follow_redirects=True
                 )
                 self.assertEqual(
                 result.data,
-                json.dumps(sent)
+                json.dumps(to_send)
                 )
             except:
                 self.assert500
@@ -108,7 +109,7 @@ class TestCreateAPost(BaseTestCase):
                 'modification_time':datetime.utcnow()
             }
             try:
-                result = client.post(
+                result = self.client.post(
                     f'/redactor-zone/forum/add-comment/{post_id}',
                     data=to_send,
                     follow_redirects=True
@@ -126,7 +127,7 @@ class TestCreateAPost(BaseTestCase):
                 'post_content': 'simple content'
             }
             try:
-                result = client.PUT(
+                result = self.client.PUT(
                     f'/redactor-zone/forum/edit-post/{post_id}',
                     data=to_send,
                     follow_redirects=True

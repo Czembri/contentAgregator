@@ -2,11 +2,6 @@
 {% from "form_helpers.html" import render_field %}
 
 {% block app %}
-<div class="row justify-content-end">
-  <div class="col d-flex justify-content-end">
-    <a href="{{ url_for('google_auth') }}" class="btn btn-light float-left">Login with google</a>
-  </div>
-</div>
 <div class="row justify-content-center">
     <div class="col d-flex justify-content-center">
         <form method="POST">
@@ -19,6 +14,18 @@
             <button type="submit" class="btn btn-light float-right">Submit</button>
           </form>
     </div>
+</div>
+<div class="row justify-content-center" style="margin: 40px auto;">
+  <div class="col d-flex justify-content-center">
+    <p>OR</p>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col d-flex justify-content-center">
+    <a href="{{ url_for('google_auth') }}">
+      <img src="{{ url_for('auth.static', filename='img/google.png') }}">
+      Login with google</a>
+  </div>
 </div>
 {% endblock %}
 {% block scripts %} 

@@ -20,9 +20,9 @@
 }
 
 .descr {
-    color: rgb(26, 26, 26);
     font-weight: 600;
     font-feature-settings: "vrt2";
+    color:coral;
 }
 
 .descr:hover {
