@@ -7,7 +7,7 @@ AVATAR_VALID_EXTENTIONS = ['jpg', 'png', 'jpeg']
 ATTACHMENT_VALID_EXTENTIONS = AVATAR_VALID_EXTENTIONS + ['pdf', 'doc', 'docx']
 
 #DATABASE CONFIGURATION SCOPE
-config =configparser.ConfigParser()
+config =configparser.RawConfigParser()
 with open('contentagregator/app_config.ini', 'r', encoding='utf-8') as f:
     config.read_file(f)
     db_config = {
@@ -22,7 +22,11 @@ with open('contentagregator/app_config.ini', 'r', encoding='utf-8') as f:
         'psswd':config['MAIL']['password'],
         'mail_default_sender':config['MAIL']['mail_default_sender'],
         'mail_sender':config['MAIL']['mail_sender'],
-        'mail_receiver':config['MAIL']['mail_receiver']
+        'mail_receiver':config['MAIL']['mail_receiver'],
+        'mail_server':config['MAIL']['mail_server'],
+        'mail_port':config['MAIL']['mail_port'],
+        'mail_use_tls':config['MAIL']['mail_use_tls'],
+        'mail_use_ssl':config['MAIL']['mail_use_ssl']
     }
     secrets = {
         'secret_key':config['SECRETS']['secret_key'],
@@ -53,6 +57,15 @@ SCRAP_URLS = {
 
 MAIL_SENDER = mail_config['mail_sender']
 MAIL_RECEIVER = mail_config['mail_receiver']
+MAIL_SERVER = mail_config['mail_server']
+MAIL_PORT = mail_config['mail_port']
+MAIL_USERNAME = mail_config['usrnm']
+MAIL_PASSWORD = mail_config['psswd']
+MAIL_USE_TLS = mail_config['mail_use_tls']
+MAIL_USE_SSL = mail_config['mail_use_ssl']
+MAIL_DEBUG = True
+MAIL_SUPPRESS_SEND = False
+MAIL_DEFAULT_SENDER = mail_config['mail_default_sender']
 
 #google section
 GOOGLE_CLIENT_ID = google_config['google_client_id']
@@ -93,12 +106,12 @@ class DevelopmentConfig(Config):
     TEMPLATES_AUTO_RELOAD = True
 
     # using a test gmail account for now, to be changed for prod
-    MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = 465
+    MAIL_SERVER = mail_config['mail_server']
+    MAIL_PORT = mail_config['mail_port']
     MAIL_USERNAME = mail_config['usrnm']
     MAIL_PASSWORD = mail_config['psswd']
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
+    MAIL_USE_TLS = mail_config['mail_use_tls']
+    MAIL_USE_SSL = mail_config['mail_use_ssl']
     MAIL_DEBUG = True
     MAIL_SUPPRESS_SEND = False
     MAIL_DEFAULT_SENDER = mail_config['mail_default_sender']
