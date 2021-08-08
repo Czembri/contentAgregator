@@ -1,8 +1,18 @@
-from contentagregator import app, db, client
+from flask_mail import Message
+from contentagregator import app, db, client, mail
 from contentagregator.modules.auth.forms.auth_forms import LoginForm, RegisterForm
 from contentagregator.modules.auth.models import User
 from contentagregator.tasks import run_scraper
-from contentagregator.config import GOOGLE_DISCOVERY_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
+from contentagregator.config import (
+    GOOGLE_DISCOVERY_URL, 
+    GOOGLE_CLIENT_ID, 
+    GOOGLE_CLIENT_SECRET, 
+    MAIL_SENDER, 
+    MAIL_SERVER, 
+    MAIL_PORT,
+    MAIL_PASSWORD,
+    MAIL_USERNAME
+    )
 
 from flask.views import MethodView
 from flask import (
@@ -24,6 +34,7 @@ from datetime import datetime
 import requests
 import string
 import random
+import ssl, smtplib
 
 auth_module = Blueprint('auth', __name__, url_prefix='/news',  template_folder='templates', static_folder='static')
 
@@ -87,20 +98,32 @@ def callback():
         users_email = userinfo_response.json()["email"]
         picture = userinfo_response.json()["picture"]
         users_name = userinfo_response.json()["given_name"]
-        exists = User.query.filter_by(google_auth_id=unique_id).one_or_none()
-        if exists is not None:
+        username = users_email.split('@')[0]
+        exists_as_google = User.query.filter_by(google_auth_id=unique_id).one_or_none()
+        exists_as_user = User.query.filter_by(username=username).count()
+        if exists_as_google is not None:
             session['logged_in']=True
-            session['username'] = exists.username
-            session['user_id'] = exists.id
+            session['username'] = exists_as_google.username
+            session['user_id'] = exists_as_google.id
             return response
         else:
+            if exists_as_user > 0:
+                username = f'{username}{exists_as_user+1}'
             passw = password_generator()
             hashed_passw = User.generate_hash(passw)
+            
+            message = f'Your password: {passw}' # To FIX
+            context = ssl.create_default_context()
+            with smtplib.SMTP(MAIL_SERVER, MAIL_PORT) as server:
+                server.ehlo()
+                server.starttls(context=context)
+                server.ehlo()
+                server.login(MAIL_SENDER, MAIL_PASSWORD)
+                server.sendmail(MAIL_SENDER, users_email, message)
 
             '''
             Send email with password to user!!!
             '''
-            username = users_email.split('@')[0]
             user = User(
                 google_auth_id=unique_id, username=username, email=users_email, avatar=picture, password=hashed_passw
             )
@@ -125,6 +148,7 @@ def google_auth():
         scope=["openid", "email", "profile"],
     )
     return redirect(request_uri)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
