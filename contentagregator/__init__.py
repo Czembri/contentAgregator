@@ -72,6 +72,7 @@ from contentagregator.modules.communicates.controllers import communicates_modul
 from contentagregator.modules.contact.controllers import contact_module
 from contentagregator.modules.redactor_zone.controllers import redactor_zone_module
 from contentagregator.modules.redactor_zone_forum.controllers import redactor_zone_forum_module
+from contentagregator.modules.search_module.controllers import search_module
 
 app.register_blueprint(api_module)
 app.register_blueprint(bbc_module)
@@ -83,6 +84,7 @@ app.register_blueprint(google_module)
 app.register_blueprint(contact_module)
 app.register_blueprint(redactor_zone_module)
 app.register_blueprint(redactor_zone_forum_module)
+app.register_blueprint(search_module)
 
 # API section
 from contentagregator.modules.api import resources

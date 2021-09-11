@@ -15,6 +15,8 @@
     {% endassets %}
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.min.css">
 </head>
 <body>
       <nav class="navbar navbar-expand-lg">
@@ -72,17 +74,18 @@
             {% endif %}     
             </ul>
         </div>
-        <form class="d-flex justify-content-end" style="margin: 0 25px;">
-          <input
-            type="search"
-            class="form-control"
-            placeholder="Type query"
-            aria-label="Search"
-            style="margin-right: 10px;"
-          />
+        <form class="d-flex justify-content-end" style="margin: 0 25px;" action="{{ url_for('search_form_post') }}" method="POST">
+            <input
+              id="autoComplete"
+              type="search"
+              class="form-control"
+              placeholder="Type query"
+              aria-label="Search"
+              style="margin-right: 10px;"
+            />
           <button
             class="btn btn-outline-light"
-            type="button"
+            type="submit"
             data-mdb-ripple-color="dark"
           >
             Search
@@ -131,5 +134,7 @@
     <script src="{{ url_for('static', filename='scripts/common.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/trumbowyg.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/language_cookie.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/search.js') }}"></script>
   </body>
 </html>

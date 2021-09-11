@@ -1,4 +1,6 @@
-from flask import jsonify, Blueprint
+import os
+from flask import json, jsonify, Blueprint
+from flask.helpers import url_for
 import requests
 from bs4 import BeautifulSoup
 from contentagregator.config import SCRAP_URLS
@@ -55,3 +57,10 @@ def gazeta_get():
     gazeta_data = gazeta()
     return jsonify(gazeta_data)
 
+
+@app.route('/api/v2/search')
+def search_strings_get():
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    json_url = os.path.join(SITE_ROOT, 'static', 'search_helpers.json')
+    data = json.load(open(json_url))
+    return data
